@@ -1,0 +1,69 @@
+
+/*.img-wrapper{*/
+/*    max-width: 100%;*/
+/*    height: 23vw;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items:flex-start;*/
+/*}*/
+.section2 {
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Optional: if you want the content to be stacked vertically */
+}
+@media (min-width: 768px) {
+    .section2 .carousel-inner {
+        display: flex;
+    }
+    .section2 carousel-item {
+        margin-right: 0;
+        flex: 0 0 33.333333%;
+        display: block;
+    }
+}
+.section2 .carousel-inner{
+    padding: 1em;
+    display: flex;
+}
+.section2 .carousel-item{
+    margin-right: 0;
+    flex: 0 0 33.333333%;
+    display: block;
+}
+.section2 .card{
+    margin: 0 .5em;
+    border-radius: 0;
+    transition: 0.2s ease;
+    border: 1px solid #e1e1e1;
+    cursor: pointer;
+}
+.section2 .card:hover{
+    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+    transition: 0.2s ease-in-out;
+}
+.section2 .card img{
+    max-height: 100%;
+    max-width: 100%;
+}
+.section2 .carousel-control-prev,.section2 .carousel-control-next{
+    background-color: #e1e1e1;
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .5;
+}
+.section2 .carousel-control-next:hover, .section2 .carousel-control-prev:hover{
+    background-color: #e1e1e1;
+    opacity: .8;
+}
+.section2 .card-body a{
+    text-decoration: none;
+    color: lightcoral;
+}
+.section2 .card-body a:hover{
+    color: #ff0000;
+}
