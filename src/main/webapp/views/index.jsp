@@ -18,21 +18,23 @@
 <jsp:include page="header.jsp"/>
 <body>
     <div class="content w-100">
-        <div class="container-fluid position-relative">
-            <div class="row banner position-absolute w-100 h-75">
-                <img src="../images/banner.jpg" class="img-fluid w-100 h-100" style="object-fit: cover;">
-            </div>
-            <div class="row position-relative">
-                <div class="col-12">
-                    <h1 class="text-center text-white">Welcome to ApartmentWorld</h1>
+        <section class="section1">
+            <div class="container-fluid position-relative">
+                <div class="row banner position-absolute w-100 h-75">
+                    <img src="../images/banner.jpg" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                </div>
+                <div class="row position-relative">
+                    <div class="col-12">
+                        <h1 class="text-center text-white">Welcome to ApartmentWorld</h1>
+                    </div>
+                </div>
+                <div class="row position-relative">
+                    <div class="col-12">
+                        <p class="text-center text-white mb-5">The best place to find your new home</p>
+                    </div>
                 </div>
             </div>
-            <div class="row position-relative">
-                <div class="col-12">
-                    <p class="text-center text-white mb-5">The best place to find your new home</p>
-                </div>
-            </div>
-        </div>
+        </section>
         <section class="section2 mt-3 container">
             <hr>
             <div id="carouselExample" class="carousel w-75">
@@ -111,6 +113,24 @@
                 </button>
             </div>
             <hr>
+        </section>
+        <section class="section3 pt-5 container">
+            <h5 class="fw-bold mb-2">Phòng trọ cho thuê giá rẻ cập nhật 9/2024</h5>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <img src="../images/test.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                        <div class="wishlist">
+                            <a href="#" class="p-2 bottom-0" id="wishlist-heart"><i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 </body>

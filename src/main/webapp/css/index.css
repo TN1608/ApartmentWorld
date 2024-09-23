@@ -6,8 +6,10 @@
 /*    justify-content: center;*/
 /*    align-items:flex-start;*/
 /*}*/
+.section1 .banner img{
+    filter: blur(2px) brightness(0.7);
+}
 .section2 {
-    background-color: #F5F5F5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,4 +68,35 @@
 }
 .section2 .card-body a:hover{
     color: #ff0000;
+}
+.section3 .card{
+    max-width: 70em;
+    flex-direction: row;
+    margin-bottom: 1em;
+    transition: 0.2s ease-in-out;
+}
+.section3 .card img{
+    max-width: 25%;
+    margin: auto;
+    padding: 0.5em;
+    border-radius: 0.7em;
+}
+.section3 .card:hover{
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 7px 7px rgba(0, 0, 0, 0.18);
+}
+.section3 .wishlist a{
+    transition: 0.2s ease;
+    color:red;
+}
+@media screen and (max-width: 475px) {
+    .section3 .card {
+        height: 10em;
+        width: 100%;
+        font-size: 0.9em;
+    }
+    .section3 .cart img {
+        width: 100%;
+        height: 100%;
+    }
 }

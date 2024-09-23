@@ -23,3 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("Element with class 'carousel-inner' not found.");
     }
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const wishlistHeart = document.getElementById('wishlist-heart');
+    wishlistHeart.addEventListener('mouseover', function () {
+        this.querySelector('i').classList.replace('bi-heart', 'bi-heart-fill');
+    });
+    wishlistHeart.addEventListener('mouseout', function () {
+        this.querySelector('i').classList.replace('bi-heart-fill', 'bi-heart');
+    });
+});
