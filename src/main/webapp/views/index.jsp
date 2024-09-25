@@ -116,17 +116,82 @@
         </section>
         <section class="section3 pt-5 container">
             <h5 class="fw-bold mb-2">Phòng trọ cho thuê giá rẻ cập nhật 9/2024</h5>
-            <div class="row">
+            <div class="row w-75">
                 <div class="col-lg-8">
                     <div class="card">
                         <img src="../images/test.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <h5 class="card-title">KTX Q.7 Cao Cấp cách LotteMart 300m</h5>
+                            <p class="card-text">950k/1 tháng</p>
+                            <a href="#" class="btn btn-primary">Tìm hiểu</a>
                         </div>
                         <div class="wishlist">
-                            <a href="#" class="p-2 bottom-0" id="wishlist-heart"><i class="bi bi-heart"></i></a>
+                            <a href="#" class="p-2 bottom-0"><i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <img src="../images/test.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">KTX Q.7 Cao Cấp cách LotteMart 300m</h5>
+                            <p class="card-text">950k/1 tháng</p>
+                            <a href="#" class="btn btn-primary">Tìm hiểu</a>
+                        </div>
+                        <div class="wishlist">
+                            <a href="#" class="p-2 bottom-0"><i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <img src="../images/test.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">KTX Q.7 Cao Cấp cách LotteMart 300m</h5>
+                            <p class="card-text">950k/1 tháng</p>
+                            <a href="#" class="btn btn-primary">Tìm hiểu</a>
+                        </div>
+                        <div class="wishlist">
+                            <a href="#" class="p-2 bottom-0"><i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <img src="../images/test.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">KTX Q.7 Cao Cấp cách LotteMart 300m</h5>
+                            <p class="card-text">950k/1 tháng</p>
+                            <a href="#" class="btn btn-primary">Tìm hiểu</a>
+                        </div>
+                        <div class="wishlist">
+                            <a href="#" class="p-2 bottom-0"><i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <img src="../images/test.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">KTX Q.7 Cao Cấp cách LotteMart 300m</h5>
+                            <p class="card-text">950k/1 tháng</p>
+                            <a href="#" class="btn btn-primary">Tìm hiểu</a>
+                        </div>
+                        <div class="wishlist">
+                            <a href="#" class="p-2 bottom-0"><i class="bi bi-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <img src="../images/test.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">KTX Q.7 Cao Cấp cách LotteMart 300m</h5>
+                            <p class="card-text">950k/1 tháng</p>
+                            <a href="#" class="btn btn-primary">Tìm hiểu</a>
+                        </div>
+                        <div class="wishlist">
+                            <a href="#" class="p-2 bottom-0"><i class="bi bi-heart"></i></a>
                         </div>
                     </div>
                 </div>

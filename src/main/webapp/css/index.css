@@ -89,6 +89,10 @@
     transition: 0.2s ease;
     color:red;
 }
+.searchbar input{
+    width: 20em;
+
+}
 @media screen and (max-width: 475px) {
     .section3 .card {
         height: 10em;

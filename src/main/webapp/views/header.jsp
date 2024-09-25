@@ -15,9 +15,9 @@
     <title>ApartmentWorld</title>
 </head>
 <body>
-<header class="header">
+<header class="header d-flex justify-content-center">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="col-md-12 align-items-center justify-content-center d-flex container-fluid">
+        <div class="col-md-12 container-fluid">
             <a class="navbar-brand" href="/home"><img
                     src="../images/icon/logo.png" alt="Logo">
             </a>
@@ -29,12 +29,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Vị trí</a>
-                    </li>
+                    <form class="d-flex searchbar" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                     <li class="nav-item">
                         <div class="dropdown">
                             <a class="navlink btn" type="button" data-bs-toggle="dropdown"
