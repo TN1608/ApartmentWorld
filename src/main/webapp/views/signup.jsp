@@ -13,9 +13,13 @@
     <script src="../js/app.js"></script>
     <title>ApartmentWorld</title>
 </head>
-<body>
 <jsp:include page="header.jsp"/>
+<body>
 <!-- Main content here -->
-<jsp:include page="footer.jsp"/>
+    <div class="container p-5">
+
+    </div>
+<!-- Main content here -->
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

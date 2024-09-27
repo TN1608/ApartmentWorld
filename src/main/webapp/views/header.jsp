@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="">
                     <img src="../images/icon/logo.png" alt="logo" width="30" height="30" class="d-inline-block align-top">
                     <span>ApartmentWorld</span>
                 </a>
