@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand" href="/home">
                     <img src="../images/icon/logo.png" alt="logo" width="30" height="30" class="d-inline-block align-top">
                     <span>ApartmentWorld</span>
                 </a>
@@ -42,7 +42,7 @@
                                 <i class="bi bi-person-circle text-warning fs-3"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                                <li><a class="dropdown-item" href="/login">Thông tin</a></li>
                                 <li><a class="dropdown-item" href="#">Lịch sử thanh toán</a></li>
                                 <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
                             </ul>

@@ -2,35 +2,40 @@
 use ApartmentWorld
 
 create table taikhoan(
-	manguoidung varchar(20) primary key,
-	tennguoidung nvarchar(200) not null,
+	tentaikhoan varchar(150) primary key,
+	firstname nvarchar(100),
+	lastname nvarchar(100),
 	matkhau varchar(200) not null,
 	sodienthoai varchar(15),
 	mota nvarchar(200),
 	gioitinh bit,
 	ngaysinh date,
 	anhtaikhoan varchar(200),
-	vaitro bit,
-	maCCCD varchar(12)
-	CONSTRAINT FK_CCCD FOREIGN KEY (maCCCD) REFERENCES CCCD(maCCCD)
+	vaitro bit
 );
+insert into taikhoan values
+('admin',N'Nguyễn Đình',N'Tuấn','123','0783955138','AdminDepTrai',0,'08-16-2004','admin.jpg',1);
+insert into CCCD values
+('079204036245','10-30-2022','TPHCM','anh.jpg','admin');
 create table CCCD(
 	maCCCD varchar(12) primary key,
 	ngaycap date,
 	noicap nvarchar(450),
-	anhCCCD varchar(250)
+	anhCCCD varchar(250),
+	tentaikhoan varchar(150),
+	constraint FK_user foreign key (tentaikhoan) references taikhoan(tentaikhoan)
 );
 create table phongtro(
 	maphong varchar(20) primary key,
-	title nvarchar(200) not null,
+	tenphong nvarchar(200) not null,
 	diachi nvarchar(250) not null,
 	anh nvarchar(100) not null,
 	giaphong float not null,
 	mota nvarchar(2000) not null,
 	matinhtrang varchar(20) not null,
-	mataikhoan varchar(20) not null,
+	tentaikhoan varchar(150) not null,
 	matrangthai varchar(20) not null,
-    CONSTRAINT FK_taikhoan FOREIGN KEY (mataikhoan) REFERENCES taikhoan(manguoidung),
+    CONSTRAINT FK_taikhoan FOREIGN KEY (tentaikhoan) REFERENCES taikhoan(tentaikhoan),
     CONSTRAINT FK_tinhtrang FOREIGN KEY (matinhtrang) REFERENCES tinhtrang(matinhtrang),
     CONSTRAINT FK_trangthai FOREIGN KEY (matrangthai) REFERENCES trangthaisudung(matrangthai),
 );
@@ -51,21 +56,21 @@ CREATE TABLE trangthaisudung(
 );
 CREATE TABLE danhgia(
     madanhgia INT PRIMARY KEY,
-    mataikhoan VARCHAR(20),    -- Tài khoản người đánh giá
+    tentaikhoan varchar(150),    -- Tài khoản người đánh giá
     maphong VARCHAR(20),       -- Phòng được đánh giá
     noidung NVARCHAR(500),
     sosao INT,                 -- Số sao đánh giá (1-5)
     ngaydanhgia DATE,
-    CONSTRAINT FK_taikhoan_danhgia FOREIGN KEY (mataikhoan) REFERENCES taikhoan(manguoidung),
+    CONSTRAINT FK_taikhoan_danhgia FOREIGN KEY (tentaikhoan) REFERENCES taikhoan(tentaikhoan),
     CONSTRAINT FK_phong_danhgia FOREIGN KEY (maphong) REFERENCES phongtro(maphong)
 );
 CREATE TABLE hopdongthue(
     maHD VARCHAR(20) PRIMARY KEY,
-    mataikhoanthue VARCHAR(20),  -- Tài khoản người thuê
+	tentaikhoan varchar(150),  -- Tài khoản người thuê
     maphong VARCHAR(20),         -- Mã phòng trọ
     ngaybatdau DATE,
     ngayketthuc DATE,
-    CONSTRAINT FK_taikhoan_thue FOREIGN KEY (mataikhoanthue) REFERENCES taikhoan(manguoidung),
+    CONSTRAINT FK_taikhoan_thue FOREIGN KEY (tentaikhoan) REFERENCES taikhoan(tentaikhoan),
     CONSTRAINT FK_phong FOREIGN KEY (maphong) REFERENCES phongtro(maphong)
 );
 CREATE TABLE lichsuthanhtoan(
