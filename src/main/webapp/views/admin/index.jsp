@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,12 +75,17 @@
                             aria-expanded="false"
                     >
                         <i class="fa-solid fa-user"></i>
+                        ${user.firstname} ${user.lastname}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Thông tin</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li>
                             <a class="dropdown-item" href="#">Something else here</a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a class="dropdown-item" href="/home">Home</a>
                         </li>
                     </ul>
                 </li>

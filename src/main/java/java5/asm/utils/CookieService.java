@@ -25,11 +25,11 @@ public class CookieService {
         return null;
     }
 
-    public String getValue(String name){
+    public String getValue(String name) {
         Cookie[] cookies = req.getCookies();
-        if(cookies!=null){
-            for(Cookie cookie:cookies){
-                if(cookie.getName().equals(name)){
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(name)) {
                     return cookie.getValue();
                 }
             }
@@ -37,23 +37,45 @@ public class CookieService {
         return null;
     }
 
-    public Cookie add(String name,String value,int hours){
+    public Cookie add(String name, String value, int hours) {
         //goi ten va gia tri
-        Cookie cookie = new Cookie(name,value);
+        Cookie cookie = new Cookie(name, value);
         //set thoi han theo don vi gio
-        cookie.setMaxAge(hours*60*60);
+        cookie.setMaxAge(hours * 60 * 60);
         //them cookie
         reps.addCookie(cookie);
         return cookie;
     }
+
     //xoa cookie theo ten
-    public void remove(String name){
+    public void remove(String name) {
         //goi ten
         Cookie cookie = get(name);
-        if(cookie!=null){
+        if (cookie != null) {
             cookie.setMaxAge(0);
             reps.addCookie(cookie);
         }
+    }
+
+    //    test
+    public void add(String name, String value, int hours, HttpServletResponse response) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setMaxAge(hours * 60 * 60);
+        cookie.setHttpOnly(true); // Set HttpOnly flag
+        cookie.setSecure(true); // Set Secure flag
+        response.addCookie(cookie);
+    }
+
+    public String getValue(String name, HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(name)) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
 
 }

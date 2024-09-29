@@ -21,4 +21,5 @@ public class taikhoan implements Serializable {
     Date ngaysinh;
     String anhtaikhoan;
     boolean vaitro;
+//    email đâu vcl ????????????
 }

@@ -1,6 +1,7 @@
 ﻿create database ApartmentWorld
 use ApartmentWorld
 
+
 create table taikhoan(
 	tentaikhoan varchar(150) primary key,
 	firstname nvarchar(100),
@@ -14,7 +15,8 @@ create table taikhoan(
 	vaitro bit
 );
 insert into taikhoan values
-('admin',N'Nguyễn Đình',N'Tuấn','123','0783955138','AdminDepTrai',0,'08-16-2004','admin.jpg',1);
+('admin',N'Nguyễn Đình',N'Tuấn','123','0783955138','AdminDepTrai',0,'08-16-2004','admin.jpg',1),
+('khang', N'Bảo', 'Khang', '123', '0865399254','normal dev', 0, '2004-08-30', null, 1);
 insert into CCCD values
 ('079204036245','10-30-2022','TPHCM','anh.jpg','admin');
 create table CCCD(
@@ -25,6 +27,15 @@ create table CCCD(
 	tentaikhoan varchar(150),
 	constraint FK_user foreign key (tentaikhoan) references taikhoan(tentaikhoan)
 );
+create table tinhtrang(
+	matinhtrang varchar(20) primary key,
+	loaitinhtrang varchar(100) -- ví dụ : 'Nội thất cao cấp', 'Nội thất đầy đủ', 'Nhà trống'
+);
+CREATE TABLE trangthaisudung(
+    matrangthai VARCHAR(20) PRIMARY KEY,
+    trangthai NVARCHAR(100)  -- Ví dụ: 'Còn trống', 'Đã thuê', 'Đang bảo trì'
+);
+
 create table phongtro(
 	maphong varchar(20) primary key,
 	tenphong nvarchar(200) not null,
@@ -46,14 +57,7 @@ create table chitietphongtro(
 	maphong varchar(20)
 	CONSTRAINT FK_phongtro FOREIGN KEY (maphong) REFERENCES phongtro(maphong)
 );
-create table tinhtrang(
-	matinhtrang varchar(20) primary key,
-	loaitinhtrang varchar(100) -- ví dụ : 'Nội thất cao cấp', 'Nội thất đầy đủ', 'Nhà trống'
-);
-CREATE TABLE trangthaisudung(
-    matrangthai VARCHAR(20) PRIMARY KEY,
-    trangthai NVARCHAR(100)  -- Ví dụ: 'Còn trống', 'Đã thuê', 'Đang bảo trì'
-);
+
 CREATE TABLE danhgia(
     madanhgia INT PRIMARY KEY,
     tentaikhoan varchar(150),    -- Tài khoản người đánh giá

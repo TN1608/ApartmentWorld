@@ -9,11 +9,10 @@ import java5.asm.utils.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+public class HomeController {
     @Autowired
     HttpServletRequest req;
     @Autowired
@@ -23,22 +22,23 @@ public class AdminController {
     @Autowired
     CookieService cookieService;
     @Autowired
-    java5.asm.dao.usersDAO usersDAO;
+    usersDAO usersDAO;
 
     @RequestMapping("/home")
     public String home(Model model) {
-        taikhoan currentUser = sessionService.get("user");
-        if (currentUser != null) {
-            if (currentUser.isVaitro()){
-                model.addAttribute("user", currentUser);
-            } else {
-                resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                return "error/403";
-            }
+        taikhoan user = sessionService.get("user");
+        if (user != null) {
+            model.addAttribute("user", user);
         } else {
-            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "error/403";
+            String username = cookieService.getValue("username", req);
+            if (username != null) {
+                user = usersDAO.findById(username).orElse(null);
+                if (user != null) {
+                    sessionService.set("user", user);
+                    model.addAttribute("user", user);
+                }
+            }
         }
-        return "admin/index";
+        return "index";
     }
 }
