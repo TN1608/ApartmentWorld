@@ -66,7 +66,7 @@
                             <a class="nav-link btn btn-success" href="/login">Đăng nhập</a>
                         </li>
                         <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link btn btn-warning" href="/register">Đăng ký</a>
+                            <a class="nav-link btn btn-warning" href="/signup">Đăng ký</a>
                         </li>
                     </c:if>
                 </ul>
