@@ -13,6 +13,7 @@ create table taikhoan(
 	anhtaikhoan varchar(200),
 	vaitro bit
 );
+
 insert into taikhoan values
 ('admin',N'Nguyễn Đình',N'Tuấn','123','0783955138','AdminDepTrai',0,'08-16-2004','admin.jpg',1);
 insert into CCCD values

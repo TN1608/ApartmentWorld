@@ -25,7 +25,7 @@
                     <li class="nav-item d-flex align-items-center">
                         <div class="dropdown">
                             <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-bell-fill text-warning me-2"></i>Thông báo</a>
+                                <i class="bi bi-bell-fill text-warning me-2"></i>Thông báo
                             </a>
                             <ul class="dropdown-menu p-2">
                                 <li>
@@ -37,16 +37,21 @@
                         </div>
                     </li>
                     <li class="nav-item d-flex align-items-center">
-                        <div class="dropdown">
-                            <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle text-warning fs-3"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/login">Thông tin</a></li>
-                                <li><a class="dropdown-item" href="#">Lịch sử thanh toán</a></li>
-                                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-                            </ul>
-                        </div>
+                        <c:when test="${loggedIn==true}">
+                            <a class="nav-link" href="/login"><i class="bi bi-person-fill text-primary me-2"></i>Đăng nhập</a>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="dropdown">
+                                <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle text-warning fs-3"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/profile">Thông tin</a></li>
+                                    <li><a class="dropdown-item" href="#">Lịch sử thanh toán</a></li>
+                                    <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                                </ul>
+                            </div>
+                        </c:otherwise>
                     </li>
                 </ul>
             </div>

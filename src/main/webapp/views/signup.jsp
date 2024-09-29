@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -22,21 +23,22 @@
                 <img src="../images/login.jpg" alt="signup" class="img-fluid">
             </div>
             <div class="col-md-6">
-                <form action="signup" method="post">
+                <form:form action="/signup" modelAttribute="taikhoan" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+                        <form:input type="text" class="form-control" id="username" path="tentaikhoan"/>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <form:input type="password" class="form-control" id="password" path="matkhau"/>
                     </div>
                     <div class="mb-3">
                         <label for="Cpassword" class="form-label">Xác nhận mật khẩu</label>
-                        <input type="password" class="form-control" id="Cpassword" name="Cpass">
+                        <input type="password" class="form-control" id="Cpassword" name="cpass">
                     </div>
+                    <p class="text-danger">${message}</p>
                     <button type="submit" class="btn btn-primary">Đăng ký</button>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>

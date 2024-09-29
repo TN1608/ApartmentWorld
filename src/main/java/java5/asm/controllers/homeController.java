@@ -16,7 +16,13 @@ public class homeController {
     @Autowired
     CookieService cookieService;
     @RequestMapping("/home")
-    public String home() {
+    public String home(Model model) {
+        String username = sessionService.get("username");
+        if (username != null) {
+            model.addAttribute("loggedIn", true);
+        } else {
+            model.addAttribute("loggedIn", false);
+        }
         return "index";
     }
 }

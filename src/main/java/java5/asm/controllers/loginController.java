@@ -31,9 +31,6 @@ public class loginController {
 
     @GetMapping("/login")
     public String loginIndex(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model){
-        if(sessionService.get("remeber")!=null){
-            return "redirect:/home";
-        }
         return "login";
     }
     @PostMapping("/login")
@@ -48,5 +45,34 @@ public class loginController {
         }
         model.addAttribute("message","Sai tên đăng nhập hoặc mật khẩu");
         return "login";
+    }
+    @GetMapping("/signup")
+    public String signupIndex(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model){
+
+        return "signup";
+    }
+    @PostMapping("/signup")
+    public String signup(@RequestParam("cpass") String cpass,@ModelAttribute("taikhoan") @Validated taikhoan taikhoan, Errors errors, Model model){
+        if(errors.hasErrors()){
+            return "signup";
+        }
+        if(usersDAO.findById(taikhoan.getTentaikhoan()).isPresent()){
+            model.addAttribute("message","Tên tài khoản đã tồn tại");
+            return "signup";
+        }
+        if(!cpass.equals(taikhoan.getMatkhau())){
+            model.addAttribute("message","Mật khẩu không khớp");
+            return "signup";
+        }
+        model.addAttribute("message","Đăng ký thành công");
+        usersDAO.save(taikhoan);
+        return "redirect:/login";
+    }
+    @GetMapping("/logout")
+    public String logout(){
+        sessionService.remove("username");
+        cookieService.remove("username");
+        cookieService.remove("password");
+        return "redirect:/home";
     }
 }
