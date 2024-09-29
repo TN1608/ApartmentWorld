@@ -27,16 +27,14 @@
             <img src="../images/login.jpg" alt="login" class="img-fluid">
         </div>
         <div class="col-md-6">
-            <form:form action="/login" modelAttribute="taikhoan" method="post">
+            <form action="/login" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Tên đăng nhập</label>
-                    <form:input type="text" class="form-control" id="username" path="tentaikhoan" name="tentaikhoan"/>
-                    <form:errors path="tentaikhoan" cssClass="text-danger"/><br>
+                    <input type="text" class="form-control" id="username" path="tentaikhoan" name="tentaikhoan"/>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Mật khẩu</label>
-                    <form:input type="password" class="form-control" id="password" path="matkhau" name="matkhau"/>
-                    <form:errors path="matkhau" cssClass="text-danger"/><br>
+                    <input type="password" class="form-control" id="password" path="matkhau" name="matkhau"/>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="rememberMe" name="remember" value="true"/>
                         <label class="form-check-label" for="rememberMe">Lưu đăng nhập</label>
@@ -47,7 +45,7 @@
                 <button type="submit" class="btn btn-primary">Đăng nhập</button>
                 <br>
                 Chưa có tài khoản?<a href="/signup" class="btn btn-success">Đăng ký</a>
-            </form:form>
+            </form>
         </div>
     </div>
 </div>

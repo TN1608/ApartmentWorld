@@ -62,4 +62,14 @@ public class LoginController {
     public String registerIndex(@ModelAttribute("taikhoan") taikhoan taikhoan){
         return "signup";
     }
+
+    @RequestMapping("/user")
+    public String user(Model model){
+        taikhoan user = sessionService.get("user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        return "profile";
+    }
+
 }
