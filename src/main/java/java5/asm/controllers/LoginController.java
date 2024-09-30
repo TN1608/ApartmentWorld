@@ -10,6 +10,8 @@ import java5.asm.utils.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -55,21 +57,30 @@ public class LoginController {
     public String logout(){
         sessionService.remove("user");
         cookieService.remove("username");
+        cookieService.remove("password");
         return "redirect:/home";
     }
 
-    @RequestMapping("/signup")
-    public String registerIndex(@ModelAttribute("taikhoan") taikhoan taikhoan){
+    @GetMapping("/signup")
+    public String signupIndex(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model){
+
         return "signup";
     }
-
-    @RequestMapping("/user")
-    public String user(Model model){
-        taikhoan user = sessionService.get("user");
-        if (user != null) {
-            model.addAttribute("user", user);
+    @PostMapping("/signup")
+    public String signup(@RequestParam("cpass") String cpass, @ModelAttribute("taikhoan") @Validated taikhoan taikhoan, Errors errors, Model model){
+        if(errors.hasErrors()){
+            return "signup";
         }
-        return "profile";
+        if(usersDAO.findById(taikhoan.getTentaikhoan()).isPresent()){
+            model.addAttribute("message","Tên tài khoản đã tồn tại");
+            return "signup";
+        }
+        if(!cpass.equals(taikhoan.getMatkhau())){
+            model.addAttribute("message","Mật khẩu không khớp");
+            return "signup";
+        }
+        model.addAttribute("message","Đăng ký thành công");
+        usersDAO.save(taikhoan);
+        return "redirect:/login";
     }
-
 }
