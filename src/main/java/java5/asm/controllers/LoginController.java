@@ -31,6 +31,18 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginIndex(@ModelAttribute("taikhoan") taikhoan taikhoan){
+        taikhoan user = sessionService.get("user");
+        if(user != null){
+            return "redirect:/home";
+        } else {
+            String username = cookieService.getValue("username", req);
+            if (username != null) {
+                user = usersDAO.findById(username).orElse(null);
+                if (user != null) {
+                    return "redirect:/home";
+                }
+            }
+        }
         return "login";
     }
 
