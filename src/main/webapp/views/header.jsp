@@ -50,7 +50,7 @@
                                         ${user.firstname} ${user.lastname}
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/profile">Thông tin</a></li>
+                                    <li><a class="dropdown-item" href="/user">Thông tin</a></li>
                                     <li><a class="dropdown-item" href="#">Lịch sử thanh toán</a></li>
                                     <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                                     <hr>

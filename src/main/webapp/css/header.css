@@ -1,3 +1,6 @@
+header{
+    font-family: 'Open Sans', sans-serif;
+}
 .searchbar input {
     height: 2em;
 }

@@ -56,7 +56,7 @@ create table chitietphongtro(
 	noidungchitiet nvarchar(500),
 	maphong varchar(20)
 	CONSTRAINT FK_phongtro FOREIGN KEY (maphong) REFERENCES phongtro(maphong)
-);
+);	
 
 CREATE TABLE danhgia(
     madanhgia INT PRIMARY KEY,
