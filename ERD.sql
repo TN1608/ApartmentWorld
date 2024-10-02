@@ -1,7 +1,6 @@
 ﻿create database ApartmentWorld
 use ApartmentWorld
 
-
 create table taikhoan(
 	tentaikhoan varchar(150) primary key,
 	firstname nvarchar(100),
@@ -12,8 +11,12 @@ create table taikhoan(
 	gioitinh bit,
 	ngaysinh date,
 	anhtaikhoan varchar(200),
-	vaitro bit
+	vaitro bit,
+	email nvarchar(150),
+	email_verified BIT DEFAULT 0,        
+    phone_verified BIT DEFAULT 0
 );
+select * from taikhoan
 insert into taikhoan values
 ('admin',N'Nguyễn Đình',N'Tuấn','123','0783955138','AdminDepTrai',0,'08-16-2004','admin.jpg',1),
 ('khang', N'Bảo', 'Khang', '123', '0865399254','normal dev', 0, '2004-08-30', null, 1);

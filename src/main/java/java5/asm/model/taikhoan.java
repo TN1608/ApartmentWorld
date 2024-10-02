@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
@@ -13,6 +16,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
+@Getter
+@Setter
 @Entity
 @Table(name = "taikhoan")
 public class taikhoan implements Serializable {
@@ -69,5 +74,13 @@ public class taikhoan implements Serializable {
 
     @OneToMany(mappedBy = "tentaikhoan")
     private Set<phongtro> phongtros = new LinkedHashSet<>();
+
+    @ColumnDefault("0")
+    @Column(name = "email_verified")
+    private Boolean emailVerified;
+
+    @ColumnDefault("0")
+    @Column(name = "phone_verified")
+    private Boolean phoneVerified;
 
 }

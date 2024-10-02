@@ -39,7 +39,7 @@
         </aside>
         <div class="col-8">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body a-groups">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
 

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
     <base href="${pageContext.request.contextPath}/">
-    <script src="/js/app.js"></script>
+    <script src="/js/link.js"></script>
     <title>ApartmentWorld</title>
 </head>
 <body>
@@ -29,11 +29,15 @@
     <div class="row">
         <aside class="col-sm-4">
             <div class="card">
-                <div class="card-body">
-                    <a href="/user/settings/profile" class="nav-link text-start" role="tab" aria-controls="v-pills-profile" aria-selected="false">Thông tin cá nhân</a>
-                    <a href="/user/settings/linking" class="nav-link text-start show active" role="tab" aria-controls="v-pills-linking" aria-selected="false">Liên kết và xác thực</a>
-                    <a href="/user/settings/payment-history" class="nav-link text-start" role="tab" aria-controls="v-pills-lichsuthanhtoan" aria-selected="false">Lịch sử thanh toán</a>
-                    <a href="/user/settings/account-settings" class="nav-link text-start" role="tab" aria-controls="v-pills-settings" aria-selected="false">Cài đặt tài khoản</a>
+                <div class="card-body a-groups">
+                    <a href="/user/settings/profile" class="nav-link text-start" role="tab"
+                       aria-controls="v-pills-profile" aria-selected="false">Thông tin cá nhân</a>
+                    <a href="/user/settings/linking" class="nav-link text-start show active" role="tab"
+                       aria-controls="v-pills-linking" aria-selected="false">Liên kết và xác thực</a>
+                    <a href="/user/settings/payment-history" class="nav-link text-start" role="tab"
+                       aria-controls="v-pills-lichsuthanhtoan" aria-selected="false">Lịch sử thanh toán</a>
+                    <a href="/user/settings/account-settings" class="nav-link text-start" role="tab"
+                       aria-controls="v-pills-settings" aria-selected="false">Cài đặt tài khoản</a>
                 </div>
             </div>
         </aside>
@@ -41,63 +45,67 @@
             <div class="card">
                 <div class="card-body">
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                             aria-labelledby="v-pills-profile-tab" tabindex="0">
 
                         </div>
-                        <div class="tab-pane fade show active" id="v-pills-linking" role="tabpanel" aria-labelledby="v-pills-linking-tab" tabindex="0">
+                        <div class="tab-pane fade show active" id="v-pills-linking" role="tabpanel"
+                             aria-labelledby="v-pills-linking-tab" tabindex="0">
                             <div class="container mt-4">
                                 <h3 class="mb-4">Liên kết tài khoản</h3>
-                                <form:form modelAttribute="taikhoan" action="${pageContext.request.contextPath}/user/settings/update" method="post" class="row g-3">
-                                    <!-- Username -->
-                                    <div class="col-md-6">
-                                        <label for="username" class="form-label">Tên tài khoản</label>
-                                        <form:input type="text" class="form-control" id="username" path="tentaikhoan"
-                                                    value="${user.tentaikhoan}"/>
-                                    </div>
-                                    <%--        firstname--%>
-                                    <div class="col-md-6">
-                                        <label for="firstname" class="form-label">Họ</label>
-                                        <form:input type="text" class="form-control" id="firstname" path="firstname"
-                                                    value="${user.firstname}"/>
-                                    </div>
-                                    <!-- Last Name -->
-                                    <div class="col-md-6">
-                                        <label for="lastname" class="form-label">Tên</label>
-                                        <form:input type="text" class="form-control" id="lastname" path="lastname"
-                                                    value="${user.lastname}"/>
-                                    </div>
-                                    <%--        ngaysinh--%>
-                                    <div class="col-md-6">
-                                        <label for="ngaysinh" class="form-label">Ngày sinh</label>
-                                        <form:input type="date" class="form-control" id="ngaysinh" path="ngaysinh"
-                                                    value="${user.ngaysinh}"/>
-                                    </div>
+                            <form:form action="user/settings/linking/update" class="row g-3" modelAttribute="taikhoan" method="post">
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <form:input path="email" type="email" class="form-control" id="email" value="${user.email}"/>
+                                    <c:if test="${!emailVerified}">
+                                        <button formaction="/user/settings/linking/verifyMail" id="verifyEmailBtn" class="btn btn-primary fw-bold mt-2">
+                                            Xác thực <i class="bi bi-patch-check-fill"></i>
+                                        </button>
+                                    </c:if>
+                                </div>
+                                <div class="col-md-6" id="otpField" style="display:none;">
+                                    <label for="otp" class="form-label">Nhập mã xác thực</label>
+                                    <input type="text" class="form-control" name="otp" id="otp" placeholder="Nhập mã OTP" />
+                                    <button type="button" id="confirmOtpBtn" class="btn btn-success fw-bold mt-2">
+                                        Xác nhận mã <i class="bi bi-check-circle-fill"></i>
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="sdt" class="form-label">Số điện thoại</label>
+                                    <form:input path="sodienthoai" type="text" class="form-control" id="sdt" value="${user.sodienthoai}"/>
+                                    <button class="btn btn-primary fw-bold mt-2">Xác thực <i class="bi bi-patch-check-fill"></i></button>
+                                </div>
+                            </form:form>
+                                <script>
+                                    document.getElementById('verifyEmailBtn').addEventListener('click', function(event) {
+                                        event.preventDefault();
+                                        // Show OTP input field
+                                        document.getElementById('otpField').style.display = 'block';
+                                    });
 
-                                    <!-- Email -->
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <form:input type="email" class="form-control" id="email" path="email"
-                                                    value="${user.email}"/>
-                                    </div>
+                                    // Verify OTP and disable email input field on successful verification
+                                    document.getElementById('confirmOtpBtn').addEventListener('click', function() {
+                                        const enteredOtp = document.getElementById('otp').value;
 
-                                    <!-- Phone Number -->
-                                    <div class="col-md-6">
-                                        <label for="phone" class="form-label">Số điện thoại</label>
-                                        <form:input type="text" class="form-control" id="phone" path="sodienthoai"
-                                                    value="${user.sodienthoai}"/>
-                                    </div>
-
-                                    <!-- Submit Button -->
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
-                                    </div>
-                                </form:form>
+                                        // Simulating OTP check with backend (replace with actual verification call)
+                                        if (enteredOtp === 'expectedOtp') { // Replace 'expectedOtp' with actual OTP sent from the server
+                                            // Disable the email input field and verification button
+                                            document.getElementById('email').setAttribute('disabled', 'true');
+                                            document.getElementById('verifyEmailBtn').setAttribute('disabled', 'true');
+                                            alert('Mã xác thực đúng. Email đã được xác nhận!');
+                                        } else {
+                                            alert('Mã xác thực không đúng. Vui lòng thử lại!');
+                                        }
+                                    });
+                                </script>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel" aria-labelledby="v-pills-payment-history-tab" tabindex="0">
+                        <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"
+                             aria-labelledby="v-pills-payment-history-tab" tabindex="0">
 
                         </div>
-                        <div class="tab-pane fade" id="v-pills-account-settings" role="tabpanel" aria-labelledby="v-pills-account-settings-tab" tabindex="0">
+                        <div class="tab-pane fade" id="v-pills-account-settings" role="tabpanel"
+                             aria-labelledby="v-pills-account-settings-tab" tabindex="0">
 
                         </div>
                     </div>

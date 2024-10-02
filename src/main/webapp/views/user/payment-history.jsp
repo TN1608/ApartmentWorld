@@ -29,7 +29,7 @@
     <div class="row">
         <aside class="col-sm-4">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body a-groups">
                     <a href="/user/settings/profile" class="nav-link text-start" role="tab" aria-controls="v-pills-profile" aria-selected="false">Thông tin cá nhân</a>
                     <a href="/user/settings/linking" class="nav-link text-start" role="tab" aria-controls="v-pills-linking" aria-selected="false">Liên kết và xác thực</a>
                     <a href="/user/settings/payment-history" class="nav-link text-start show active" role="tab" aria-controls="v-pills-lichsuthanhtoan" aria-selected="false">Lịch sử thanh toán</a>
