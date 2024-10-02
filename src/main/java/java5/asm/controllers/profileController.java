@@ -6,18 +6,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java5.asm.dao.usersDAO;
 import java5.asm.model.taikhoan;
-import java5.asm.utils.CookieService;
-import java5.asm.utils.EmailSenderService;
-import java5.asm.utils.SessionService;
+import java5.asm.services.CookieService;
+import java5.asm.services.EmailSenderService;
+import java5.asm.services.SessionService;
+import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Random;
-import java.util.UUID;
 
 @RequestMapping("/user")
 @Controller
@@ -36,142 +35,174 @@ public class profileController {
     HttpServletResponse resp;
     @Autowired
     private EmailSenderService MailSender;
-    String otp = generateOTP();
+    @Autowired
+    AuthUtils authUtils;
+    String otpMail;
+
     @GetMapping
-    public String user(Model model){
-        taikhoan user = sessionService.get("user");
+    public String user(Model model) {
+        taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             model.addAttribute("user", user);
         }
         return "user/user";
     }
+
     @RequestMapping("/settings/profile")
-    public String profile(@ModelAttribute("taikhoan") taikhoan taikhoan,Model model){
-        taikhoan user = sessionService.get("user");
+    public String profile(@ModelAttribute("taikhoan") taikhoan taikhoan,
+                          Model model) {
+        taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             model.addAttribute("user", user);
         }
+
         return "user/profile";
     }
+
     @RequestMapping("/settings/linking")
-    public String linking(@ModelAttribute("taikhoan") taikhoan taikhoan,Model model){
-        taikhoan user = sessionService.get("user");
-        boolean emailVerified = checkIfEmailIsVerified(user);
+    public String linking(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
+        taikhoan user = authUtils.getCurrentUser();
+        boolean emailVerified = authUtils.isEmailVerified(user);
+        boolean phoneVerified = authUtils.isPhoneVerified(user);
         if (user != null) {
             model.addAttribute("user", user);
         }
-        String otpIn = req.getParameter("otp");
-        if (otpIn != null && otpIn.equals(otp)) {
-            user.setEmailVerified(true);
-            usersDAO.save(user);
-            emailVerified = true;
-        }
         model.addAttribute("emailVerified", emailVerified);
+        model.addAttribute("phoneVerified", phoneVerified);
         return "user/linking";
     }
+
     @RequestMapping("/settings/payment-history")
-    public String paymentHistory(@ModelAttribute("taikhoan") taikhoan taikhoan,Model model){
-        taikhoan user = sessionService.get("user");
+    public String paymentHistory(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
+        taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             model.addAttribute("user", user);
         }
         return "user/payment-history";
     }
+
     @RequestMapping("settings/account-settings")
-    public String accountSettings(@ModelAttribute("taikhoan") taikhoan taikhoan,Model model){
-        taikhoan user = sessionService.get("user");
+    public String accountSettings(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
+        taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             model.addAttribute("user", user);
         }
         return "user/account-settings";
     }
+
     @RequestMapping("/settings/update")
-    public String update(@ModelAttribute("taikhoan") taikhoan taikhoan,Model model){
-        taikhoan user = sessionService.get("user");
+    public String update(@ModelAttribute("taikhoan") taikhoan taikhoan,
+                         RedirectAttributes redirectAttributes, Model model) {
+        taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             user.setTentaikhoan(taikhoan.getTentaikhoan());
             user.setFirstname(taikhoan.getFirstname());
             user.setLastname(taikhoan.getLastname());
-            user.setEmail(taikhoan.getEmail());
             user.setSodienthoai(taikhoan.getSodienthoai());
             user.setNgaysinh(taikhoan.getNgaysinh());
+            if (!user.getEmail().equals(taikhoan.getEmail())) {
+                user.setEmail(taikhoan.getEmail());
+                user.setEmailVerified(false);
+            }
+
             usersDAO.save(user);
             model.addAttribute("user", user);
+            redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin thành công");
             return "redirect:/user/settings/profile";
-        }else{
-            model.addAttribute("message", "Có lỗi xảy ra");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
             return "user/settings/profile";
         }
     }
+
     @RequestMapping("/settings/changePassword")
     public String changePassword(
             @RequestParam("oldpassword") String oldPassword,
             @RequestParam("newPassword") String newPassword,
             @RequestParam("confirmNewPassword") String confirmNewPassword,
+            RedirectAttributes redirectAttributes,
             Model model) {
-        taikhoan user = sessionService.get("user");
+        taikhoan user = authUtils.getCurrentUser();
 
         if (!oldPassword.equals(user.getMatkhau())) {
-            model.addAttribute("message", "Mật khẩu cũ không đúng");
-            return "user/account-settings";
+            redirectAttributes.addFlashAttribute("error", "Mật khẩu cũ không đúng");
+            return "redirect:/user/settings/account-settings";
         }
         if (oldPassword.equals(newPassword)) {
-            model.addAttribute("message", "Mật khẩu mới không được trùng với mật khẩu cũ");
-            return "user/account-settings";
+            redirectAttributes.addFlashAttribute("error", "Mật khẩu mới không được trùng với mật khẩu cũ");
+            return "redirect:/user/settings/account-settings";
         }
         if (!newPassword.equals(confirmNewPassword)) {
-            model.addAttribute("message", "Mật khẩu mới không trùng khớp");
-            return "user/account-settings";
+            redirectAttributes.addFlashAttribute("error", "Mật khẩu mới không trùng khớp");
+            return "redirect:/user/settings/account-settings";
         }
         user.setMatkhau(newPassword);
-        model.addAttribute("message", "Đổi mật khẩu thành công");
+        redirectAttributes.addFlashAttribute("message", "Đổi mật khẩu thành công");
         usersDAO.save(user);
         return "redirect:/user/settings/account-settings";
     }
+
     @RequestMapping("/settings/linking/update")
-    public String updateLinking(@ModelAttribute("taikhoan") taikhoan taikhoan,Model model){
-        taikhoan user = sessionService.get("user");
+    public String updateLinking(@ModelAttribute("taikhoan") taikhoan taikhoan,
+                                RedirectAttributes redirectAttributes,
+                                Model model) {
+        taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
 
             usersDAO.save(user);
             model.addAttribute("user", user);
+            redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin thành công");
             return "redirect:/user/settings/linking";
-        }else{
-            model.addAttribute("message", "Có lỗi xảy ra");
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
             return "user/settings/linking";
         }
     }
-    //KIEM TRA XAC THUC EMAIL
-    public boolean checkIfEmailIsVerified(taikhoan user) {
-        // Check the status from the user object
+
+    @RequestMapping("/settings/linking/sendMail")
+    public String sendMail(RedirectAttributes redirectAttributes,
+                           @RequestParam("email") String email)
+            throws MessagingException {
+        taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
-            Boolean isVerified = user.getEmailVerified();
-            return isVerified != null && isVerified;
-        }
-        return false;  // Return false if user is null or not verified
-    }
-    @RequestMapping("settings/linking/verifyMail")
-    public String verifyMail(@RequestParam("email") String email,Model model) throws MessagingException {
-        taikhoan user = sessionService.get("user");
-        if(user != null) {
-            user.setEmail(email);
-            usersDAO.save(user);
+            //OTP
+            otpMail = generateOTP();
 
             //MAIL
             String emailContent = "<h2>Xác nhận email</h2>"
                     + "<p>Xin chào " + user.getFirstname() + " " + user.getLastname() + ",</p>"
                     + "<p>Vui lòng sử dụng mã xác nhận bên dưới để hoàn tất việc xác nhận email:</p>"
-                    + "<h3 style='color:blue;'>" + otp + "</h3>"
+                    + "<h3 style='color:blue;'>" + otpMail + "</h3>"
                     + "<p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>";
 
             // Send email
-            MailSender.sendEmail(email, otp + " là mã xác thực của bạn. ", emailContent);
+            MailSender.sendEmail(email, otpMail + " là mã xác thực của bạn. ", emailContent);
             //xac thuc thanh cong
-            model.addAttribute("message", "Đã gửi mail xác nhận");
+            redirectAttributes.addFlashAttribute("message", "Đã gửi mail xác nhận");
+            redirectAttributes.addAttribute("showOtpField", "true");
         }
         return "redirect:/user/settings/linking";
     }
-//OTP GENERATOR
+
+    @RequestMapping("settings/linking/verifyMail")
+    public String verifyMail(RedirectAttributes redirectAttributes,
+                             @RequestParam("otpMail") String otp)
+            throws MessagingException {
+        taikhoan user = authUtils.getCurrentUser();
+        if (user != null) {
+            if (otpMail != null && otpMail.equals(otp)) {
+                user.setEmailVerified(true);
+                usersDAO.save(user);
+                redirectAttributes.addFlashAttribute("message", "Xác thực email thành công");
+            } else {
+                redirectAttributes.addFlashAttribute("message", "Mã xác thực không đúng");
+            }
+        }
+        return "redirect:/user/settings/linking";
+    }
+
+
+    //OTP GENERATOR
     private String generateOTP() {
         Random random = new Random();
         int otp = 100000 + random.nextInt(900000);

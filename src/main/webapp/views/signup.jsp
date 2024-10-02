@@ -29,6 +29,10 @@
                     <form:input type="text" class="form-control" id="username" path="tentaikhoan"/>
                 </div>
                 <div class="mb-3">
+                    <label for="password" class="form-label">Email</label>
+                    <form:input type="email" class="form-control" id="password" path="email"/>
+                </div>
+                <div class="mb-3">
                     <label for="password" class="form-label">Mật khẩu</label>
                     <form:input type="password" class="form-control" id="password" path="matkhau"/>
                 </div>

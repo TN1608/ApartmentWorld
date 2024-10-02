@@ -5,8 +5,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java5.asm.dao.usersDAO;
 import java5.asm.model.taikhoan;
-import java5.asm.utils.CookieService;
-import java5.asm.utils.SessionService;
+import java5.asm.services.CookieService;
+import java5.asm.services.SessionService;
+import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,20 +29,14 @@ public class LoginController {
     HttpServletRequest req;
     @Autowired
     HttpServletResponse resp;
+    @Autowired
+    AuthUtils authUtils;
 
     @GetMapping("/login")
     public String loginIndex(@ModelAttribute("taikhoan") taikhoan taikhoan){
-        taikhoan user = sessionService.get("user");
-        if(user != null){
+        taikhoan user = authUtils.getCurrentUser();
+        if (user != null) {
             return "redirect:/home";
-        } else {
-            String username = cookieService.getValue("username", req);
-            if (username != null) {
-                user = usersDAO.findById(username).orElse(null);
-                if (user != null) {
-                    return "redirect:/home";
-                }
-            }
         }
         return "login";
     }
@@ -56,7 +51,7 @@ public class LoginController {
             if (user.getMatkhau().equalsIgnoreCase(password)) {
                 sessionService.set("user", user);
                 if (remember) {
-                    cookieService.add("username", username, 24, resp);
+                    cookieService.add("username", username, 24);
                 }
                 return "redirect:/home";
             }

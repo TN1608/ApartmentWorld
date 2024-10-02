@@ -1,4 +1,4 @@
-package java5.asm.utils;
+package java5.asm.services;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,6 +42,8 @@ public class CookieService {
         Cookie cookie = new Cookie(name, value);
         //set thoi han theo don vi gio
         cookie.setMaxAge(hours * 60 * 60);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
         //them cookie
         reps.addCookie(cookie);
         return cookie;
@@ -57,25 +59,5 @@ public class CookieService {
         }
     }
 
-    //    test
-    public void add(String name, String value, int hours, HttpServletResponse response) {
-        Cookie cookie = new Cookie(name, value);
-        cookie.setMaxAge(hours * 60 * 60);
-        cookie.setHttpOnly(true); // Set HttpOnly flag
-        cookie.setSecure(true); // Set Secure flag
-        response.addCookie(cookie);
-    }
-
-    public String getValue(String name, HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(name)) {
-                    return cookie.getValue();
-                }
-            }
-        }
-        return null;
-    }
 
 }

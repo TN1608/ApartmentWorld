@@ -47,14 +47,21 @@
                                    role="button" data-bs-toggle="dropdown"
                                    aria-expanded="false">
                                     <i class="fa-solid fa-user"></i>
-                                        ${user.firstname} ${user.lastname}
+                                    <c:choose>
+                                        <c:when test="${empty user.firstname and empty user.lastname}">
+                                            ${user.tentaikhoan}
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${user.firstname} ${user.lastname}
+                                        </c:otherwise>
+                                    </c:choose>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="/user">Thông tin</a></li>
                                     <li><a class="dropdown-item" href="#">Lịch sử thanh toán</a></li>
                                     <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                                     <hr>
-                                    <c:if test="${not empty user.vaitro}">
+                                    <c:if test="${user.vaitro}">
                                         <li><a class="dropdown-item" href="/admin/home">Admin</a></li>
                                     </c:if>
                                 </ul>

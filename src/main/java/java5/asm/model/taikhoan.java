@@ -75,12 +75,12 @@ public class taikhoan implements Serializable {
     @OneToMany(mappedBy = "tentaikhoan")
     private Set<phongtro> phongtros = new LinkedHashSet<>();
 
-    @ColumnDefault("0")
-    @Column(name = "email_verified")
-    private Boolean emailVerified;
+    @ColumnDefault("false")
+    @Column(name = "email_verified", nullable = false)
+    private Boolean emailVerified = false;
 
-    @ColumnDefault("0")
-    @Column(name = "phone_verified")
-    private Boolean phoneVerified;
+    @ColumnDefault("false")
+    @Column(name = "phone_verified", nullable = false)
+    private Boolean phoneVerified = false;
 
 }
