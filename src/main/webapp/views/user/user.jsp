@@ -35,26 +35,32 @@
             <div class="card profile-card" style="width: 18rem; position: relative;">
                 <!-- Banner -->
                 <div class="banner-container position-relative">
-                    <img src="../../images/user/banner.jpg" class="card-img-top" alt="Banner"
+                    <img src="../../images/avatar/banner.jpg" class="card-img-top" alt="Banner"
                          style="height: 150px; object-fit: cover;">
                     <!-- Icon to change banner -->
-                    <label for="banner-upload" class="position-absolute"
-                           style="top: 10px; right: 10px; cursor: pointer;">
-                        <i class="bi bi-camera-fill"></i>
-                        <input type="file" id="banner-upload" style="display: none;">
-                    </label>
+                    <%--                    <label for="banner-upload" class="position-absolute"--%>
+                    <%--                           style="top: 10px; right: 10px; cursor: pointer;">--%>
+                    <%--                        <i class="fa-solid fa-camera"></i>--%>
+                    <%--                        <input type="file" id="banner-upload" style="display: none;">--%>
+                    <%--                    </label>--%>
                 </div>
                 <!-- Avatar -->
                 <div class="avatar-container text-center"
                      style="position: absolute; top: 100px; left: 50%; transform: translateX(-50%);">
-                    <img src="../../images/user/avatar.jpg" class="rounded-circle" alt="Avatar"
-                         style="width: 100px; height: 100px; border: 5px solid white;">
+                    <c:if test="${empty user.anhtaikhoan}">
+                        <img src="../../images/avatar/default.png" class="rounded-circle" alt="Avatar"
+                             style="width: 100px; height: 100px; border: 5px solid white;">
+                    </c:if>
+                    <c:if test="${not empty user.anhtaikhoan}">
+                        <img src="../../images/avatar/${user.anhtaikhoan}" class="rounded-circle" alt="Avatar"
+                             style="width: 100px; height: 100px; border: 5px solid white;">
+                    </c:if>
                     <!-- Icon to change avatar -->
-                    <label for="avatar-upload" class="position-absolute"
-                           style="bottom: 0; right: -10px; cursor: pointer;">
-                        <i class="bi bi-camera-fill"></i>
-                        <input type="file" id="avatar-upload" style="display: none;">
-                    </label>
+                    <%--                    <label for="avatar-upload" class="position-absolute"--%>
+                    <%--                           style="bottom: 0; right: -10px; cursor: pointer;">--%>
+                    <%--                        <i class="fa-solid fa-camera"></i>--%>
+                    <%--                        <input type="file" id="avatar-upload" style="display: none;">--%>
+                    <%--                    </label>--%>
                 </div>
                 <div class="card-body text-center mt-5">
                     <h5 class="card-title">${user.tentaikhoan}

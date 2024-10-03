@@ -43,7 +43,7 @@
                     <c:if test="${not empty user}">
                         <li class="nav-item d-flex align-items-center">
                             <div class="dropdown">
-                                <a class="dropdown-toggle nav-link d-block justify-content-center" href="#"
+                                <a class="dropdown-toggle nav-link d-block justify-content-center" href="/user"
                                    role="button" data-bs-toggle="dropdown"
                                    aria-expanded="false">
                                     <i class="fa-solid fa-user"></i>

@@ -31,20 +31,7 @@
 <div class="container p-5">
     <h4 class="mb-2 fw-bold">Thông tin cá nhân</h4>
     <div class="row">
-        <aside class="col-sm-4">
-            <div class="card">
-                <div class="card-body a-groups">
-                    <a href="/user/settings/profile" class="nav-link text-start show active" role="tab"
-                       aria-controls="v-pills-profile" aria-selected="false">Thông tin cá nhân</a>
-                    <a href="/user/settings/linking" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-linking" aria-selected="false">Liên kết và xác thực</a>
-                    <a href="/user/settings/payment-history" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-lichsuthanhtoan" aria-selected="false">Lịch sử thanh toán</a>
-                    <a href="/user/settings/account-settings" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-settings" aria-selected="false">Cài đặt tài khoản</a>
-                </div>
-            </div>
-        </aside>
+        <jsp:include page="_aside.jsp"/>
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
@@ -55,8 +42,33 @@
                                 <h3 class="mb-4">Thông tin cá nhân</h3>
                                 <form:form modelAttribute="taikhoan"
                                            action="${pageContext.request.contextPath}/user/settings/update"
-                                           method="post" class="row g-3">
+                                           method="post" class="row g-3" enctype="multipart/form-data">
                                     <!-- Username -->
+                                    <!-- avatar -->
+                                    <div class="col-md-7">
+                                        <label for="avatar" class="form-label">Ảnh đại diện</label>
+                                        <div class="row d-flex justify-content-center align-items-center">
+                                            <div class="col-md-3">
+                                                <c:if test="${empty user.anhtaikhoan}">
+                                                    <img src="../../images/avatar/default.png" class="rounded-circle"
+                                                         alt="Avatar"
+                                                         style="width: 100px; height: 100px; border: 5px solid white;">
+                                                </c:if>
+                                                <c:if test="${not empty user.anhtaikhoan}">
+                                                    <img src="../../images/avatar/${user.anhtaikhoan}"
+                                                         class="rounded-circle"
+                                                         alt="Avatar"
+                                                         style="width: 100px; height: 100px; border: 5px solid white;">
+                                                </c:if>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <label for="avatar" class="btn btn-outline-secondary ms-3">Chọn
+                                                    ảnh</label>
+                                                <input type="file" class="form-control d-none" id="avatar" name="avatar"
+                                                       accept="image/*"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <label for="username" class="form-label">Tên tài khoản</label>
                                         <form:input type="text" class="form-control" id="username" path="tentaikhoan"
