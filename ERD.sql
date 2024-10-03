@@ -20,6 +20,7 @@ select * from taikhoan
 insert into taikhoan values
 ('admin',N'Nguyễn Đình',N'Tuấn','123','0783955138','AdminDepTrai',0,'08-16-2004','admin.jpg',1),
 ('khang', N'Bảo', 'Khang', '123', '0865399254','normal dev', 0, '2004-08-30', null, 1);
+SELECT * FROM CCCD WHERE tentaikhoan = 'admin';
 insert into CCCD values
 ('079204036245','10-30-2022','TPHCM','anh.jpg','admin');
 create table CCCD(

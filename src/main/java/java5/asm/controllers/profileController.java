@@ -4,18 +4,23 @@ import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java5.asm.dao.CCCDDao;
 import java5.asm.dao.usersDAO;
+import java5.asm.model.CCCD;
 import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
 import java5.asm.services.EmailSenderService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @RequestMapping("/user")
@@ -27,6 +32,8 @@ public class profileController {
     CookieService cookieService;
     @Autowired
     usersDAO usersDAO;
+    @Autowired
+    CCCDDao CCCDDao;
     @Autowired
     EntityManager em;
     @Autowired
@@ -60,12 +67,20 @@ public class profileController {
     }
 
     @RequestMapping("/settings/linking")
-    public String linking(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
+    public String linking(@ModelAttribute("CCCD") CCCD CCCD,@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
         taikhoan user = authUtils.getCurrentUser();
         boolean emailVerified = authUtils.isEmailVerified(user);
         boolean phoneVerified = authUtils.isPhoneVerified(user);
         if (user != null) {
+            //user
             model.addAttribute("user", user);
+            //CCCD
+//            CCCD existedCCCD = CCCDDao.findByTentaikhoan(user.getTentaikhoan().toString());
+//            if (existedCCCD != null) {
+//                model.addAttribute("CCCD", existedCCCD);
+//            }else{
+//                model.addAttribute("CCCD", new CCCD());
+//            }
         }
         model.addAttribute("emailVerified", emailVerified);
         model.addAttribute("phoneVerified", phoneVerified);
@@ -100,6 +115,7 @@ public class profileController {
             user.setLastname(taikhoan.getLastname());
             user.setSodienthoai(taikhoan.getSodienthoai());
             user.setNgaysinh(taikhoan.getNgaysinh());
+            user.setCccd(taikhoan.getCccd());
             if (!user.getEmail().equals(taikhoan.getEmail())) {
                 user.setEmail(taikhoan.getEmail());
                 user.setEmailVerified(false);
@@ -208,4 +224,34 @@ public class profileController {
         int otp = 100000 + random.nextInt(900000);
         return String.valueOf(otp);
     }
+    //CCCD
+//    @RequestMapping("/settings/linking/updateCCCD")
+//    public String updateCCCD(@ModelAttribute("CCCD") CCCD CCCD,
+//                             RedirectAttributes redirectAttributes,
+//                             Model model) {
+//        taikhoan user = authUtils.getCurrentUser();
+//        if (user != null) {
+//            CCCD existingCCCD = CCCDDao.findById(user.getCccd().toString()).orElse(null);
+//
+//            // If CCCD already exists, update it
+//            if (existingCCCD != null) {
+//                existingCCCD.setMaCCCD(CCCD.getMaCCCD());
+//                existingCCCD.setNgaycap(CCCD.getNgaycap());
+//                existingCCCD.setNoicap(CCCD.getNoicap());
+//                existingCCCD.setAnhCCCD(CCCD.getAnhCCCD());
+//                CCCDDao.save(existingCCCD);
+//            } else {
+//                // Create a new CCCD entry if it doesn't exist
+//                CCCD.setTentaikhoan(user);
+//                CCCDDao.save(CCCD);
+//            }
+//
+//            model.addAttribute("user", user);
+//            redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin CCCD thành công");
+//            return "redirect:/user/settings/linking";
+//        } else {
+//            redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
+//            return "user/settings/linking";
+//        }
+//    }
 }

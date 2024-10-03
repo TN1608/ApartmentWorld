@@ -16,8 +16,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
-@Getter
-@Setter
 @Entity
 @Table(name = "taikhoan")
 public class taikhoan implements Serializable {
@@ -70,7 +68,7 @@ public class taikhoan implements Serializable {
     private String email;
 
     @OneToMany(mappedBy = "tentaikhoan")
-    private Set<CCCD> cccds = new LinkedHashSet<>();
+    private Set<CCCD> cccd = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "tentaikhoan")
     private Set<phongtro> phongtros = new LinkedHashSet<>();

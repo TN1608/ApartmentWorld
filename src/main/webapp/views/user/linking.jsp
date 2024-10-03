@@ -128,28 +128,28 @@
                                         </p>
                                     </c:if>
                                 </form:form>
-                                <%--                                <script>--%>
-                                <%--                                    document.getElementById('verifyEmailBtn').addEventListener('click', function (event) {--%>
-                                <%--                                        event.preventDefault();--%>
-                                <%--                                        // Show OTP input field--%>
-                                <%--                                        document.getElementById('otpField').style.display = 'block';--%>
-                                <%--                                    });--%>
-
-                                <%--                                    // Verify OTP and disable email input field on successful verification--%>
-                                <%--                                    document.getElementById('confirmOtpBtn').addEventListener('click', function () {--%>
-                                <%--                                        const enteredOtp = document.getElementById('otp').value;--%>
-
-                                <%--                                        // Simulating OTP check with backend (replace with actual verification call)--%>
-                                <%--                                        if (enteredOtp === 'expectedOtp') { // Replace 'expectedOtp' with actual OTP sent from the server--%>
-                                <%--                                            // Disable the email input field and verification button--%>
-                                <%--                                            document.getElementById('email').setAttribute('disabled', 'true');--%>
-                                <%--                                            document.getElementById('verifyEmailBtn').setAttribute('disabled', 'true');--%>
-                                <%--                                            alert('Mã xác thực đúng. Email đã được xác nhận!');--%>
-                                <%--                                        } else {--%>
-                                <%--                                            alert('Mã xác thực không đúng. Vui lòng thử lại!');--%>
-                                <%--                                        }--%>
-                                <%--                                    });--%>
-                                <%--                                </script>--%>
+                                <h3>Xác thực thông tin</h3>
+                                <form:form class="row g-3" action="/user/settings/linking/updateCCCD" modelAttribute="CCCD" method="post">
+                                    <div class="col-md-6">
+                                        <label for="maCCCD" class="form-label">Mã CCCD</label>
+                                        <form:input path="maCCCD" type="text" class="form-control" id="maCCCD" value="${CCCD.maCCCD}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="ngaycap" class="form-label">Ngày cấp</label>
+                                        <form:input path="ngaycap" type="date" class="form-control" id="ngaycap" value="${CCCD.ngaycap}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="noicap" class="form-label">Nơi cấp</label>
+                                        <form:input path="noicap" type="text" class="form-control" id="noicap" value="${CCCD.noicap}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="anhCCCD" class="form-label">Ảnh CCCD</label>
+                                        <input type="file" name="anhCCCD" class="form-control" id="anhCCCD" accept="image/*"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD</button>
+                                    </div>
+                                </form:form>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"
