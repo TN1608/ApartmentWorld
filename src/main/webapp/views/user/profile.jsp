@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -93,6 +94,7 @@
                                                     value="${user.ngaysinh}"/>
                                     </div>
 
+
                                     <!-- Email -->
                                     <c:if test="${user.emailVerified}">
                                         <div class="col-md-6">
@@ -113,6 +115,29 @@
                                         <label for="phone" class="form-label">Số điện thoại</label>
                                         <form:input type="text" class="form-control" id="phone" path="sodienthoai"
                                                     value="${user.sodienthoai}"/>
+                                    </div>
+
+                                    <!-- Dia chi -->
+                                    <div class="col-md-4">
+                                        <label for="ngaysinh" class="form-label">Tỉnh Thành</label>
+                                        <form:input type="text" class="form-control" id="ngaysinh" path="tinhThanh"
+                                                    value="${user.tinhThanh}"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="ngaysinh" class="form-label">Quận Huyện</label>
+                                        <form:input type="text" class="form-control" id="ngaysinh" path="quanHuyen"
+                                                    value="${user.quanHuyen}"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="ngaysinh" class="form-label">Phường Xã</label>
+                                        <form:input type="text" class="form-control" id="ngaysinh" path="phuongXa"
+                                                    value="${user.phuongXa}"/>
+                                    </div>
+                                    <!-- Dia chi cu the -->
+                                    <div class="col-md-12">
+                                        <label for="ngaysinh" class="form-label">Địa chỉ</label>
+                                        <form:input type="text" class="form-control" id="ngaysinh" path="diaChi"
+                                                    value="${user.diaChi}"/>
                                     </div>
                                     <c:if test="${not empty message}">
                                         <p class="text-success" role="alert">

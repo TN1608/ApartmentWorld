@@ -15,7 +15,11 @@ create table taikhoan(
 	email nvarchar(150),
 	email_verified BIT DEFAULT 0,        
     phone_verified BIT DEFAULT 0,
-    ngaytao DATETIME DEFAULT GETDATE()
+    ngaytao DATETIME DEFAULT GETDATE(),
+    diachi nvarchar(250),
+    tinhthanh nvarchar(250),
+    quanhuyen nvarchar(250),
+    phuongxa nvarchar(250)
 );
 select * from taikhoan
 insert into taikhoan values
