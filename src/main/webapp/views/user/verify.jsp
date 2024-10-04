@@ -22,8 +22,20 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
     <base href="${pageContext.request.contextPath}/">
-    <script src="/js/app.js"></script>
+    <script src="/js/link.js"></script>
     <title>ApartmentWorld</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
@@ -34,71 +46,68 @@
         <jsp:include page="_aside.jsp"/>
         <div class="col-8">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body ">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                              aria-labelledby="v-pills-profile-tab" tabindex="0">
 
                         </div>
-                        <div class="tab-pane fade" id="v-pills-linking" role="tabpanel"
+                        <div class="tab-pane fade show active" id="v-pills-linking" role="tabpanel"
                              aria-labelledby="v-pills-linking-tab" tabindex="0">
-
-                        </div>
-                        <div class="tab-pane fade show active" id="v-pills-payment-history" role="tabpanel"
-                             aria-labelledby="v-pills-payment-history-tab" tabindex="0">
                             <div class="container mt-4">
-                                <h3 class="mb-4">Lịch sử thanh toán</h3>
-                                <form:form modelAttribute="taikhoan"
-                                           action="${pageContext.request.contextPath}/user/settings/update"
-                                           method="post" class="row g-3">
-                                    <!-- Username -->
-                                    <div class="col-md-6">
-                                        <label for="username" class="form-label">Tên tài khoản</label>
-                                        <form:input type="text" class="form-control" id="username" path="tentaikhoan"
-                                                    value="${user.tentaikhoan}"/>
-                                    </div>
-                                    <%--        firstname--%>
-                                    <div class="col-md-6">
-                                        <label for="firstname" class="form-label">Họ</label>
-                                        <form:input type="text" class="form-control" id="firstname" path="firstname"
-                                                    value="${user.firstname}"/>
-                                    </div>
-                                    <!-- Last Name -->
-                                    <div class="col-md-6">
-                                        <label for="lastname" class="form-label">Tên</label>
-                                        <form:input type="text" class="form-control" id="lastname" path="lastname"
-                                                    value="${user.lastname}"/>
-                                    </div>
-                                    <%--        ngaysinh--%>
-                                    <div class="col-md-6">
-                                        <label for="ngaysinh" class="form-label">Ngày sinh</label>
-                                        <form:input type="date" class="form-control" id="ngaysinh" path="ngaysinh"
-                                                    value="${user.ngaysinh}"/>
-                                    </div>
 
-                                    <!-- Email -->
+                                <h3>Xác thực thông tin</h3>
+                                <form:form class="row g-3" action="/user/settings/verify/updateCCCD"
+                                           modelAttribute="CCCD" method="post">
                                     <div class="col-md-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <form:input type="email" class="form-control" id="email" path="email"
-                                                    value="${user.email}"/>
+                                        <label for="maCCCD" class="form-label">Mã CCCD</label>
+                                        <form:input path="maCCCD" type="text" class="form-control" id="maCCCD"
+                                                    value="${CCCD.maCCCD}"/>
                                     </div>
-
-                                    <!-- Phone Number -->
                                     <div class="col-md-6">
-                                        <label for="phone" class="form-label">Số điện thoại</label>
-                                        <form:input type="text" class="form-control" id="phone" path="sodienthoai"
-                                                    value="${user.sodienthoai}"/>
+                                        <label for="maCCCD" class="form-label">Họ và Tên</label>
+                                        <form:input path="tenCCCD" type="text" class="form-control" id="maCCCD"
+                                                    value="${CCCD.maCCCD}"/>
                                     </div>
-
-                                    <!-- Submit Button -->
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
+                                    <div class="col-md-6">
+                                        <label for="maCCCD" class="form-label">Ngày Sinh</label>
+                                        <form:input path="ngaysinhCCCD" type="date" class="form-control" id="maCCCD"
+                                                    value="${CCCD.maCCCD}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="ngaycap" class="form-label">Ngày cấp</label>
+                                        <form:input path="ngaycap" type="date" class="form-control" id="ngaycap"
+                                                    value="${CCCD.ngaycap}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="noicap" class="form-label">Nơi cấp</label>
+                                        <form:input path="noicap" type="text" class="form-control" id="noicap"
+                                                    value="${CCCD.noicap}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="anhCCCDtruoc" class="form-label">Ảnh CCCD (Mặt trước)</label>
+                                        <input type="file" name="anhCCCD" class="form-control" id="anhCCCDtruoc"
+                                               accept="image/*"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="anhCCCDsau" class="form-label">Ảnh CCCD (Mặt sau)</label>
+                                        <input type="file" name="anhCCCD" class="form-control" id="anhCCCDsau"
+                                               accept="image/*"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD
+                                        </button>
                                     </div>
                                 </form:form>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"
+                             aria-labelledby="v-pills-payment-history-tab" tabindex="0">
+
+                        </div>
                         <div class="tab-pane fade" id="v-pills-account-settings" role="tabpanel"
                              aria-labelledby="v-pills-account-settings-tab" tabindex="0">
+
                         </div>
                     </div>
                 </div>

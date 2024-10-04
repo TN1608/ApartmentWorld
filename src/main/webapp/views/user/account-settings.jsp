@@ -31,20 +31,7 @@
 <div class="container p-5">
     <h4 class="mb-2 fw-bold">Thông tin cá nhân</h4>
     <div class="row">
-        <aside class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <a href="/user/settings/profile" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-profile" aria-selected="false">Thông tin cá nhân</a>
-                    <a href="/user/settings/linking" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-linking" aria-selected="false">Liên kết và xác thực</a>
-                    <a href="/user/settings/payment-history" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-lichsuthanhtoan" aria-selected="false">Lịch sử thanh toán</a>
-                    <a href="/user/settings/account-settings" class="nav-link text-start show active" role="tab"
-                       aria-controls="v-pills-settings" aria-selected="false">Cài đặt tài khoản</a>
-                </div>
-            </div>
-        </aside>
+        <jsp:include page="_aside.jsp"/>
         <div class="col-8">
             <div class="card">
                 <div class="card-body a-groups">

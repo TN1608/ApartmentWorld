@@ -31,6 +31,7 @@
             display: flex;
             flex-direction: column;
         }
+
         .container {
             flex: 1;
         }
@@ -42,20 +43,7 @@
 <div class="container p-5">
     <h4 class="mb-2 fw-bold">Thông tin cá nhân</h4>
     <div class="row">
-        <aside class="col-sm-4">
-            <div class="card">
-                <div class="card-body a-groups">
-                    <a href="/user/settings/profile" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-profile" aria-selected="false">Thông tin cá nhân</a>
-                    <a href="/user/settings/linking" class="nav-link text-start show active" role="tab"
-                       aria-controls="v-pills-linking" aria-selected="false">Liên kết và xác thực</a>
-                    <a href="/user/settings/payment-history" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-lichsuthanhtoan" aria-selected="false">Lịch sử thanh toán</a>
-                    <a href="/user/settings/account-settings" class="nav-link text-start" role="tab"
-                       aria-controls="v-pills-settings" aria-selected="false">Cài đặt tài khoản</a>
-                </div>
-            </div>
-        </aside>
+        <jsp:include page="_aside.jsp"/>
         <div class="col-8">
             <div class="card">
                 <div class="card-body ">
@@ -128,45 +116,45 @@
                                         </p>
                                     </c:if>
                                 </form:form>
-                                <h3>Xác thực thông tin</h3>
-                                <form:form class="row g-3" action="/user/settings/linking/updateCCCD" modelAttribute="CCCD" method="post">
-                                    <div class="col-md-6">
-                                        <label for="maCCCD" class="form-label">Mã CCCD</label>
-                                        <form:input path="maCCCD" type="text" class="form-control" id="maCCCD" value="${CCCD.maCCCD}"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="ngaycap" class="form-label">Ngày cấp</label>
-                                        <form:input path="ngaycap" type="date" class="form-control" id="ngaycap" value="${CCCD.ngaycap}"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="noicap" class="form-label">Nơi cấp</label>
-                                        <form:input path="noicap" type="text" class="form-control" id="noicap" value="${CCCD.noicap}"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="anhCCCD" class="form-label">Ảnh CCCD</label>
-                                        <input type="file" name="anhCCCD" class="form-control" id="anhCCCD" accept="image/*"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD</button>
-                                    </div>
-                                </form:form>
+                                <%--                                <h3>Xác thực thông tin</h3>--%>
+                                <%--                                <form:form class="row g-3" action="/user/settings/linking/updateCCCD" modelAttribute="CCCD" method="post">--%>
+                                <%--                                    <div class="col-md-6">--%>
+                                <%--                                        <label for="maCCCD" class="form-label">Mã CCCD</label>--%>
+                                <%--                                        <form:input path="maCCCD" type="text" class="form-control" id="maCCCD" value="${CCCD.maCCCD}"/>--%>
+                                <%--                                    </div>--%>
+                                <%--                                    <div class="col-md-6">--%>
+                                <%--                                        <label for="ngaycap" class="form-label">Ngày cấp</label>--%>
+                                <%--                                        <form:input path="ngaycap" type="date" class="form-control" id="ngaycap" value="${CCCD.ngaycap}"/>--%>
+                                <%--                                    </div>--%>
+                                <%--                                    <div class="col-md-6">--%>
+                                <%--                                        <label for="noicap" class="form-label">Nơi cấp</label>--%>
+                                <%--                                        <form:input path="noicap" type="text" class="form-control" id="noicap" value="${CCCD.noicap}"/>--%>
+                                <%--                                    </div>--%>
+                                <%--                                    <div class="col-md-6">--%>
+                                <%--                                        <label for="anhCCCD" class="form-label">Ảnh CCCD</label>--%>
+                                <%--                                        <input type="file" name="anhCCCD" class="form-control" id="anhCCCD" accept="image/*"/>--%>
+                                <%--                                    </div>--%>
+                                <%--                                    <div class="col-md-6">--%>
+                                <%--                                        <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD</button>--%>
+                                <%--                                    </div>--%>
+                                <%--                                </form:form>--%>
+                                                            </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"
-                             aria-labelledby="v-pills-payment-history-tab" tabindex="0">
+                            <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"
+                                 aria-labelledby="v-pills-payment-history-tab" tabindex="0">
 
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-account-settings" role="tabpanel"
-                             aria-labelledby="v-pills-account-settings-tab" tabindex="0">
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-account-settings" role="tabpanel"
+                                 aria-labelledby="v-pills-account-settings-tab" tabindex="0">
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Main content here -->
+    <!-- Main content here -->
 
 </body>
 <jsp:include page="../footer.jsp"/>

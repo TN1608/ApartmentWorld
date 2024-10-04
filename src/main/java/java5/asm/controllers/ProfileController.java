@@ -2,9 +2,9 @@ package java5.asm.controllers;
 
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityManager;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java5.asm.dao.CCCDDao;
 import java5.asm.dao.usersDAO;
 import java5.asm.model.CCCD;
 import java5.asm.model.taikhoan;
@@ -13,33 +13,37 @@ import java5.asm.services.EmailSenderService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.Optional;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Random;
 
 @RequestMapping("/user")
 @Controller
-public class profileController {
+public class ProfileController {
     @Autowired
     SessionService sessionService;
     @Autowired
     CookieService cookieService;
     @Autowired
     usersDAO usersDAO;
-    @Autowired
-    CCCDDao CCCDDao;
+    //    @Autowired
+//    CCCDDao CCCDDao;
     @Autowired
     EntityManager em;
     @Autowired
     HttpServletRequest req;
     @Autowired
     HttpServletResponse resp;
+    @Autowired
+    ServletContext servletContext;
     @Autowired
     private EmailSenderService MailSender;
     @Autowired
@@ -67,7 +71,7 @@ public class profileController {
     }
 
     @RequestMapping("/settings/linking")
-    public String linking(@ModelAttribute("CCCD") CCCD CCCD,@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
+    public String linking(@ModelAttribute("CCCD") CCCD CCCD, @ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
         taikhoan user = authUtils.getCurrentUser();
         boolean emailVerified = authUtils.isEmailVerified(user);
         boolean phoneVerified = authUtils.isPhoneVerified(user);
@@ -82,6 +86,7 @@ public class profileController {
 //                model.addAttribute("CCCD", new CCCD());
 //            }
         }
+//        model.addAttribute("CCCD", new CCCD());
         model.addAttribute("emailVerified", emailVerified);
         model.addAttribute("phoneVerified", phoneVerified);
         return "user/linking";
@@ -107,7 +112,9 @@ public class profileController {
 
     @RequestMapping("/settings/update")
     public String update(@ModelAttribute("taikhoan") taikhoan taikhoan,
-                         RedirectAttributes redirectAttributes, Model model) {
+                         RedirectAttributes redirectAttributes,
+                         Model model,
+                         @RequestParam("avatar") MultipartFile avatar) {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             user.setTentaikhoan(taikhoan.getTentaikhoan());
@@ -120,14 +127,31 @@ public class profileController {
                 user.setEmail(taikhoan.getEmail());
                 user.setEmailVerified(false);
             }
-
+            if (!avatar.isEmpty()) {
+                try {
+                    String uploadDirectory = servletContext.getRealPath("/images/avatar/");
+                    String fileName = avatar.getOriginalFilename();
+                    Path uploadPath = Paths.get(uploadDirectory);
+                    if (!Files.exists(uploadPath)) {
+                        Files.createDirectories(uploadPath);
+                    }
+                    Path filePath = uploadPath.resolve(fileName);
+                    Files.copy(avatar.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                    user.setAnhtaikhoan(fileName);
+                } catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra khi tải ảnh lên");
+                    return "redirect:/user/settings/profile";
+                }
+            } else {
+                user.setAnhtaikhoan(user.getAnhtaikhoan());
+            }
             usersDAO.save(user);
             model.addAttribute("user", user);
             redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin thành công");
             return "redirect:/user/settings/profile";
         } else {
             redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
-            return "user/settings/profile";
+            return "redirect:/user/settings/profile";
         }
     }
 
@@ -158,22 +182,21 @@ public class profileController {
         return "redirect:/user/settings/account-settings";
     }
 
-    @RequestMapping("/settings/linking/update")
-    public String updateLinking(@ModelAttribute("taikhoan") taikhoan taikhoan,
-                                RedirectAttributes redirectAttributes,
-                                Model model) {
-        taikhoan user = authUtils.getCurrentUser();
-        if (user != null) {
-
-            usersDAO.save(user);
-            model.addAttribute("user", user);
-            redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin thành công");
-            return "redirect:/user/settings/linking";
-        } else {
-            redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
-            return "user/settings/linking";
-        }
-    }
+//    @RequestMapping("/settings/linking/update")
+//    public String updateLinking(@ModelAttribute("taikhoan") taikhoan taikhoan,
+//                                RedirectAttributes redirectAttributes,
+//                                Model model) {
+//        taikhoan user = authUtils.getCurrentUser();
+//        if (user != null) {
+//            usersDAO.save(user);
+//            model.addAttribute("user", user);
+//            redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin thành công");
+//            return "redirect:/user/settings/linking";
+//        } else {
+//            redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
+//            return "user/settings/linking";
+//        }
+//    }
 
     @RequestMapping("/settings/linking/sendMail")
     public String sendMail(RedirectAttributes redirectAttributes,
@@ -254,4 +277,14 @@ public class profileController {
 //            return "user/settings/linking";
 //        }
 //    }
+
+    @RequestMapping("/settings/verify")
+    public String verify(Model model) {
+        taikhoan user = authUtils.getCurrentUser();
+        if (user != null) {
+            model.addAttribute("CCCD", new CCCD());
+            model.addAttribute("user", user);
+        }
+        return "user/verify";
+    }
 }
