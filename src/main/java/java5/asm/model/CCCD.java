@@ -6,8 +6,9 @@ import lombok.Data;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
+
 @Data
 @Entity
 @Table(name = "CCCD")
@@ -26,24 +27,12 @@ public class CCCD implements Serializable {
     @Column(name = "noicap", length = 450)
     private String noicap;
 
+    @Size(max = 250)
+    @Column(name = "anhCCCD", length = 250)
+    private String anhCCCD;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tentaikhoan")
     private taikhoan taikhoan;
-
-    @Size(max = 250)
-    @Nationalized
-    @Column(name = "tenCCCD", length = 250)
-    private String tenCCCD;
-
-    @Column(name = "ngaysinhCCCD")
-    private Instant ngaysinhCCCD;
-
-    @Size(max = 250)
-    @Column(name = "anhTruocCCCD", length = 250)
-    private String anhTruocCCCD;
-
-    @Size(max = 50)
-    @Column(name = "anhSauCCCD", length = 50)
-    private String anhSauCCCD;
 
 }

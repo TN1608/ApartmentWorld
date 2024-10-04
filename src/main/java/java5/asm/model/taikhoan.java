@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -78,30 +80,5 @@ public class taikhoan implements Serializable {
     @ColumnDefault("false")
     @Column(name = "phone_verified", nullable = false)
     private Boolean phoneVerified = false;
-
-    @ColumnDefault("getdate()")
-    @Column(name = "ngaytao")
-    private Instant ngaytao = Instant.now();
-
-    @Size(max = 250)
-    @Nationalized
-    @Column(name = "diachi", length = 250)
-    private String diaChi;
-
-    @Size(max = 250)
-    @Nationalized
-    @Column(name = "tinhthanh", length = 250)
-    private String tinhThanh;
-
-    @Size(max = 250)
-    @Nationalized
-    @Column(name = "quanhuyen", length = 250)
-    private String quanHuyen;
-
-
-    @Size(max = 250)
-    @Nationalized
-    @Column(name = "phuongxa", length = 250)
-    private String phuongXa;
 
 }

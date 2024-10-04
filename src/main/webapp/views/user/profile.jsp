@@ -96,20 +96,12 @@
 
 
                                     <!-- Email -->
-                                    <c:if test="${user.emailVerified}">
-                                        <div class="col-md-6">
-                                            <label for="email" class="form-label">Email</label>
-                                            <form:input type="email" class="form-control" id="email" path="email"
-                                                        value="${user.email}" disabled="true"/>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${!user.emailVerified}">
-                                        <div class="col-md-6">
-                                            <label for="email" class="form-label">Email</label>
-                                            <form:input type="email" class="form-control" id="email" path="email"
-                                                        value="${user.email}" disabled="true"/>
-                                        </div>
-                                    </c:if>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email</label>
+                                        <form:input type="email" class="form-control" id="email" path="email"
+                                                    value="${user.email}"/>
+                                    </div>
+
                                     <!-- Phone Number -->
                                     <div class="col-md-6">
                                         <label for="phone" class="form-label">Số điện thoại</label>

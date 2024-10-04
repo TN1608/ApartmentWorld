@@ -65,14 +65,14 @@
                                                     value="${CCCD.maCCCD}"/>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="tenCCCD" class="form-label">Họ và Tên</label>
-                                        <form:input path="tenCCCD" type="text" class="form-control" id="tenCCCD"
-                                                    value="${CCCD.tenCCCD}"/>
+                                        <label for="maCCCD" class="form-label">Họ và Tên</label>
+                                        <form:input path="tenCCCD" type="text" class="form-control" id="maCCCD"
+                                                    value="${CCCD.maCCCD}"/>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="ngaysinh" class="form-label">Ngày Sinh</label>
-                                        <form:input path="ngaysinhCCCD" type="date" class="form-control" id="ngaysinh"
-                                                    value="${CCCD.ngaysinhCCCD}"/>
+                                        <label for="maCCCD" class="form-label">Ngày Sinh</label>
+                                        <form:input path="ngaysinhCCCD" type="date" class="form-control" id="maCCCD"
+                                                    value="${CCCD.maCCCD}"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="ngaycap" class="form-label">Ngày cấp</label>
@@ -85,18 +85,14 @@
                                                     value="${CCCD.noicap}"/>
                                     </div>
                                     <div class="col-md-6">
-
-                                    </div>
-                                    <div class="col-md-6">
                                         <label for="anhCCCDtruoc" class="form-label">Ảnh CCCD (Mặt trước)</label>
-                                        <form:input type="file" path="anhTruocCCCD" class="form-control"
-                                                    id="anhCCCDtruoc"
-                                                    accept="image/*"/>
+                                        <input type="file" name="anhCCCD" class="form-control" id="anhCCCDtruoc"
+                                               accept="image/*"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="anhCCCDsau" class="form-label">Ảnh CCCD (Mặt sau)</label>
-                                        <form:input type="file" path="anhSauCCCD" class="form-control" id="anhCCCDsau"
-                                                    accept="image/*"/>
+                                        <input type="file" name="anhCCCD" class="form-control" id="anhCCCDsau"
+                                               accept="image/*"/>
                                     </div>
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD

@@ -14,12 +14,7 @@ create table taikhoan(
 	vaitro bit,
 	email nvarchar(150),
 	email_verified BIT DEFAULT 0,        
-    phone_verified BIT DEFAULT 0,
-    ngaytao DATETIME DEFAULT GETDATE(),
-    diachi nvarchar(250),
-    tinhthanh nvarchar(250),
-    quanhuyen nvarchar(250),
-    phuongxa nvarchar(250)
+    phone_verified BIT DEFAULT 0
 );
 select * from taikhoan
 insert into taikhoan values
@@ -27,15 +22,12 @@ insert into taikhoan values
 ('khang', N'Bảo', 'Khang', '123', '0865399254','normal dev', 0, '2004-08-30', null, 1);
 SELECT * FROM CCCD WHERE tentaikhoan = 'admin';
 insert into CCCD values
-('079204036245','10-30-2022','TPHCM','anhT.jpg','admin',N'Nguyễn Đình Tuấn','2004-08-16','anhS.jpg');
+('079204036245','10-30-2022','TPHCM','anh.jpg','admin');
 create table CCCD(
 	maCCCD varchar(12) primary key,
-	tenCCCD nvarchar(250),
 	ngaycap date,
 	noicap nvarchar(450),
-	anhTruocCCCD varchar(250),
-	anhSauCCCD varchar(50),
-	ngaysinhCCCD datetime,
+	anhCCCD varchar(250),
 	tentaikhoan varchar(150),
 	constraint FK_user foreign key (tentaikhoan) references taikhoan(tentaikhoan)
 );
