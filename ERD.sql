@@ -23,9 +23,10 @@ insert into taikhoan values
 ('khang', N'Bảo', 'Khang', '123', '0865399254','normal dev', 0, '2004-08-30', null, 1);
 SELECT * FROM CCCD WHERE tentaikhoan = 'admin';
 insert into CCCD values
-('079204036245','10-30-2022','TPHCM','anh.jpg','admin','');
+('079204036245','10-30-2022','TPHCM','anhT.jpg','admin',N'Nguyễn Đình Tuấn','2004-08-16','anhS.jpg');
 create table CCCD(
 	maCCCD varchar(12) primary key,
+	tenCCCD nvarchar(250),
 	ngaycap date,
 	noicap nvarchar(450),
 	anhTruocCCCD varchar(250),
