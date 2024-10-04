@@ -28,7 +28,7 @@ public class CCCD implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tentaikhoan")
-    private taikhoan tentaikhoan;
+    private taikhoan taikhoan;
 
     @Size(max = 250)
     @Nationalized
