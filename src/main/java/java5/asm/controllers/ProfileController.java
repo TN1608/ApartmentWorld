@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java5.asm.dao.CCCDDao;
 import java5.asm.dao.usersDAO;
 import java5.asm.model.CCCD;
 import java5.asm.model.taikhoan;
@@ -34,8 +35,8 @@ public class ProfileController {
     CookieService cookieService;
     @Autowired
     usersDAO usersDAO;
-    //    @Autowired
-//    CCCDDao CCCDDao;
+    @Autowired
+    CCCDDao CCCDDao;
     @Autowired
     EntityManager em;
     @Autowired
@@ -51,7 +52,7 @@ public class ProfileController {
     String otpMail;
 
     @GetMapping
-    public String user(Model model) {
+    public String user(Model model,@ModelAttribute("taikhoan") taikhoan taikhoan) {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             model.addAttribute("user", user);
@@ -279,12 +280,17 @@ public class ProfileController {
 //    }
 
     @RequestMapping("/settings/verify")
-    public String verify(Model model) {
+    public String verify(Model model,@ModelAttribute("CCCD") CCCD CCCD) {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
-            model.addAttribute("CCCD", new CCCD());
             model.addAttribute("user", user);
         }
         return "user/verify";
+    }
+
+    @ResponseBody
+    @RequestMapping("/cccd")
+    public CCCD verifyCCCD(@RequestParam("ID") String ID) {
+        return CCCDDao.findByTentaikhoan(ID);
     }
 }

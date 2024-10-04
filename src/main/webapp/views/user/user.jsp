@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,12 +38,6 @@
                 <div class="banner-container position-relative">
                     <img src="../../images/avatar/banner.jpg" class="card-img-top" alt="Banner"
                          style="height: 150px; object-fit: cover;">
-                    <!-- Icon to change banner -->
-                    <%--                    <label for="banner-upload" class="position-absolute"--%>
-                    <%--                           style="top: 10px; right: 10px; cursor: pointer;">--%>
-                    <%--                        <i class="fa-solid fa-camera"></i>--%>
-                    <%--                        <input type="file" id="banner-upload" style="display: none;">--%>
-                    <%--                    </label>--%>
                 </div>
                 <!-- Avatar -->
                 <div class="avatar-container text-center"
@@ -71,7 +66,7 @@
                     <p class="card-text">${user.mota}</p>
                     <a href="/user/settings/profile" class="btn btn-warning fw-bold mb-2 w-100">Chỉnh sửa thông tin cá
                         nhân</a>
-                    <p class="card-text text-start m-2"><i class="bi bi-calendar-check me-2"></i>Ngày tham gia: 0</p>
+                    <p class="card-text text-start m-2"><i class="bi bi-calendar-check me-2"></i>Ngày tham gia: ${user.ngaytao}</p>
                     <p class="card-text text-start verify m-2"><i
                             class="bi bi-patch-check-fill text-success me-2"></i></i>Verify : <a href="#"
                                                                                                  class="me-2"><i

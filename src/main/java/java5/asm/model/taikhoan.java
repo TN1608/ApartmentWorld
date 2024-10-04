@@ -10,6 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -80,5 +81,9 @@ public class taikhoan implements Serializable {
     @ColumnDefault("false")
     @Column(name = "phone_verified", nullable = false)
     private Boolean phoneVerified = false;
+
+    @ColumnDefault("getdate()")
+    @Column(name = "ngaytao")
+    private Instant ngaytao;
 
 }
