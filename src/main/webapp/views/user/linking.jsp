@@ -116,29 +116,7 @@
                                         </p>
                                     </c:if>
                                 </form:form>
-                                <%--                                <h3>Xác thực thông tin</h3>--%>
-                                <%--                                <form:form class="row g-3" action="/user/settings/linking/updateCCCD" modelAttribute="CCCD" method="post">--%>
-                                <%--                                    <div class="col-md-6">--%>
-                                <%--                                        <label for="maCCCD" class="form-label">Mã CCCD</label>--%>
-                                <%--                                        <form:input path="maCCCD" type="text" class="form-control" id="maCCCD" value="${CCCD.maCCCD}"/>--%>
-                                <%--                                    </div>--%>
-                                <%--                                    <div class="col-md-6">--%>
-                                <%--                                        <label for="ngaycap" class="form-label">Ngày cấp</label>--%>
-                                <%--                                        <form:input path="ngaycap" type="date" class="form-control" id="ngaycap" value="${CCCD.ngaycap}"/>--%>
-                                <%--                                    </div>--%>
-                                <%--                                    <div class="col-md-6">--%>
-                                <%--                                        <label for="noicap" class="form-label">Nơi cấp</label>--%>
-                                <%--                                        <form:input path="noicap" type="text" class="form-control" id="noicap" value="${CCCD.noicap}"/>--%>
-                                <%--                                    </div>--%>
-                                <%--                                    <div class="col-md-6">--%>
-                                <%--                                        <label for="anhCCCD" class="form-label">Ảnh CCCD</label>--%>
-                                <%--                                        <input type="file" name="anhCCCD" class="form-control" id="anhCCCD" accept="image/*"/>--%>
-                                <%--                                    </div>--%>
-                                <%--                                    <div class="col-md-6">--%>
-                                <%--                                        <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD</button>--%>
-                                <%--                                    </div>--%>
-                                <%--                                </form:form>--%>
-                                                            </div>
+                                    </div>
                             </div>
                             <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"
                                  aria-labelledby="v-pills-payment-history-tab" tabindex="0">

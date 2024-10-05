@@ -48,53 +48,26 @@
                              aria-labelledby="v-pills-payment-history-tab" tabindex="0">
                             <div class="container mt-4">
                                 <h3 class="mb-4">Lịch sử thanh toán</h3>
-                                <form:form modelAttribute="taikhoan"
-                                           action="${pageContext.request.contextPath}/user/settings/update"
-                                           method="post" class="row g-3">
-                                    <!-- Username -->
-                                    <div class="col-md-6">
-                                        <label for="username" class="form-label">Tên tài khoản</label>
-                                        <form:input type="text" class="form-control" id="username" path="tentaikhoan"
-                                                    value="${user.tentaikhoan}"/>
-                                    </div>
-                                    <%--        firstname--%>
-                                    <div class="col-md-6">
-                                        <label for="firstname" class="form-label">Họ</label>
-                                        <form:input type="text" class="form-control" id="firstname" path="firstname"
-                                                    value="${user.firstname}"/>
-                                    </div>
-                                    <!-- Last Name -->
-                                    <div class="col-md-6">
-                                        <label for="lastname" class="form-label">Tên</label>
-                                        <form:input type="text" class="form-control" id="lastname" path="lastname"
-                                                    value="${user.lastname}"/>
-                                    </div>
-                                    <%--        ngaysinh--%>
-                                    <div class="col-md-6">
-                                        <label for="ngaysinh" class="form-label">Ngày sinh</label>
-                                        <form:input type="date" class="form-control" id="ngaysinh" path="ngaysinh"
-                                                    value="${user.ngaysinh}"/>
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <form:input type="email" class="form-control" id="email" path="email"
-                                                    value="${user.email}"/>
-                                    </div>
-
-                                    <!-- Phone Number -->
-                                    <div class="col-md-6">
-                                        <label for="phone" class="form-label">Số điện thoại</label>
-                                        <form:input type="text" class="form-control" id="phone" path="sodienthoai"
-                                                    value="${user.sodienthoai}"/>
-                                    </div>
-
-                                    <!-- Submit Button -->
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
-                                    </div>
-                                </form:form>
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Mã giao dịch</th>
+                                        <th scope="col">Ngày thanh toán</th>
+                                        <th scope="col">Số tiền</th>
+                                        <th scope="col">Trạng thái</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${paymentHistories}" var="paymentHistory">
+                                        <tr>
+                                            <td>${paymentHistory.id}</td>
+                                            <td>${paymentHistory.paymentDate}</td>
+                                            <td>${paymentHistory.amount}</td>
+                                            <td>${paymentHistory.status}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-account-settings" role="tabpanel"

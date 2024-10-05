@@ -6,8 +6,8 @@ import lombok.Data;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @Entity
@@ -19,6 +19,22 @@ public class CCCD implements Serializable {
     @Column(name = "maCCCD", nullable = false, length = 12)
     private String maCCCD;
 
+    @Size(max = 250)
+    @Nationalized
+    @Column(name = "tenCCCD", length = 250)
+    private String tenCCCD;
+
+    @Column(name = "ngaysinh")
+    private LocalDate ngaysinh;
+
+    @Size(max = 250)
+    @Column(name = "anhTruocCCCD", length = 250)
+    private String anhTruocCCCD;
+
+    @Size(max = 250)
+    @Column(name = "anhSauCCCD", length = 250)  // Correct column mapping
+    private String anhSauCCCD;
+
     @Column(name = "ngaycap")
     private LocalDate ngaycap;
 
@@ -27,12 +43,9 @@ public class CCCD implements Serializable {
     @Column(name = "noicap", length = 450)
     private String noicap;
 
-    @Size(max = 250)
-    @Column(name = "anhCCCD", length = 250)
-    private String anhCCCD;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tentaikhoan")
     private taikhoan taikhoan;
 
 }
+

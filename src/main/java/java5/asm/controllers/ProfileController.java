@@ -5,8 +5,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java5.asm.dao.CCCDDao;
+import java5.asm.dao.HDTDao;
+import java5.asm.dao.LSTTDao;
 import java5.asm.dao.usersDAO;
 import java5.asm.model.CCCD;
+import java5.asm.model.lichsuthanhtoan;
 import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
 import java5.asm.services.EmailSenderService;
@@ -19,10 +23,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @RequestMapping("/user")
@@ -34,8 +41,12 @@ public class ProfileController {
     CookieService cookieService;
     @Autowired
     usersDAO usersDAO;
-    //    @Autowired
-//    CCCDDao CCCDDao;
+    @Autowired
+    CCCDDao CCCDDao;
+//    @Autowired
+//    LSTTDao LSTTDao;
+    @Autowired
+    HDTDao HDTDao;
     @Autowired
     EntityManager em;
     @Autowired
@@ -71,33 +82,28 @@ public class ProfileController {
     }
 
     @RequestMapping("/settings/linking")
-    public String linking(@ModelAttribute("CCCD") CCCD CCCD, @ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
+    public String linking(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
         taikhoan user = authUtils.getCurrentUser();
         boolean emailVerified = authUtils.isEmailVerified(user);
         boolean phoneVerified = authUtils.isPhoneVerified(user);
         if (user != null) {
             //user
             model.addAttribute("user", user);
-            //CCCD
-//            CCCD existedCCCD = CCCDDao.findByTentaikhoan(user.getTentaikhoan().toString());
-//            if (existedCCCD != null) {
-//                model.addAttribute("CCCD", existedCCCD);
-//            }else{
-//                model.addAttribute("CCCD", new CCCD());
-//            }
         }
-//        model.addAttribute("CCCD", new CCCD());
         model.addAttribute("emailVerified", emailVerified);
         model.addAttribute("phoneVerified", phoneVerified);
         return "user/linking";
     }
 
     @RequestMapping("/settings/payment-history")
-    public String paymentHistory(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
+    public String paymentHistory(Model model) {
         taikhoan user = authUtils.getCurrentUser();
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
+//        if (user != null) {
+//            List<lichsuthanhtoan> paymentHistory = LSTTDao.findByTentaikhoan(user.getTentaikhoan());
+//            model.addAttribute("paymentHistory", paymentHistory != null ? paymentHistory : new ArrayList<>());
+//        }else{
+//            model.addAttribute("paymentHistory", new ArrayList<>());
+//        }
         return "user/payment-history";
     }
 
@@ -248,41 +254,72 @@ public class ProfileController {
         return String.valueOf(otp);
     }
     //CCCD
-//    @RequestMapping("/settings/linking/updateCCCD")
-//    public String updateCCCD(@ModelAttribute("CCCD") CCCD CCCD,
-//                             RedirectAttributes redirectAttributes,
-//                             Model model) {
-//        taikhoan user = authUtils.getCurrentUser();
-//        if (user != null) {
-//            CCCD existingCCCD = CCCDDao.findById(user.getCccd().toString()).orElse(null);
-//
-//            // If CCCD already exists, update it
-//            if (existingCCCD != null) {
-//                existingCCCD.setMaCCCD(CCCD.getMaCCCD());
-//                existingCCCD.setNgaycap(CCCD.getNgaycap());
-//                existingCCCD.setNoicap(CCCD.getNoicap());
-//                existingCCCD.setAnhCCCD(CCCD.getAnhCCCD());
-//                CCCDDao.save(existingCCCD);
-//            } else {
-//                // Create a new CCCD entry if it doesn't exist
-//                CCCD.setTentaikhoan(user);
-//                CCCDDao.save(CCCD);
-//            }
-//
-//            model.addAttribute("user", user);
-//            redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin CCCD thành công");
-//            return "redirect:/user/settings/linking";
-//        } else {
-//            redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
-//            return "user/settings/linking";
-//        }
-//    }
+    @RequestMapping("/settings/verify/updateCCCD")
+    public String updateCCCD(@ModelAttribute("CCCD") CCCD cccd,
+                             RedirectAttributes redirectAttributes,
+                             Model model,
+                             @RequestParam("anhTruoc") MultipartFile anhTruocCCCD,
+                                @RequestParam("anhSau") MultipartFile anhSauCCCD) {
+        taikhoan user = authUtils.getCurrentUser();
+        String uploadDirectory = servletContext.getRealPath("/images/cccd/");
+        if (user != null) {
+            cccd.setTaikhoan(user);
+            Path path = Paths.get(uploadDirectory);
+            if (!anhTruocCCCD.isEmpty()) {
+                try {
+                    String fileNameT = anhTruocCCCD.getOriginalFilename();
+                    Path uploadPathT = path;
+                    if (!Files.exists(uploadPathT)) {
+                        Files.createDirectories(uploadPathT);
+                    }
+                    Path filePath = uploadPathT.resolve(fileNameT);
+                    Files.copy(anhTruocCCCD.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                    cccd.setAnhTruocCCCD(fileNameT);
+                } catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra khi tải ảnh lên");
+                    return "redirect:/user/settings/verify";
+                }
+            } else {
+                cccd.setAnhTruocCCCD(cccd.getAnhTruocCCCD());
+            }
+            if (!anhSauCCCD.isEmpty()) {
+                try {
+                    String fileNameS = anhSauCCCD.getOriginalFilename();
+                    Path uploadPathS = path;
+                    if (!Files.exists(uploadPathS)) {
+                        Files.createDirectories(uploadPathS);
+                    }
+                    Path filePath = uploadPathS.resolve(fileNameS);
+                    Files.copy(anhSauCCCD.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+                    cccd.setAnhSauCCCD(fileNameS);
+                } catch (Exception e) {
+                    redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra khi tải ảnh lên");
+                    return "redirect:/user/settings/verify";
+                }
+            } else {
+                cccd.setAnhSauCCCD(cccd.getAnhSauCCCD());
+            }
+            CCCDDao.save(cccd);
+            model.addAttribute("CCCD", cccd);
+            redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin thành công");
+            return "redirect:/user/settings/verify";
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
+            return "redirect:/user/settings/verify";
+        }
+    }
+
 
     @RequestMapping("/settings/verify")
-    public String verify(Model model) {
+    public String verify(Model model,@ModelAttribute("CCCD") CCCD CCCD) {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
-            model.addAttribute("CCCD", new CCCD());
+            CCCD existedCCCD = CCCDDao.findByTentaikhoan(user.getTentaikhoan().toString());
+            if (existedCCCD != null) {
+                model.addAttribute("CCCD", existedCCCD);
+            }else{
+                model.addAttribute("CCCD", new CCCD());
+            }
             model.addAttribute("user", user);
         }
         return "user/verify";

@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -67,11 +68,11 @@ public class taikhoan implements Serializable {
     @Column(name = "email", length = 150)
     private String email;
 
-    @OneToMany(mappedBy = "tentaikhoan")
-    private Set<CCCD> cccd = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "taikhoan")
+    private List<CCCD> cccd;
 
     @OneToMany(mappedBy = "tentaikhoan")
-    private Set<phongtro> phongtros = new LinkedHashSet<>();
+    private List<phongtro> phongtro;
 
     @ColumnDefault("false")
     @Column(name = "email_verified", nullable = false)
