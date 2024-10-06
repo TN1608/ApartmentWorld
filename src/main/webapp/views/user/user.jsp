@@ -73,11 +73,11 @@
                     <a href="/user/settings/profile" class="btn btn-warning fw-bold mb-2 w-100">Chỉnh sửa thông tin cá
                         nhân</a>
                     <p class="card-text text-start m-2"><i class="fa-solid fa-calendar"></i>Ngày tham gia:
-                        <fmt:formatDate value="${dayJoin}" pattern="dd/MM/yyyy"/></p>
+                        <fmt:formatDate value="${dayJoin != null ? dayJoin : 0}" pattern="dd/MM/yyyy"/></p>
                     <p class="card-text text-start verify m-2"><i
                             class="bi bi-patch-check-fill text-success me-2"></i></i>Verify : <a href="#"
                                                                                                  class="me-2"><i
-                            class="bi bi-facebook"></i></a><a href="#" class="me-2"><i
+                    <%--                            class="bi bi-facebook"></i></a><a href="#" class="me-2"><i--%>
                             class="bi bi-telephone-fill text-warning"></i></a><a class="me-2" href="#"><i
                             class="bi bi-google text-danger"></i></a></p>
                     <p class="card-text text-start m-2"><i class="bi bi-house-check-fill me-2"></i>Địa chỉ : Trống</p>
