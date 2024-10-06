@@ -70,7 +70,7 @@ public class ProfileController {
             return "redirect:/home";
         }
         model.addAttribute("user", user);
-        Date date = DateUtils.convertToDate(user.getNgaysinh());
+        Date date = DateUtils.convertToDate(user.getNgaytao());
         model.addAttribute("dayJoin", date);
         return "user/user";
     }
@@ -130,6 +130,12 @@ public class ProfileController {
                          @RequestParam("avatar") MultipartFile avatar) {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
+            List<taikhoan> usersWithEmail = usersDAO.findByEmail(taikhoan.getEmail());
+            if (!usersWithEmail.isEmpty() && !usersWithEmail.getFirst().getTentaikhoan().equals(user.getTentaikhoan())) {
+                redirectAttributes.addFlashAttribute("error", "Email đã tồn tại");
+                return "redirect:/user/settings/profile";
+            }
+
             user.setTentaikhoan(taikhoan.getTentaikhoan());
             user.setFirstname(taikhoan.getFirstname());
             user.setLastname(taikhoan.getLastname());

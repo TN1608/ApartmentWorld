@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -18,8 +19,8 @@
     <script src="../js/app.js"></script>
     <title>ApartmentWorld</title>
 </head>
-<jsp:include page="_header.jsp"/>
 <body>
+<jsp:include page="_header.jsp"/>
 <!-- Main content here -->
 <div class="container p-5">
     <div class="row">
@@ -27,33 +28,28 @@
             <img src="../images/login.jpg" alt="login" class="img-fluid">
         </div>
         <div class="col-md-6">
-            <form action="/login" method="post">
+            <form action="/forgot-password/reset-password" method="post">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Tên đăng nhập</label>
-                    <input type="text" class="form-control" id="username" path="tentaikhoan" name="tentaikhoan"/>
+                    <label for="password" class="form-label">Mật khẩu mới</label>
+                    <input type="password" class="form-control" id="password" path="password" name="password"/>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" path="matkhau" name="matkhau"/>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberMe" name="remember"
-                               value="true"/>
-                        <label class="form-check-label" for="rememberMe">Lưu đăng nhập</label>
-                    </div>
+                    <label for="checkPassword" class="form-label">Xác nhận mật khẩu</label>
+                    <input type="password" class="form-control" id="checkPassword" path="checkPassword"
+                           name="checkPassword"/>
 
                 </div>
 
                 <p class="text-danger">${message}</p>
-                <button type="submit" class="btn btn-primary">Đăng nhập</button>
-                <br>
-                <span><a href="/forgot-password" class="text-decoration-none text-black">Quên mật khẩu?</a></span>
-                <p>Chưa có tài khoản?<a href="/signup" class="btn btn-success">Đăng ký</a></p>
-
+                <button
+                        class="btn btn-primary fw-bold mt-2" type="submit">
+                    Xác nhận
+                </button>
             </form>
         </div>
     </div>
 </div>
 <!-- Main content here -->
-</body>
 <jsp:include page="_footer.jsp"/>
+</body>
 </html>
