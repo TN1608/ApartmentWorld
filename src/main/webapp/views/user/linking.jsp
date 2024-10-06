@@ -38,7 +38,7 @@
     </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../_header.jsp"/>
 <!-- Main content here -->
 <div class="container p-5">
     <h4 class="mb-2 fw-bold">Thông tin cá nhân</h4>
@@ -76,7 +76,7 @@
                                         </c:if>
                                     </div>
 
-                                    <c:if test="${param.showOtpField == 'true'}">
+                                    <c:if test="${showOtpField == 'true'}">
                                         <div class="col-md-6" id="otpField">
                                             <label for="otp" class="form-label">Nhập mã xác thực</label>
                                             <input type="text" class="form-control" name="otpMail" id="otp"
@@ -116,24 +116,24 @@
                                         </p>
                                     </c:if>
                                 </form:form>
-                                    </div>
                             </div>
-                            <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"
-                                 aria-labelledby="v-pills-payment-history-tab" tabindex="0">
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"
+                             aria-labelledby="v-pills-payment-history-tab" tabindex="0">
 
-                            </div>
-                            <div class="tab-pane fade" id="v-pills-account-settings" role="tabpanel"
-                                 aria-labelledby="v-pills-account-settings-tab" tabindex="0">
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-account-settings" role="tabpanel"
+                             aria-labelledby="v-pills-account-settings-tab" tabindex="0">
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Main content here -->
+</div>
+<!-- Main content here -->
 
 </body>
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>
 </html>

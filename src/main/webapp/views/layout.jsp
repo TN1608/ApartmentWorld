@@ -14,8 +14,8 @@
     <title>ApartmentWorld</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="_header.jsp"/>
 <!-- Main content here -->
-<jsp:include page="footer.jsp"/>
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>

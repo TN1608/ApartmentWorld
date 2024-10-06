@@ -136,9 +136,13 @@ public class ProfileController {
             user.setSodienthoai(taikhoan.getSodienthoai());
             user.setNgaysinh(taikhoan.getNgaysinh());
             user.setCccd(taikhoan.getCccd());
-            if (!user.getEmail().equals(taikhoan.getEmail())) {
+            if (user.getEmail() != null) {
+                if (!user.getEmail().equals(taikhoan.getEmail())) {
+                    user.setEmail(taikhoan.getEmail());
+                    user.setEmailVerified(false);
+                }
+            } else {
                 user.setEmail(taikhoan.getEmail());
-                user.setEmailVerified(false);
             }
             if (!avatar.isEmpty()) {
                 try {
@@ -235,7 +239,7 @@ public class ProfileController {
         MailSender.sendEmail(email, otpMail + " là mã xác thực của bạn. ", emailContent);
         //xac thuc thanh cong
         redirectAttributes.addFlashAttribute("message", "Đã gửi mail xác nhận");
-        redirectAttributes.addAttribute("showOtpField", "true");
+        redirectAttributes.addFlashAttribute("showOtpField", "true");
         return "redirect:/user/settings/linking";
     }
 

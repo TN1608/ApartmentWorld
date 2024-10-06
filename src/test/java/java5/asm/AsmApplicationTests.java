@@ -8,6 +8,7 @@ class AsmApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

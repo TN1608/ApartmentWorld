@@ -28,7 +28,7 @@
           type="image/x-icon">
     <title>ApartmentWorld</title>
 </head>
-<jsp:include page="header.jsp"/>
+<jsp:include page="_header.jsp"/>
 <body>
 <div class="content">
     <section class="section1">
@@ -298,5 +298,5 @@
     </section>
 </div>
 </body>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="_footer.jsp"/>
 </html>

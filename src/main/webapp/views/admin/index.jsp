@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../../css/admin/style.css">
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="_header.jsp"/>
 <main class="mt-5 pt-3">
     <div class="container-fluid">
         <div class="row">

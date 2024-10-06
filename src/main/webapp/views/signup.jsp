@@ -14,7 +14,7 @@
     <script src="../js/app.js"></script>
     <title>ApartmentWorld</title>
 </head>
-<jsp:include page="header.jsp"/>
+<jsp:include page="_header.jsp"/>
 <body>
 <!-- Main content here -->
 <div class="container p-5">
@@ -48,5 +48,5 @@
 </div>
 <!-- Main content here -->
 </body>
-<jsp:include page="footer.jsp"/>
+<jsp:include page="_footer.jsp"/>
 </html>

@@ -26,7 +26,7 @@
     <title>ApartmentWorld</title>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../_header.jsp"/>
 <!-- Main content here -->
 <div class="container p-5">
     <h4 class="mb-2 fw-bold">Thông tin cá nhân</h4>
@@ -82,5 +82,5 @@
 <!-- Main content here -->
 
 </body>
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>
 </html>
