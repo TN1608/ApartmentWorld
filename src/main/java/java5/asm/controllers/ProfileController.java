@@ -19,6 +19,8 @@ import java5.asm.utils.AuthUtils;
 import java5.asm.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -187,10 +189,11 @@ public class ProfileController {
             RedirectAttributes redirectAttributes,
             Model model) {
         taikhoan user = authUtils.getCurrentUser();
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         if (user == null) {
             return "redirect:/home";
         }
-        if (!oldPassword.equals(user.getMatkhau())) {
+        if (!authUtils.checkPass(user.getTentaikhoan(), oldPassword)) {
             redirectAttributes.addFlashAttribute("error", "Mật khẩu cũ không đúng");
             return "redirect:/user/settings/account-settings";
         }
@@ -202,13 +205,13 @@ public class ProfileController {
             redirectAttributes.addFlashAttribute("error", "Mật khẩu mới không trùng khớp");
             return "redirect:/user/settings/account-settings";
         }
-        user.setMatkhau(newPassword);
+        user.setMatkhau(passwordEncoder.encode(newPassword));
         redirectAttributes.addFlashAttribute("message", "Đổi mật khẩu thành công");
         usersDAO.save(user);
         return "redirect:/user/settings/account-settings";
     }
 
-//    @RequestMapping("/settings/linking/update")
+    //    @RequestMapping("/settings/linking/update")
 //    public String updateLinking(@ModelAttribute("taikhoan") taikhoan taikhoan,
 //                                RedirectAttributes redirectAttributes,
 //                                Model model) {

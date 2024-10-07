@@ -9,6 +9,10 @@ public class SessionService {
     @Autowired
     HttpSession session;
 
+    public <T> T get(String name) {
+        return (T) session.getAttribute(name);
+    }
+
     public <T> T get(String name, String s) {
         return (T) session.getAttribute(name);
     }

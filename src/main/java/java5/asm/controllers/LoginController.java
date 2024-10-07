@@ -58,10 +58,14 @@ public class LoginController {
                         Model model) {
         taikhoan user = usersDAO.findById(username).orElse(null);
         if (user != null) {
+            var token = authUtils.generateToken(username);
+//            System.out.println(token);
+//            var info = authUtils.getIdFormToken(token);
+//            System.out.println(info);
             if (authUtils.checkPass(username, password)) {
-                sessionService.set("user", user);
+                sessionService.set("token", token);
                 if (remember) {
-                    cookieService.add("username", username, 24);
+                    cookieService.add("token", token, 24);
                 }
                 return "redirect:/home";
             } else {
@@ -75,9 +79,8 @@ public class LoginController {
 
     @RequestMapping("/logout")
     public String logout() {
-        sessionService.remove("user");
-        cookieService.remove("username");
-        cookieService.remove("password");
+        sessionService.remove("token");
+        cookieService.remove("token");
         return "redirect:/home";
     }
 
