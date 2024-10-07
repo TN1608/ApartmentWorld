@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%--Navbar--%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
@@ -46,16 +47,29 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a
-                            class="nav-link dropdown-toggle ms-2"
+                            class="nav-link ms-2"
                             href="#"
                             role="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                     >
                         <i class="fa-solid fa-bell"></i>
+                        <c:if test="${not empty notifications}">
+                            <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
+                                    ${fn:length(notifications)}
+                            </span>
+                        </c:if>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-<%--                        <li><a class="dropdown-item" href="#">Thông tin</a></li>--%>
+                        <li><h5 class="fw-bold text-center">Thông báo</h5></li>
+                        <hr/>
+                        <c:forEach var="user" items="${notifications}">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                        ${user.tentaikhoan} đợi duyệt
+                                </a>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

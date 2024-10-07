@@ -13,8 +13,9 @@ create table taikhoan(
 	anhtaikhoan varchar(200),
 	vaitro bit,
 	email nvarchar(150),
-	email_verified BIT DEFAULT 0,        
-    phone_verified BIT DEFAULT 0
+	email_verified BIT DEFAULT 0,
+    phone_verified BIT DEFAULT 0,
+    status varchar(50)
 );
 select * from taikhoan
 insert into taikhoan values
@@ -64,7 +65,7 @@ create table chitietphongtro(
 	noidungchitiet nvarchar(500),
 	maphong varchar(20)
 	CONSTRAINT FK_phongtro FOREIGN KEY (maphong) REFERENCES phongtro(maphong)
-);	
+);
 
 CREATE TABLE danhgia(
     madanhgia INT PRIMARY KEY,

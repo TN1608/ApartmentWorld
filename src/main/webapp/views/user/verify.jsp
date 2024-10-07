@@ -56,51 +56,66 @@
                              aria-labelledby="v-pills-linking-tab" tabindex="0">
                             <div class="container mt-4">
                                 <h3>Xác thực thông tin</h3>
-                                <form:form class="row g-3" action="/user/settings/verify/updateCCCD"
-                                           modelAttribute="CCCD" method="post" enctype="multipart/form-data">
-                                    <div class="col-md-6">
-                                        <label for="maCCCD" class="form-label">Mã CCCD</label>
-                                        <form:input path="maCCCD" type="text" class="form-control" id="maCCCD"
-                                                    value="${CCCD.maCCCD}"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="tenCCCD" class="form-label">Họ và Tên</label>
-                                        <form:input path="tenCCCD" type="text" class="form-control" id="tenCCCD"
-                                                    value="${CCCD.tenCCCD}"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="ngaysinh" class="form-label">Ngày Sinh</label>
-                                        <form:input path="ngaysinh" type="date" class="form-control" id="ngaysinh"
-                                                    value="${CCCD.ngaysinh}"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="ngaycap" class="form-label">Ngày cấp</label>
-                                        <form:input path="ngaycap" type="date" class="form-control" id="ngaycap"
-                                                    value="${CCCD.ngaycap}"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="noicap" class="form-label">Nơi cấp</label>
-                                        <form:input path="noicap" type="text" class="form-control" id="noicap"
-                                                    value="${CCCD.noicap}"/>
-                                    </div>
-                                    <div class="col-md-6">
+                                <c:if test="${user.status == 'NONE'}">
+                                    <form:form class="row g-3" action="/user/settings/verify/updateCCCD"
+                                               modelAttribute="CCCD" method="post" enctype="multipart/form-data">
+                                        <div class="col-md-6">
+                                            <label for="maCCCD" class="form-label">Mã CCCD</label>
+                                            <form:input path="maCCCD" type="text" class="form-control" id="maCCCD"
+                                                        value="${CCCD.maCCCD}"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="tenCCCD" class="form-label">Họ và Tên</label>
+                                            <form:input path="tenCCCD" type="text" class="form-control" id="tenCCCD"
+                                                        value="${CCCD.tenCCCD}"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="ngaysinh" class="form-label">Ngày Sinh</label>
+                                            <form:input path="ngaysinh" type="date" class="form-control" id="ngaysinh"
+                                                        value="${CCCD.ngaysinh}"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="ngaycap" class="form-label">Ngày cấp</label>
+                                            <form:input path="ngaycap" type="date" class="form-control" id="ngaycap"
+                                                        value="${CCCD.ngaycap}"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="noicap" class="form-label">Nơi cấp</label>
+                                            <form:input path="noicap" type="text" class="form-control" id="noicap"
+                                                        value="${CCCD.noicap}"/>
+                                        </div>
+                                        <div class="col-md-6">
 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="anhCCCDtruoc" class="form-label">Ảnh CCCD (Mặt trước)</label>
-                                        <input type="file" name="anhTruoc" class="form-control" id="anhCCCDtruoc"
-                                               accept="image/*"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="anhCCCDsau" class="form-label">Ảnh CCCD (Mặt sau)</label>
-                                        <input type="file" name="anhSau" class="form-control" id="anhCCCDsau"
-                                               accept="image/*"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD
-                                        </button>
-                                    </div>
-                                </form:form>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="anhCCCDtruoc" class="form-label">Ảnh CCCD (Mặt trước)</label>
+                                            <input type="file" name="anhTruoc" class="form-control" id="anhCCCDtruoc"
+                                                   accept="image/*"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="anhCCCDsau" class="form-label">Ảnh CCCD (Mặt sau)</label>
+                                            <input type="file" name="anhSau" class="form-control" id="anhCCCDsau"
+                                                   accept="image/*"/>
+                                        </div>
+                                        <c:if test="${not empty message}">
+                                            <p class="text-success" role="alert">
+                                                    ${message}
+                                            </p>
+                                        </c:if>
+                                        <c:if test="${not empty error}">
+                                            <p class="text-danger" role="alert">
+                                                    ${error}
+                                            </p>
+                                        </c:if>
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD
+                                            </button>
+                                        </div>
+                                    </form:form>
+                                </c:if>
+                                <c:if test="${user.status == 'WAITING'}">
+                                    <h1>Vui Lòng chờ đợi xác minh</h1>
+                                </c:if>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-payment-history" role="tabpanel"

@@ -87,4 +87,14 @@ public class taikhoan implements Serializable {
     @Column(name = "ngaytao")
     private Instant ngaytao = Instant.now();
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private UserStatus status = UserStatus.NONE;
+
+    public enum UserStatus {
+        NONE,
+        WAITING,
+        APPROVED,
+        SELLER
+    }
 }

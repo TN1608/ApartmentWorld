@@ -17,6 +17,7 @@ import java5.asm.services.EmailSenderService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import java5.asm.utils.DateUtils;
+import java5.asm.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -154,20 +155,8 @@ public class ProfileController {
                 user.setEmail(taikhoan.getEmail());
             }
             if (!avatar.isEmpty()) {
-                try {
-                    String uploadDirectory = servletContext.getRealPath("/images/avatar/");
-                    String fileName = avatar.getOriginalFilename();
-                    Path uploadPath = Paths.get(uploadDirectory);
-                    if (!Files.exists(uploadPath)) {
-                        Files.createDirectories(uploadPath);
-                    }
-                    Path filePath = uploadPath.resolve(fileName);
-                    Files.copy(avatar.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                    user.setAnhtaikhoan(fileName);
-                } catch (Exception e) {
-                    redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra khi tải ảnh lên");
-                    return "redirect:/user/settings/profile";
-                }
+                user.setAnhtaikhoan(FileUtils
+                        .uploadFile(avatar, servletContext.getRealPath("/images/avatar/")));
             } else {
                 user.setAnhtaikhoan(user.getAnhtaikhoan());
             }
@@ -289,42 +278,16 @@ public class ProfileController {
         String uploadDirectory = servletContext.getRealPath("/images/cccd/");
         if (user != null) {
             cccd.setTaikhoan(user);
-            Path path = Paths.get(uploadDirectory);
-            if (!anhTruocCCCD.isEmpty()) {
-                try {
-                    String fileNameT = anhTruocCCCD.getOriginalFilename();
-                    Path uploadPathT = path;
-                    if (!Files.exists(uploadPathT)) {
-                        Files.createDirectories(uploadPathT);
-                    }
-                    Path filePath = uploadPathT.resolve(fileNameT);
-                    Files.copy(anhTruocCCCD.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                    cccd.setAnhTruocCCCD(fileNameT);
-                } catch (Exception e) {
-                    redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra khi tải ảnh lên");
-                    return "redirect:/user/settings/verify";
-                }
+            if (!anhTruocCCCD.isEmpty() && !anhSauCCCD.isEmpty()) {
+                cccd.setAnhTruocCCCD(FileUtils.uploadFile(anhTruocCCCD, uploadDirectory));
+                cccd.setAnhSauCCCD(FileUtils.uploadFile(anhSauCCCD, uploadDirectory));
             } else {
-                cccd.setAnhTruocCCCD(cccd.getAnhTruocCCCD());
-            }
-            if (!anhSauCCCD.isEmpty()) {
-                try {
-                    String fileNameS = anhSauCCCD.getOriginalFilename();
-                    Path uploadPathS = path;
-                    if (!Files.exists(uploadPathS)) {
-                        Files.createDirectories(uploadPathS);
-                    }
-                    Path filePath = uploadPathS.resolve(fileNameS);
-                    Files.copy(anhSauCCCD.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                    cccd.setAnhSauCCCD(fileNameS);
-                } catch (Exception e) {
-                    redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra khi tải ảnh lên");
-                    return "redirect:/user/settings/verify";
-                }
-            } else {
-                cccd.setAnhSauCCCD(cccd.getAnhSauCCCD());
+                redirectAttributes.addFlashAttribute("error", "Vui lòng thêm ảnh");
+                return "redirect:/user/settings/verify";
             }
             CCCDDao.save(cccd);
+            user.setStatus(taikhoan.UserStatus.WAITING);
+            usersDAO.save(user);
             model.addAttribute("CCCD", cccd);
             redirectAttributes.addFlashAttribute("message", "Cập nhật thông tin thành công");
             return "redirect:/user/settings/verify";

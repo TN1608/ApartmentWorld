@@ -40,9 +40,7 @@ public class AdminController {
     private int NUMBER_OF_ITEM_PER_PAGE = 10;
 
     @RequestMapping("/home")
-    public String home(Model model,
-                       @RequestParam("page") Optional<Integer> page,
-                       @RequestParam("field") Optional<String> field) {
+    public String home(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("field") Optional<String> field) {
         taikhoan currentUser = authUtils.getCurrentUser();
         if (currentUser != null) {
             if (currentUser.isVaitro()) {
@@ -63,6 +61,9 @@ public class AdminController {
                 }
                 Page<taikhoan> pages = usersDAO.findAll(pageable);
                 model.addAttribute("pages", pages);
+//                thông báo
+                List<taikhoan> waitingUser = usersDAO.findByStatus(taikhoan.UserStatus.WAITING);
+                model.addAttribute("notifications", waitingUser);
             } else {
                 resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 return "error/403";
