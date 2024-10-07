@@ -40,13 +40,19 @@ public class AuthUtils {
     public taikhoan getCurrentUser() {
         taikhoan user = null;
         var token = cookieService.getValue("token");
-        if (token != null && checkToken(token)) {
-            String username = getIdFormToken(token);
-            user = usersDAO.findById(username).orElse(null);
-            if (user != null) {
-                sessionService.set("token", token);
+        if (token != null) {
+            if (checkToken(token)) {
+                String username = getIdFormToken(token);
+                user = usersDAO.findById(username).orElse(null);
+                if (user != null) {
+                    sessionService.set("token", token);
+                } else {
+                    cookieService.remove("token");
+                    sessionService.remove("token");
+                }
             } else {
                 cookieService.remove("token");
+                sessionService.remove("token");
             }
         } else {
             token = sessionService.get("token");
