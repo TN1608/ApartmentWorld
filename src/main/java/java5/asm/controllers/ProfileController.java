@@ -16,6 +16,7 @@ import java5.asm.services.CookieService;
 import java5.asm.services.EmailSenderService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
+import java5.asm.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -44,7 +46,7 @@ public class ProfileController {
     usersDAO usersDAO;
     @Autowired
     CCCDDao CCCDDao;
-//    @Autowired
+    //    @Autowired
 //    LSTTDao LSTTDao;
     @Autowired
     HDTDao HDTDao;
@@ -65,9 +67,12 @@ public class ProfileController {
     @GetMapping
     public String user(Model model) {
         taikhoan user = authUtils.getCurrentUser();
-        if (user != null) {
-            model.addAttribute("user", user);
+        if (user == null) {
+            return "redirect:/home";
         }
+        model.addAttribute("user", user);
+        Date date = DateUtils.convertToDate(user.getNgaytao());
+        model.addAttribute("dayJoin", date);
         return "user/user";
     }
 
@@ -75,22 +80,23 @@ public class ProfileController {
     public String profile(@ModelAttribute("taikhoan") taikhoan taikhoan,
                           Model model) {
         taikhoan user = authUtils.getCurrentUser();
-        if (user != null) {
-            model.addAttribute("user", user);
+        if (user == null) {
+            return "redirect:/home";
         }
-
+        model.addAttribute("user", user);
         return "user/profile";
     }
 
     @RequestMapping("/settings/linking")
     public String linking(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
         taikhoan user = authUtils.getCurrentUser();
+        if (user == null) {
+            return "redirect:/home";
+        }
         boolean emailVerified = authUtils.isEmailVerified(user);
         boolean phoneVerified = authUtils.isPhoneVerified(user);
-        if (user != null) {
-            //user
-            model.addAttribute("user", user);
-        }
+        //user
+        model.addAttribute("user", user);
         model.addAttribute("emailVerified", emailVerified);
         model.addAttribute("phoneVerified", phoneVerified);
         return "user/linking";
@@ -111,9 +117,10 @@ public class ProfileController {
     @RequestMapping("settings/account-settings")
     public String accountSettings(@ModelAttribute("taikhoan") taikhoan taikhoan, Model model) {
         taikhoan user = authUtils.getCurrentUser();
-        if (user != null) {
-            model.addAttribute("user", user);
+        if (user == null) {
+            return "redirect:/home";
         }
+        model.addAttribute("user", user);
         return "user/account-settings";
     }
 
@@ -124,15 +131,25 @@ public class ProfileController {
                          @RequestParam("avatar") MultipartFile avatar) {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
+            List<taikhoan> usersWithEmail = usersDAO.findByEmail(taikhoan.getEmail());
+            if (!usersWithEmail.isEmpty() && !usersWithEmail.getFirst().getTentaikhoan().equals(user.getTentaikhoan())) {
+                redirectAttributes.addFlashAttribute("error", "Email đã tồn tại");
+                return "redirect:/user/settings/profile";
+            }
+
             user.setTentaikhoan(taikhoan.getTentaikhoan());
             user.setFirstname(taikhoan.getFirstname());
             user.setLastname(taikhoan.getLastname());
             user.setSodienthoai(taikhoan.getSodienthoai());
             user.setNgaysinh(taikhoan.getNgaysinh());
             user.setCccd(taikhoan.getCccd());
-            if (!user.getEmail().equals(taikhoan.getEmail())) {
+            if (user.getEmail() != null) {
+                if (!user.getEmail().equals(taikhoan.getEmail())) {
+                    user.setEmail(taikhoan.getEmail());
+                    user.setEmailVerified(false);
+                }
+            } else {
                 user.setEmail(taikhoan.getEmail());
-                user.setEmailVerified(false);
             }
             if (!avatar.isEmpty()) {
                 try {
@@ -158,7 +175,7 @@ public class ProfileController {
             return "redirect:/user/settings/profile";
         } else {
             redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
-            return "redirect:/user/settings/profile";
+            return "redirect:/home";
         }
     }
 
@@ -170,7 +187,9 @@ public class ProfileController {
             RedirectAttributes redirectAttributes,
             Model model) {
         taikhoan user = authUtils.getCurrentUser();
-
+        if (user == null) {
+            return "redirect:/home";
+        }
         if (!oldPassword.equals(user.getMatkhau())) {
             redirectAttributes.addFlashAttribute("error", "Mật khẩu cũ không đúng");
             return "redirect:/user/settings/account-settings";
@@ -209,23 +228,24 @@ public class ProfileController {
                            @RequestParam("email") String email)
             throws MessagingException {
         taikhoan user = authUtils.getCurrentUser();
-        if (user != null) {
-            //OTP
-            otpMail = generateOTP();
-
-            //MAIL
-            String emailContent = "<h2>Xác nhận email</h2>"
-                    + "<p>Xin chào " + user.getFirstname() + " " + user.getLastname() + ",</p>"
-                    + "<p>Vui lòng sử dụng mã xác nhận bên dưới để hoàn tất việc xác nhận email:</p>"
-                    + "<h3 style='color:blue;'>" + otpMail + "</h3>"
-                    + "<p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>";
-
-            // Send email
-            MailSender.sendEmail(email, otpMail + " là mã xác thực của bạn. ", emailContent);
-            //xac thuc thanh cong
-            redirectAttributes.addFlashAttribute("message", "Đã gửi mail xác nhận");
-            redirectAttributes.addAttribute("showOtpField", "true");
+        if (user == null) {
+            return "redirect:/home";
         }
+        //OTP
+        otpMail = generateOTP();
+
+        //MAIL
+        String emailContent = "<h2>Xác nhận email</h2>"
+                + "<p>Xin chào " + user.getFirstname() + " " + user.getLastname() + ",</p>"
+                + "<p>Vui lòng sử dụng mã xác nhận bên dưới để hoàn tất việc xác nhận email:</p>"
+                + "<h3 style='color:blue;'>" + otpMail + "</h3>"
+                + "<p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>";
+
+        // Send email
+        MailSender.sendEmail(email, otpMail + " là mã xác thực của bạn. ", emailContent);
+        //xac thuc thanh cong
+        redirectAttributes.addFlashAttribute("message", "Đã gửi mail xác nhận");
+        redirectAttributes.addFlashAttribute("showOtpField", "true");
         return "redirect:/user/settings/linking";
     }
 
@@ -234,14 +254,15 @@ public class ProfileController {
                              @RequestParam("otpMail") String otp)
             throws MessagingException {
         taikhoan user = authUtils.getCurrentUser();
-        if (user != null) {
-            if (otpMail != null && otpMail.equals(otp)) {
-                user.setEmailVerified(true);
-                usersDAO.save(user);
-                redirectAttributes.addFlashAttribute("message", "Xác thực email thành công");
-            } else {
-                redirectAttributes.addFlashAttribute("message", "Mã xác thực không đúng");
-            }
+        if (user == null) {
+            return "redirect:/home";
+        }
+        if (otpMail != null && otpMail.equals(otp)) {
+            user.setEmailVerified(true);
+            usersDAO.save(user);
+            redirectAttributes.addFlashAttribute("message", "Xác thực email thành công");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Mã xác thực không đúng");
         }
         return "redirect:/user/settings/linking";
     }
@@ -253,13 +274,14 @@ public class ProfileController {
         int otp = 100000 + random.nextInt(900000);
         return String.valueOf(otp);
     }
+
     //CCCD
     @RequestMapping("/settings/verify/updateCCCD")
     public String updateCCCD(@ModelAttribute("CCCD") CCCD cccd,
                              RedirectAttributes redirectAttributes,
                              Model model,
                              @RequestParam("anhTruoc") MultipartFile anhTruocCCCD,
-                                @RequestParam("anhSau") MultipartFile anhSauCCCD) {
+                             @RequestParam("anhSau") MultipartFile anhSauCCCD) {
         taikhoan user = authUtils.getCurrentUser();
         String uploadDirectory = servletContext.getRealPath("/images/cccd/");
         if (user != null) {
@@ -305,23 +327,24 @@ public class ProfileController {
             return "redirect:/user/settings/verify";
         } else {
             redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra");
-            return "redirect:/user/settings/verify";
+            return "redirect:/home";
         }
     }
 
 
     @RequestMapping("/settings/verify")
-    public String verify(Model model,@ModelAttribute("CCCD") CCCD CCCD) {
+    public String verify(Model model, @ModelAttribute("CCCD") CCCD CCCD) {
         taikhoan user = authUtils.getCurrentUser();
-        if (user != null) {
-            CCCD existedCCCD = CCCDDao.findByTentaikhoan(user.getTentaikhoan().toString());
-            if (existedCCCD != null) {
-                model.addAttribute("CCCD", existedCCCD);
-            }else{
-                model.addAttribute("CCCD", new CCCD());
-            }
-            model.addAttribute("user", user);
+        if (user == null) {
+            return "redirect:/home";
         }
+        CCCD existedCCCD = CCCDDao.findByTentaikhoan(user.getTentaikhoan().toString());
+        if (existedCCCD != null) {
+            model.addAttribute("CCCD", existedCCCD);
+        } else {
+            model.addAttribute("CCCD", new CCCD());
+        }
+        model.addAttribute("user", user);
         return "user/verify";
     }
 }

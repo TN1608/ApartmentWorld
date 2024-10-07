@@ -38,7 +38,7 @@
     </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../_header.jsp"/>
 <!-- Main content here -->
 <div class="container p-5">
     <h4 class="mb-2 fw-bold">Thông tin cá nhân</h4>
@@ -84,12 +84,17 @@
                                                     value="${CCCD.noicap}"/>
                                     </div>
                                     <div class="col-md-6">
+
+                                    </div>
+                                    <div class="col-md-6">
                                         <label for="anhCCCDtruoc" class="form-label">Ảnh CCCD (Mặt trước)</label>
-                                        <input type="file" name="anhTruoc" class="form-control" id="anhCCCDtruoc" accept="image/*"/>
+                                        <input type="file" name="anhTruoc" class="form-control" id="anhCCCDtruoc"
+                                               accept="image/*"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="anhCCCDsau" class="form-label">Ảnh CCCD (Mặt sau)</label>
-                                        <input type="file" name="anhSau" class="form-control" id="anhCCCDsau" accept="image/*"/>
+                                        <input type="file" name="anhSau" class="form-control" id="anhCCCDsau"
+                                               accept="image/*"/>
                                     </div>
                                     <div class="col-md-6">
                                         <button type="submit" class="btn btn-primary fw-bold mt-2">Cập nhật CCCD
@@ -115,5 +120,5 @@
 <!-- Main content here -->
 
 </body>
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../_footer.jsp"/>
 </html>

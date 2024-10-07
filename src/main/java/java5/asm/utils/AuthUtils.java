@@ -5,6 +5,8 @@ import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
 import java5.asm.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -55,6 +57,15 @@ public class AuthUtils {
         if (user != null) {
             Boolean isVerified = user.getPhoneVerified();
             return isVerified != null && isVerified;
+        }
+        return false;
+    }
+
+    public boolean checkPass(String username, String password) {
+        taikhoan user = usersDAO.findById(username).orElse(null);
+        if (user != null) {
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+            return passwordEncoder.matches(password, user.getMatkhau());
         }
         return false;
     }

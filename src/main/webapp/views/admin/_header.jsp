@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%--Navbar--%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
@@ -44,6 +44,20 @@
                 </div>
             </form>
             <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a
+                            class="nav-link dropdown-toggle ms-2"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                    >
+                        <i class="fa-solid fa-bell"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+<%--                        <li><a class="dropdown-item" href="#">Thông tin</a></li>--%>
+                    </ul>
+                </li>
                 <li class="nav-item dropdown">
                     <a
                             class="nav-link dropdown-toggle ms-2"

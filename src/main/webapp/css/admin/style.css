@@ -23,6 +23,11 @@ button {
     display: inline-flex;
 }
 
+.dropdown:hover > .dropdown-menu {
+    display: block;
+    margin-top: .125rem;
+}
+
 .sidebar-link[aria-expanded="true"] .right-icon {
     transform: rotate(180deg);
 }
