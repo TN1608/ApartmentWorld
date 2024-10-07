@@ -129,154 +129,50 @@
     </section>
     <section class="section3 container w-100">
         <h5 class="fw-bold mb-2 pt-2 text-center">Phòng trọ cho thuê giá rẻ cập nhật 9/2024</h5>
+        <form action="/home/page" class="w-50" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Nhập nội dung cần tìm" name="keywords" value="${keywords}">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
+            </div>
+        </form>
         <hr>
         <div class="row ps-3">
-            <div class="col-3">
-                <div class="card">
-                    <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-10">
-                                <h7 class="card-title">Phòng trọ thuê gần LandMark81</h7>
-                                <p class="card-text">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Quận Bình Thạnh</span>
-                                <p class="text-danger fw-bold">Giá: 2.000.000đ/tháng</p>
-                                </p>
+            <c:forEach var="item" items="${items.content}">
+                <div class="col-3">
+                    <div class="card">
+                        <img src="../images/products/1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-10">
+                                    <h7 class="card-title fw-bold">${item.tenphong}</h7>
+                                    <p class="card-text">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <span>Quận Bình Thạnh</span>
+                                    <p class="text-danger fw-bold">Giá: ${item.giaphong}đ/tháng</p>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-dark text-warning w-100 rounded-0">Tìm hiểu</a>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-10">
-                                <h7 class="card-title">Phòng trọ thuê gần LandMark81</h7>
-                                <p class="card-text">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Quận Bình Thạnh</span>
-                                <p class="text-danger fw-bold">Giá: 2.000.000đ/tháng</p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-dark text-warning w-100 rounded-0">Tìm hiểu</a>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-10">
-                                <h7 class="card-title">Phòng trọ thuê gần LandMark81</h7>
-                                <p class="card-text">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Quận Bình Thạnh</span>
-                                <p class="text-danger fw-bold">Giá: 2.000.000đ/tháng</p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-dark text-warning w-100 rounded-0">Tìm hiểu</a>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-10">
-                                <h7 class="card-title">Phòng trọ thuê gần LandMark81</h7>
-                                <p class="card-text">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Quận Bình Thạnh</span>
-                                <p class="text-danger fw-bold">Giá: 2.000.000đ/tháng</p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-dark text-warning w-100 rounded-0">Tìm hiểu</a>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-10">
-                                <h7 class="card-title">Phòng trọ thuê gần LandMark81</h7>
-                                <p class="card-text">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Quận Bình Thạnh</span>
-                                <p class="text-danger fw-bold">Giá: 2.000.000đ/tháng</p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-dark text-warning w-100 rounded-0">Tìm hiểu</a>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-10">
-                                <h7 class="card-title">Phòng trọ thuê gần LandMark81</h7>
-                                <p class="card-text">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Quận Bình Thạnh</span>
-                                <p class="text-danger fw-bold">Giá: 2.000.000đ/tháng</p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-dark text-warning w-100 rounded-0">Tìm hiểu</a>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-10">
-                                <h7 class="card-title">Phòng trọ thuê gần LandMark81</h7>
-                                <p class="card-text">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Quận Bình Thạnh</span>
-                                <p class="text-danger fw-bold">Giá: 2.000.000đ/tháng</p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-dark text-warning w-100 rounded-0">Tìm hiểu</a>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                    <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-10">
-                                <h7 class="card-title">Phòng trọ thuê gần LandMark81</h7>
-                                <p class="card-text">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span>Quận Bình Thạnh</span>
-                                <p class="text-danger fw-bold">Giá: 2.000.000đ/tháng</p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-dark text-warning w-100 rounded-0">Tìm hiểu</a>
-                </div>
-            </div>
+            </c:forEach>
         </div>
-        <a href="#" class="align-items-center justify-content-center d-flex fw-bold">Xem Thêm</a>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center align-items-center">
+                <li class="page-item">
+                    <a class="page-link" href="/home/page?p=0" aria-label="First">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="/home/page?p=${page.number-1}">Trang trước</a></li>
+                <li class="page-item"><a class="page-link" href="/home/page?p=${page.number+1}">Trang sau</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="/home/page?p=${page.totalPages-1}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </section>
     <section class="about">
         <div class="container-fluid position-relative">

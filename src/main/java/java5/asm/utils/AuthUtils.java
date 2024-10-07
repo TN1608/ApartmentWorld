@@ -31,7 +31,7 @@ public class AuthUtils {
                 cookieService.remove("username");
             }
         } else {
-            user = sessionService.get("user");
+            user = sessionService.get("user", "");
             if (user != null) {
                 user = usersDAO.findById(user.getTentaikhoan()).orElse(null);
                 if (user == null) {

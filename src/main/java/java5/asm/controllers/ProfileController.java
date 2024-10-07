@@ -17,6 +17,7 @@ import java5.asm.services.EmailSenderService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -203,7 +204,6 @@ public class ProfileController {
 //            return "user/settings/linking";
 //        }
 //    }
-
     @RequestMapping("/settings/linking/sendMail")
     public String sendMail(RedirectAttributes redirectAttributes,
                            @RequestParam("email") String email)

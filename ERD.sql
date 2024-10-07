@@ -86,6 +86,7 @@ CREATE TABLE hopdongthue(
     CONSTRAINT FK_phong FOREIGN KEY (maphong) REFERENCES phongtro(maphong)
 );
 select * from lichsuthanhtoan join hopdongthue on lichsuthanhtoan.maHD = hopdongthue.maHD where tentaikhoan = 'admin'
+
 CREATE TABLE lichsuthanhtoan(
     mathanhtoan INT PRIMARY KEY,
     maHD VARCHAR(20),           -- Mã hợp đồng thuê
