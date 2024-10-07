@@ -33,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -74,7 +75,8 @@ public class ProfileController {
             return "redirect:/home";
         }
         model.addAttribute("user", user);
-        Date date = DateUtils.convertToDate(user.getNgaytao());
+        Date date = DateUtils.convertToDate(user.getNgaytao() == null ? Instant.now() : user.getNgaytao());
+
         model.addAttribute("dayJoin", date);
         return "user/user";
     }
@@ -304,6 +306,11 @@ public class ProfileController {
         if (user == null) {
             return "redirect:/home";
         }
+        if (user.getStatus() == null) {
+            user.setStatus(taikhoan.UserStatus.NONE);
+            usersDAO.save(user);
+        }
+
         CCCD existedCCCD = CCCDDao.findByTentaikhoan(user.getTentaikhoan().toString());
         if (existedCCCD != null) {
             model.addAttribute("CCCD", existedCCCD);
