@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
     <base href="${pageContext.request.contextPath}/">
-    <script src="/js/app.js"></script>
+    <script src="/js/profile.js"></script>
     <title>ApartmentWorld</title>
 </head>
 <body>
@@ -43,7 +43,7 @@
                                 <h3 class="mb-4">Thông tin cá nhân</h3>
                                 <form:form modelAttribute="taikhoan"
                                            action="${pageContext.request.contextPath}/user/settings/update"
-                                           method="post" class="row g-3" enctype="multipart/form-data">
+                                           method="post" class="row g-3" enctype="multipart/form-data" onsubmit="formSubmitHandler()">
                                     <!-- Username -->
                                     <!-- avatar -->
                                     <div class="col-md-7">
@@ -68,6 +68,18 @@
                                                 <input type="file" class="form-control d-none" id="avatar" name="avatar"
                                                        accept="image/*"/>
                                             </div>
+                                            <c:if test="${not empty user.mota}">
+                                                <div class="col-md-12 mt-2">
+                                                    <label for="mota" class="form-label">Mô tả</label>
+                                                    <form:textarea path="mota" class="form-control" id="mota" placeholder="${user.mota}" rows="3"></form:textarea>
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${empty user.mota}">
+                                                <div class="col-md-12 mt-2">
+                                                    <label for="mota" class="form-label">Mô tả</label>
+                                                    <form:textarea path="mota" class="form-control" id="mota" rows="3"></form:textarea>
+                                                </div>
+                                            </c:if>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -108,7 +120,14 @@
                                         <form:input type="text" class="form-control" id="phone" path="sodienthoai"
                                                     value="${user.sodienthoai}"/>
                                     </div>
-
+<%--                                    Gioi tinh--%>
+                                    <div class="col-md-6">
+                                        <label for="gioitinh" class="form-label">Giới tính</label>
+                                        <form:select class="form-select" id="gioitinh" path="gioitinh">
+                                            <form:option value="true" label="Nam"/>
+                                            <form:option value="false" label="Nữ"/>
+                                        </form:select>
+                                    </div>
                                     <!-- Dia chi -->
 <%--                                    <div class="col-md-4">--%>
 <%--                                        <label for="ngaysinh" class="form-label">Tỉnh Thành</label>--%>

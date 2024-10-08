@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -37,10 +36,14 @@ public class HomeController {
     @Autowired
     AuthUtils authUtils;
 
-    @RequestMapping("/home")
-    public String home(Model model){
+    @GetMapping("/home")
+    public String home(Model model,@RequestParam("p") Optional<Integer> p) {
         taikhoan user = authUtils.getCurrentUser();
-        Pageable pageable = PageRequest.of(0,8);
+        int pageIndex = p.orElse(0);
+        if (pageIndex <= 0) {
+            pageIndex = 0;
+        }
+        Pageable pageable = PageRequest.of(pageIndex,8);
         Page<phongtro> lists = phongtroDAO.findAll(pageable);
         model.addAttribute("items",lists);
         if (user != null) {
@@ -48,17 +51,15 @@ public class HomeController {
         }
         return "index";
     }
-    @RequestMapping("/home/page")
+    @RequestMapping("/home")
     public String homePage(Model model,
-                       @RequestParam("keywords")Optional<String> keywords,
-                       @RequestParam("p") Optional<Integer> p) {
-        String kw = keywords.orElse(sessionService.get("keywords",""));
+                           @RequestParam("keywords")Optional<String> keywords,
+                           @RequestParam("p") Optional<Integer> p) {
+        String kw = keywords.orElse(sessionService.get("keywords"));
         sessionService.set("keywords",kw);
         int pageIndex = p.orElse(0);
         if (pageIndex <= 0) {
             pageIndex = 0;
-        } else {
-            pageIndex--;
         }
         Pageable pageable = PageRequest.of(pageIndex,8);
         Page<phongtro> page = phongtroDAO.findByKeywords("%" + kw + "%",pageable);
@@ -67,6 +68,6 @@ public class HomeController {
         if (user != null) {
             model.addAttribute("user", user);
         }
-        return "index";
+        return "redirect:/home";
     }
 }

@@ -1,9 +1,12 @@
 header{
     font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    line-height: 1.42857143;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5;
 }
-.searchbar input {
-    height: 2em;
-}
+
 header .navbar-nav{
     justify-content: space-between;
 }

@@ -129,7 +129,7 @@
     </section>
     <section class="section3 container w-100">
         <h5 class="fw-bold mb-2 pt-2 text-center">Phòng trọ cho thuê giá rẻ cập nhật 9/2024</h5>
-        <form action="/home/page" class="w-50" method="get">
+        <form action="/home" class="w-50" method="get">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Nhập nội dung cần tìm" name="keywords" value="${keywords}">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
@@ -160,14 +160,14 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center align-items-center">
                 <li class="page-item">
-                    <a class="page-link" href="/home/page?p=0" aria-label="First">
+                    <a class="page-link" href="/home?p=0" aria-label="First">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="/home/page?p=${page.number-1}">Trang trước</a></li>
-                <li class="page-item"><a class="page-link" href="/home/page?p=${page.number+1}">Trang sau</a></li>
+                <li class="page-item"><a class="page-link" href="/home?p=${page.number-1}">Trang trước</a></li>
+                <li class="page-item"><a class="page-link" href="/home?p=${page.number+1}">Trang sau</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="/home/page?p=${page.totalPages-1}" aria-label="Last">
+                    <a class="page-link" href="/home?p=${page.totalPages-1}" aria-label="Last">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

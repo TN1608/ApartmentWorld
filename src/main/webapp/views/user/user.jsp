@@ -38,12 +38,6 @@
                 <div class="banner-container position-relative">
                     <img src="../../images/avatar/banner.jpg" class="card-img-top" alt="Banner"
                          style="height: 150px; object-fit: cover;">
-                    <!-- Icon to change banner -->
-                    <%--                    <label for="banner-upload" class="position-absolute"--%>
-                    <%--                           style="top: 10px; right: 10px; cursor: pointer;">--%>
-                    <%--                        <i class="fa-solid fa-camera"></i>--%>
-                    <%--                        <input type="file" id="banner-upload" style="display: none;">--%>
-                    <%--                    </label>--%>
                 </div>
                 <!-- Avatar -->
                 <div class="avatar-container text-center"
@@ -56,12 +50,6 @@
                         <img src="../../images/avatar/${user.anhtaikhoan}" class="rounded-circle" alt="Avatar"
                              style="width: 100px; height: 100px; border: 5px solid white;">
                     </c:if>
-                    <!-- Icon to change avatar -->
-                    <%--                    <label for="avatar-upload" class="position-absolute"--%>
-                    <%--                           style="bottom: 0; right: -10px; cursor: pointer;">--%>
-                    <%--                        <i class="fa-solid fa-camera"></i>--%>
-                    <%--                        <input type="file" id="avatar-upload" style="display: none;">--%>
-                    <%--                    </label>--%>
                 </div>
                 <div class="card-body text-center mt-5">
                     <h5 class="card-title">${user.tentaikhoan}
@@ -72,14 +60,15 @@
                     <p class="card-text">${user.mota}</p>
                     <a href="/user/settings/profile" class="btn btn-warning fw-bold mb-2 w-100">Chỉnh sửa thông tin cá
                         nhân</a>
-                    <p class="card-text text-start m-2"><i class="fa-solid fa-calendar"></i>Ngày tham gia:
+                    <p class="card-text text-start m-2"><i class="fa-solid fa-calendar"></i> Ngày tham gia:
                         <fmt:formatDate value="${dayJoin != null ? dayJoin : 0}" pattern="dd/MM/yyyy"/></p>
-                    <p class="card-text text-start verify m-2"><i
-                            class="bi bi-patch-check-fill text-success me-2"></i></i>Verify : <a href="#"
-                                                                                                 class="me-2"><i
-                    <%--                            class="bi bi-facebook"></i></a><a href="#" class="me-2"><i--%>
-                            class="bi bi-telephone-fill text-warning"></i></a><a class="me-2" href="#"><i
-                            class="bi bi-google text-danger"></i></a></p>
+                    <p class="card-text text-start verify m-2"><i class="bi bi-patch-check-fill text-success me-2"></i>Verify :
+                        <c:if test="${user.emailVerified}">
+                        <a href="#" class="me-2"><i class="bi bi-google text-danger"></i></a>
+                        </c:if>
+                        <c:if test="${user.phoneVerified}">
+                        <a href="#" class="me-2"><i class="bi bi-telephone-fill text-warning"></i></a>
+                        </c:if>
                     <p class="card-text text-start m-2"><i class="bi bi-house-check-fill me-2"></i>Địa chỉ : Trống</p>
                 </div>
             </div>

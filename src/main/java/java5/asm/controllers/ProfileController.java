@@ -133,7 +133,8 @@ public class ProfileController {
     public String update(@ModelAttribute("taikhoan") taikhoan taikhoan,
                          RedirectAttributes redirectAttributes,
                          Model model,
-                         @RequestParam("avatar") MultipartFile avatar) {
+                         @RequestParam("avatar") MultipartFile avatar,
+                         @RequestParam("gioitinh") boolean gioitinh) {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             List<taikhoan> usersWithEmail = usersDAO.findByEmail(taikhoan.getEmail());
@@ -148,6 +149,13 @@ public class ProfileController {
             user.setSodienthoai(taikhoan.getSodienthoai());
             user.setNgaysinh(taikhoan.getNgaysinh());
             user.setCccd(taikhoan.getCccd());
+            user.setMota(taikhoan.getMota());
+            //Nam 1 true - Nữ 0 false
+            if(gioitinh){
+                user.setGioitinh(gioitinh);
+            }else{
+                user.setGioitinh(gioitinh);
+            }
             if (user.getEmail() != null) {
                 if (!user.getEmail().equals(taikhoan.getEmail())) {
                     user.setEmail(taikhoan.getEmail());

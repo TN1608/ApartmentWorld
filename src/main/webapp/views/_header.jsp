@@ -15,10 +15,6 @@
                     <span>ApartmentWorld</span>
                 </a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <form class="d-flex align-items-center searchbar" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                     <li class="nav-item d-flex align-items-center ms-5">
                         <a class="nav-link" href="#">Liên hệ</a>
                     </li>
