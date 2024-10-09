@@ -8,6 +8,7 @@ import org.hibernate.annotations.Nationalized;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Entity
@@ -43,9 +44,12 @@ public class CCCD implements Serializable {
     @Column(name = "noicap", length = 450)
     private String noicap;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "tentaikhoan")
     private taikhoan taikhoan;
+
+    @Column(name = "ngaythem")
+    private Date ngaythem = new Date();
 
 }
 

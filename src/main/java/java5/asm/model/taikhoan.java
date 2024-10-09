@@ -1,21 +1,17 @@
 package java5.asm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -69,8 +65,9 @@ public class taikhoan implements Serializable {
     @Column(name = "email", length = 150)
     private String email;
 
-    @OneToMany(mappedBy = "taikhoan")
-    private List<CCCD> cccd;
+    @OneToOne(mappedBy = "taikhoan", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private CCCD cccd;
 
     @OneToMany(mappedBy = "tentaikhoan")
     private List<phongtro> phongtro;
@@ -95,6 +92,7 @@ public class taikhoan implements Serializable {
         NONE,
         WAITING,
         APPROVED,
-        SELLER
+        FREE,
+        PREMIUM,
     }
 }

@@ -114,7 +114,15 @@
                                     </form:form>
                                 </c:if>
                                 <c:if test="${user.status == 'WAITING'}">
-                                    <h1>Vui Lòng chờ đợi xác minh</h1>
+                                    <h3 class="d-grid align-items-center text-center text-warning"
+                                        style="height: 200px">
+                                        Vui Lòng chờ đợi xác minh</h3>
+                                </c:if>
+
+                                <c:if test="${user.status == 'APPROVED'}">
+                                    <h3 class="d-grid align-items-center text-center text-success"
+                                        style="height: 200px">
+                                        Xác minh thàng công</h3>
                                 </c:if>
                             </div>
                         </div>

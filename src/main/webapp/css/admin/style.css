@@ -59,3 +59,7 @@ button {
     }
 }
 
+
+.nav-tabs .active button {
+    color: #212529;
+}

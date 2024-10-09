@@ -54,7 +54,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="/user">Thông tin</a></li>
-                                    <li><a class="dropdown-item" href="/createPost">Đăng tin</a></li>
+                                    <li><a class="dropdown-item" href="/dang-tin">Đăng tin</a></li>
                                     <li><a class="dropdown-item" href="#">Lịch sử thanh toán</a></li>
                                     <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                                     <hr>

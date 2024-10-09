@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name="phongtro")
+@Table(name = "phongtro")
 public class phongtro {
 
     @Id
@@ -75,14 +75,14 @@ public class phongtro {
         Rented("Đã thuê hết"),
         NoRent("Không cho thuê");
 
-        private final String label;
+        private final String description;
 
-        trangthai(String label) {
-            this.label = label;
+        trangthai(String description) {
+            this.description = description;
         }
 
-        public String getLabel() {
-            return label;
+        public String getDescription() {
+            return description;
         }
     }
 
@@ -92,13 +92,14 @@ public class phongtro {
         NTDD("Nội thất đầy đủ"),
         NT("Nhà trống");
 
-        private final String label;
-        tinhtrang(String label) {
-            this.label = label;
+        private final String description;
+
+        tinhtrang(String description) {
+            this.description = description;
         }
 
-        public String getLabel() {
-            return label;
+        public String getDescription() {
+            return description;
         }
     }
 }
