@@ -2,7 +2,6 @@ package java5.asm.controllers;
 
 import java5.asm.dao.phongtroDAO;
 import java5.asm.model.phongtro;
-import java5.asm.model.province.Province;
 import java5.asm.model.taikhoan;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
@@ -35,15 +34,16 @@ public class createPostController {
     public List<EnumOptions> getTinhTrang() {
         List<EnumOptions> tinhtrangOptions = new ArrayList<>();
         for (phongtro.tinhtrang tt : phongtro.tinhtrang.values()) {
-            tinhtrangOptions.add(new EnumOptions(tt.name(), tt.getLabel()));  // Add value and label
+            tinhtrangOptions.add(new EnumOptions(tt.name(), tt.getDescription()));  // Add value and label
         }
         return tinhtrangOptions;
     }
+
     @RequestMapping("/dang-tin")
     public String createPost(Model model, @ModelAttribute("phongtro") phongtro phongtro) {
         taikhoan user = AuthUtils.getCurrentUser();
-        if(user !=null){
-            model.addAttribute("user",user);
+        if (user != null) {
+            model.addAttribute("user", user);
         }
         return "user/createPost";
     }

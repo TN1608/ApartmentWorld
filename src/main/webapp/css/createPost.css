@@ -1,6 +1,15 @@
-body{
+body {
     background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+}
+
+select#diachi {
+    background-image: none;
+    cursor: pointer;
+}
+
+.not-allowed {
+    cursor: not-allowed;
 }
