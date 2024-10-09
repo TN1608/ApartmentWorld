@@ -49,20 +49,54 @@ public class phongtro {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "matinhtrang", nullable = false)
-    private tinhtrang matinhtrang;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tentaikhoan", nullable = false)
     private taikhoan tentaikhoan;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "matrangthai", nullable = false)
-    private trangthaisudung matrangthai;
 
     @OneToMany(mappedBy = "maphong")
     private Set<chitietphongtro> chitietphongtros = new LinkedHashSet<>();
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tinhtrang", length = 150)
+    private tinhtrang tinhtrang;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "trangthai", length = 150)
+    private trangthai trangthai;
+
+    @OneToMany(mappedBy = "maphong")
+    private Set<danhgia> danhgias = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "maphong")
+    private Set<hopdongthue> hopdongthues = new LinkedHashSet<>();
+//ENUM
+    public enum trangthai{
+        Renting,
+        Rented,
+        NoRent
+    }
+    public String getStatusMessage(){
+        switch(this.trangthai){
+            case trangthai.Renting:
+                return "Đang cho thuê";
+            case trangthai.Rented:
+                return "Đã cho thuê";
+            default:
+                return "Chưa cho thuê";
+        }
+    }
+    public enum tinhtrang{
+        NTCC,
+        NTDD,
+        NT,
+    }
+    public String getTinhTrangMessage(){
+        switch(this.tinhtrang){
+            case tinhtrang.NTCC:
+                return "Nội thất cao cấp";
+            case tinhtrang.NTDD:
+                return "Nội thất đầy đủ";
+            default:
+                return "Nhà trống";
+        }
+    }
 }

@@ -42,7 +42,7 @@
                             <div class="container mt-4">
                                 <h3 class="mb-4">Thông tin cá nhân</h3>
                                 <form:form modelAttribute="taikhoan"
-                                           action="${pageContext.request.contextPath}/user/settings/update"
+                                           action="/user/settings/update"
                                            method="post" class="row g-3" enctype="multipart/form-data" onsubmit="formSubmitHandler()">
                                     <!-- Username -->
                                     <!-- avatar -->
