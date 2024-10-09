@@ -68,35 +68,37 @@ public class phongtro {
 
     @OneToMany(mappedBy = "maphong")
     private Set<hopdongthue> hopdongthues = new LinkedHashSet<>();
-//ENUM
-    public enum trangthai{
-        Renting,
-        Rented,
-        NoRent
-    }
-    public String getStatusMessage(){
-        switch(this.trangthai){
-            case trangthai.Renting:
-                return "Đang cho thuê";
-            case trangthai.Rented:
-                return "Đã cho thuê";
-            default:
-                return "Chưa cho thuê";
+
+    //ENUM
+    public enum trangthai {
+        Renting("Đang cho thuê"),
+        Rented("Đã thuê hết"),
+        NoRent("Không cho thuê");
+
+        private final String label;
+
+        trangthai(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
         }
     }
-    public enum tinhtrang{
-        NTCC,
-        NTDD,
-        NT,
-    }
-    public String getTinhTrangMessage(){
-        switch(this.tinhtrang){
-            case tinhtrang.NTCC:
-                return "Nội thất cao cấp";
-            case tinhtrang.NTDD:
-                return "Nội thất đầy đủ";
-            default:
-                return "Nhà trống";
+
+
+    public enum tinhtrang {
+        NTCC("Nội thất cao cấp"),
+        NTDD("Nội thất đầy đủ"),
+        NT("Nhà trống");
+
+        private final String label;
+        tinhtrang(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
         }
     }
 }

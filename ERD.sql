@@ -1,6 +1,6 @@
 ﻿create database ApartmentWorld
 use ApartmentWorld
-
+drop database ApartmentWorld
 create table taikhoan(
 	tentaikhoan varchar(150) primary key,
 	firstname nvarchar(100),
@@ -44,7 +44,7 @@ CREATE TABLE trangthaisudung(
     matrangthai VARCHAR(20) PRIMARY KEY,
     trangthai NVARCHAR(100)  -- Ví dụ: 'Còn trống', 'Đã thuê', 'Đang bảo trì'
 );
-
+select * from tinhtrang
 create table phongtro(
 	maphong varchar(20) primary key,
 	tenphong nvarchar(200) not null,
