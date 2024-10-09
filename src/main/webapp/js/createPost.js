@@ -114,3 +114,51 @@ function saveAddress() {
     var modal = bootstrap.Modal.getInstance(document.getElementById('addressModal'));
     modal.hide();
 }
+function handleFileSelect(event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById('preview-container');
+    previewContainer.innerHTML = ''; // Xóa nội dung cũ
+    let firstImage = true;
+
+    Array.from(files).forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            // Tạo phần tử chứa hình ảnh
+            const imgContainer = document.createElement('div');
+            imgContainer.classList.add('position-relative');
+
+            // Tạo thẻ img để hiển thị hình ảnh
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.classList.add('img-thumbnail');
+
+            // Tạo nút chọn làm ảnh bìa
+            const coverButton = document.createElement('button');
+            coverButton.classList.add('btn', 'btn-outline-primary');
+            coverButton.textContent = firstImage ? 'Ảnh bìa' : 'Chọn làm ảnh bìa';
+            coverButton.onclick = function () {
+                document.querySelectorAll('.img-container .btn').forEach(btn => btn.textContent = 'Chọn làm ảnh bìa');
+                coverButton.textContent = 'Ảnh bìa';
+            };
+
+            // Tạo nút xóa ảnh
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-btn');
+            deleteButton.textContent = 'X';
+            deleteButton.onclick = function () {
+                imgContainer.remove(); // Xóa ảnh khỏi danh sách
+            };
+
+            imgContainer.appendChild(img);
+            imgContainer.appendChild(coverButton);
+            imgContainer.appendChild(deleteButton);
+            previewContainer.appendChild(imgContainer);
+
+            if (firstImage) {
+                coverButton.textContent = 'Ảnh bìa';
+                firstImage = false;
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+}

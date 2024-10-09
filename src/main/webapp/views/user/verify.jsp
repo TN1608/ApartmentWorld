@@ -120,9 +120,40 @@
                                 </c:if>
 
                                 <c:if test="${user.status == 'APPROVED'}">
-                                    <h3 class="d-grid align-items-center text-center text-success"
-                                        style="height: 200px">
-                                        Xác minh thàng công</h3>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Mã CCCD</label>
+                                            <input name="${CCCD.maCCCD}" class="form-control" value="${CCCD.maCCCD}" disabled/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Họ và Tên</label>
+                                            <input name="${CCCD.tenCCCD}" class="form-control" value="${CCCD.tenCCCD}" disabled/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Ngày Sinh</label>
+                                            <input name="${CCCD.ngaysinh}" type="date" class="form-control" value="${CCCD.ngaysinh}" disabled/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Ngày cấp</label>
+                                            <input name="${CCCD.ngaycap}" type="date" class="form-control" value="${CCCD.ngaycap}" disabled/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Nơi cấp</label>
+                                            <input name="${CCCD.noicap}" class="form-control" value="${CCCD.noicap}" disabled/>
+                                        </div>
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Ảnh CCCD (Mặt trước)</label>
+                                            <img src="../../images/cccd/${CCCD.anhTruocCCCD}" class="img-thumbnail overflow-y-auto w-100" style="max-height: 250px" alt="Ảnh CCCD"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Ảnh CCCD (Mặt sau)</label>
+                                            <img src="../../images/cccd/${CCCD.anhSauCCCD}" class="img-thumbnail overflow-y-auto w-100" style="max-height: 250px" alt="Ảnh CCCD"/>
+                                        </div>
+                                        <div class="col-md-12 text-center report">
+                                           Thông tin nhập sai?<a class="btn fw-bold" href="#">Hãy báo cáo sửa thông tin!</a>
+                                        </div>
+                                    </div>
                                 </c:if>
                             </div>
                         </div>

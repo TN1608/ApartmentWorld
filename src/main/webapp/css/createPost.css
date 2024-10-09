@@ -4,7 +4,18 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.btn-orange{
+    background-color: #fe9900;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.btn-orange:hover{
+    background-color: #ffaa22;
+}
 select#diachi {
     background-image: none;
     cursor: pointer;
@@ -12,4 +23,64 @@ select#diachi {
 
 .not-allowed {
     cursor: not-allowed;
+}
+.dangtinform{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 4px;
+    padding: 20px;
+}
+.image-group{
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    border: 2px dotted #fe9900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+.img-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.img-container .position-relative {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.img-container .img-thumbnail {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: transform 0.2s;
+}
+
+.img-container .img-thumbnail:hover {
+    transform: scale(1.05);
+}
+
+.img-container .btn {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: 12px;
+}
+
+.img-container .delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
 }

@@ -8,7 +8,7 @@ body{
 .card{
     border:0;
 }
-.card .card-body a{
+aside .card .card-body a{
     border:0;
     color: #333;
     font-size: 14px;
@@ -18,11 +18,30 @@ body{
     margin: 0;
     cursor: pointer;
 }
-.card .card-body a:hover{
+aside .card .card-body a:hover{
     background-color: #f5f5f5;
     color: #333;
 }
-.card .card-body .a-groups .show .active{
+aside .card .card-body .a-groups .show .active{
     background-color: #f5f5f5;
     color: #333;
+}
+.report{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.report a{
+    color:red;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 0;
+    margin: 0;
+    transition: 0.3s;
+}
+.report a:hover{
+    color: darkred;
+    text-decoration: underline;
+    transition: 0.3s;
 }

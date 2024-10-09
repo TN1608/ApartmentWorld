@@ -15,4 +15,6 @@ public interface phongtroDAO extends JpaRepository<phongtro,String> {
 //    //PriceBetween
 //    @Query("SELECT p FROM phongtro p WHERE p.giaphong BETWEEN ?1 AND ?2")
 //    Page<phongtro>findByPriceBetween(int min, int max);
+    @Query("Select p.maphong from phongtro p order by length(p.maphong) desc,p.maphong desc")
+    String findTopByMaphong();
 }

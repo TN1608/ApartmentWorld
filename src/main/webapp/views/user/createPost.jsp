@@ -28,14 +28,21 @@
 <jsp:include page="../_header.jsp"/>
 <body>
 <!-- Main content here -->
-<div class="container p-5">
-    <form:form action="/dang-tin" modelAttribute="phongtro" method="post" enctype="multipart/form-data">
-        <div class="row g-3 bg-secondary rounded-2">
-            <div class="col-md-4 bg-warning">
+<div class="dangtinform container p-5">
+    <form:form action="/dang-tin/tao-tin" modelAttribute="phongtro" method="post" enctype="multipart/form-data">
+        <div class="row g-3 rounded-2">
+            <div class="col-md-4">
                 <h3>Hình ảnh và video phòng trọ</h3>
                 <p>Xem thêm về <a href="#">Quy định đăng tin của ApartMentWorld</a></p>
+                <div class="image-group">
+                    <label for="file-upload" class="form-label">Chọn hình ảnh</label>
+                    <input type="file" id="file-upload" name="anh" accept="image/*" multiple class="form-control" onchange="handleFileSelect(event)" />
+                    <div id="preview-container" class="img-container mt-3">
+
+                    </div>
+                </div>
             </div>
-            <div class="col-md-8 bg-success d-flex flex-column align-items-center justify-content-center">
+            <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
                 <div class="col-md-8 m-2">
                     <label for="tenphong" class="form-label">Tiêu đề phòng trọ</label>
                     <form:input path="tenphong" placeholder="Tiêu đề" class="form-control" id="tenphong"/>
@@ -98,7 +105,20 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- Modal Bootstrap -->
+                <div class="col-md-8 m-2">
+                    <button class="btn btn-orange fw-bold fs-5 w-100 text-white" type="submit">Đăng tin</button>
+                </div>
+                <c:if test="${not empty message}">
+                    <p class="text-success" role="alert">
+                            ${message}
+                    </p>
+                </c:if>
+                <c:if test="${not empty error}">
+                    <p class="text-danger" role="alert">
+                            ${error}
+                    </p>
+                </c:if>
             </div>
         </div>
     </form:form>
