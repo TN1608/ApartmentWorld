@@ -1,17 +1,22 @@
 package java5.asm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java5.asm.utils.StringListConverter;
 import lombok.Data;
 import org.hibernate.annotations.Nationalized;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "phongtro")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class phongtro {
 
     @Id
@@ -31,11 +36,9 @@ public class phongtro {
     @Column(name = "diachi", nullable = false, length = 250)
     private String diachi;
 
-    @Size(max = 100)
-    @NotNull
-    @Nationalized
-    @Column(name = "anh", nullable = false, length = 100)
-    private String anh;
+    @Convert(converter = StringListConverter.class)
+    @Column(name = "anh")
+    private List<String> anh = new ArrayList<>();
 
     @NotNull
     @Column(name = "giaphong", nullable = false)
@@ -73,7 +76,11 @@ public class phongtro {
     public enum trangthai {
         Renting("Đang cho thuê"),
         Rented("Đã thuê hết"),
-        NoRent("Không cho thuê");
+        NoRent("Không cho thuê"),
+        Waiting("Chờ duyệt"),
+        Deleted("Đã xóa"),
+        Hidden("Ẩn"),
+        Approved("Đã duyệt");
 
         private final String description;
 

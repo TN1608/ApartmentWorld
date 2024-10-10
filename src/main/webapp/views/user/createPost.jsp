@@ -36,7 +36,8 @@
                 <p>Xem thêm về <a href="#">Quy định đăng tin của ApartMentWorld</a></p>
                 <div class="image-group">
                     <label for="file-upload" class="form-label">Chọn hình ảnh</label>
-                    <input type="file" id="file-upload" name="anh" accept="image/*" multiple class="form-control" onchange="handleFileSelect(event)" />
+                    <input type="file" id="file-upload" name="images" accept="image/*" multiple class="form-control"
+                           onchange="handleFileSelect(event)"/>
                     <div id="preview-container" class="img-container mt-3">
 
                     </div>
@@ -62,7 +63,8 @@
                 </div>
                 <div class="col-md-8 m-2">
                     <label for="diachi" class="form-label">Địa chỉ</label>
-                    <select id="diachi" class="form-select" onclick="showPopup()" onmousedown="preventDropdown(event)">
+                    <select id="diachi" name="diachi" class="form-select" onclick="showPopup()"
+                            onmousedown="preventDropdown(event)">
                         <option value="">Chọn địa chỉ</option>
                     </select>
                 </div>
@@ -94,7 +96,7 @@
                                     </select>
 
                                     <label for="diachicuthe" class="mt-3">Địa chỉ cụ thể</label>
-                                    <input type="text" name="diachi" class="form-control"
+                                    <input type="text" name="diachicuthe" class="form-control"
                                            placeholder="Địa chỉ cụ thể?" id="diachicuthe"/>
                                 </div>
                             </div>

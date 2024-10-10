@@ -1,6 +1,7 @@
 package java5.asm.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,6 +17,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "taikhoan")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class taikhoan implements Serializable {
 
     @Id
@@ -69,6 +71,7 @@ public class taikhoan implements Serializable {
     @JsonIgnore
     private CCCD cccd;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tentaikhoan")
     private List<phongtro> phongtro;
 
