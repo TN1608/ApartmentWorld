@@ -5,12 +5,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java5.asm.dao.CCCDDao;
-import java5.asm.dao.HDTDao;
-import java5.asm.dao.LSTTDao;
-import java5.asm.dao.usersDAO;
+import java5.asm.dao.*;
 import java5.asm.model.CCCD;
 import java5.asm.model.lichsuthanhtoan;
+import java5.asm.model.phongtro;
 import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
 import java5.asm.services.EmailSenderService;
@@ -55,6 +53,8 @@ public class ProfileController {
     @Autowired
     HDTDao HDTDao;
     @Autowired
+    phongtroDAO phongtroDAO;
+    @Autowired
     EntityManager em;
     @Autowired
     HttpServletRequest req;
@@ -76,8 +76,10 @@ public class ProfileController {
         }
         model.addAttribute("user", user);
         Date date = DateUtils.convertToDate(user.getNgaytao() == null ? Instant.now() : user.getNgaytao());
-
         model.addAttribute("dayJoin", date);
+        List<phongtro> phongtros = phongtroDAO.findByTentaikhoan(user.getTentaikhoan());
+        model.addAttribute("phongtros", phongtros);
+
         return "user/user";
     }
 
@@ -151,9 +153,9 @@ public class ProfileController {
             user.setCccd(taikhoan.getCccd());
             user.setMota(taikhoan.getMota());
             //Nam 1 true - Nữ 0 false
-            if(gioitinh){
+            if (gioitinh) {
                 user.setGioitinh(gioitinh);
-            }else{
+            } else {
                 user.setGioitinh(gioitinh);
             }
             if (user.getEmail() != null) {

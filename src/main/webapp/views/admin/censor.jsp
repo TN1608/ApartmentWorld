@@ -40,7 +40,7 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="result-tab" data-bs-toggle="tab" data-bs-target="#result-tab-pane"
                         type="button" role="tab" aria-controls="result-tab-pane" aria-selected="false">Duyệt bài
-                    đăng (0)
+                    đăng (${waitingPosts.size()})
                 </button>
             </li>
             <%--                <li class="nav-item" role="presentation">--%>

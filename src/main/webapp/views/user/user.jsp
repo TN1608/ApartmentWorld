@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,8 @@
                         nhân</a>
                     <p class="card-text text-start m-2"><i class="fa-solid fa-calendar"></i> Ngày tham gia:
                         <fmt:formatDate value="${dayJoin != null ? dayJoin : 0}" pattern="dd/MM/yyyy"/></p>
-                    <p class="card-text text-start verify m-2"><i class="bi bi-patch-check-fill text-success me-2"></i>Verify :
+                    <p class="card-text text-start verify m-2"><i class="bi bi-patch-check-fill text-success me-2"></i>Verify
+                        :
                         <c:if test="${user.emailVerified}">
                         <a href="#" class="me-2"><i class="bi bi-google text-danger"></i></a>
                         </c:if>
@@ -77,7 +79,8 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="view-tab" data-bs-toggle="tab" data-bs-target="#view-tab-pane"
-                            type="button" role="tab" aria-controls="view-tab-pane" aria-selected="true">Đang hiển thị(0)
+                            type="button" role="tab" aria-controls="view-tab-pane" aria-selected="true">Bài viết
+                        (${phongtros.size()})
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -93,8 +96,41 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="view-tab-pane" role="tabpanel" aria-labelledby="view-tab"
                      tabindex="0">
-                    <div class="container-fluid p-2">
-                        <h4 class="text-center fw-bold">Bài đăng trống</h4>
+                    <div class="container-fluid p-2 d-flex justify-content-center align-items-center">
+                        <c:if test="${empty phongtros}">
+                            <h4 class="text-center fw-bold">Bài đăng trống</h4>
+                        </c:if>
+                        <c:if test="${not empty phongtros}">
+                            <c:forEach items="${phongtros}" var="phongtro">
+
+                                <div class="card card-user">
+                                    <img src="../../images/phongtro/${phongtro.anh[0]}" class="card-img-top"
+                                         alt="...">
+                                    <div class="card-body">
+                                        <div class="text-section">
+                                            <h5 class="card-title">${phongtro.tenphong}</h5>
+                                            <p class="card-text">Giá: <fmt:formatNumber
+                                                    value="${phongtro.giaphong}"
+                                                    pattern="#,##0"/>đ <br>
+                                                Tình trạng: ${phongtro.tinhtrang.getDescription()} <br>
+                                                Địa chỉ: ${phongtro.diachi}
+                                            </p>
+                                        </div>
+
+                                        <div class="cta-section">
+                                            <c:if test="${phongtro.trangthai == 'Waiting'}">
+                                                <div>Trạng thái:
+                                                    <div class="bg-warning p-2 rounded">${phongtro.trangthai.getDescription()}</div>
+                                                </div>
+                                            </c:if>
+                                            <a href="#" class="btn btn-primary">Xem thêm</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </c:forEach>
+                        </c:if>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="result-tab-pane" role="tabpanel" aria-labelledby="result-tab"

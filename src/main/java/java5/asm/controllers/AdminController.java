@@ -3,8 +3,10 @@ package java5.asm.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java5.asm.dao.CCCDDao;
+import java5.asm.dao.phongtroDAO;
 import java5.asm.dao.usersDAO;
 import java5.asm.model.CCCD;
+import java5.asm.model.phongtro;
 import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
 import java5.asm.services.SessionService;
@@ -40,6 +42,8 @@ public class AdminController {
     usersDAO usersDAO;
     @Autowired
     CCCDDao CCCDDao;
+    @Autowired
+    phongtroDAO phongtroDAO;
     @Autowired
     AuthUtils authUtils;
 
@@ -167,6 +171,8 @@ public class AdminController {
     private void addNotifications(Model model) {
         List<CCCD> waitingUser = CCCDDao.findCCCDByUser(taikhoan.UserStatus.WAITING);
         model.addAttribute("waitingUsers", waitingUser);
+        List<phongtro> waitingPost = phongtroDAO.findByTrangThai(phongtro.trangthai.Waiting);
+        model.addAttribute("waitingPosts", waitingPost);
     }
 
 }

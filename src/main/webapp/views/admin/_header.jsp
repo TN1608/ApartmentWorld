@@ -71,10 +71,10 @@
                                 </a>
                             </li>
                         </c:forEach>
-                        <c:forEach var="post" items="${pendingPosts}">
+                        <c:forEach var="post" items="${waitingPosts}">
                             <li>
                                 <a class="dropdown-item" href="#">
-                                    Bài đăng ${post.title} đợi duyệt
+                                    Bài đăng ${post.tenphong} đợi duyệt
                                 </a>
                             </li>
                         </c:forEach>
