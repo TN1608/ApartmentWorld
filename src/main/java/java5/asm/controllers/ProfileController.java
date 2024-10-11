@@ -71,9 +71,9 @@ public class ProfileController {
     @GetMapping
     public String user(Model model) {
         taikhoan user = authUtils.getCurrentUser();
-        if (user == null) {
-            return "redirect:/home";
-        }
+//        if (user == null) {
+//            return "redirect:/home";
+//        }
         model.addAttribute("user", user);
         Date date = DateUtils.convertToDate(user.getNgaytao() == null ? Instant.now() : user.getNgaytao());
         model.addAttribute("dayJoin", date);

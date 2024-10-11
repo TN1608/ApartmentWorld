@@ -55,10 +55,6 @@ public class AdminController {
                        @RequestParam("page") Optional<Integer> page,
                        @RequestParam("field") Optional<String> field) {
         taikhoan currentUser = authUtils.getCurrentUser();
-        if (currentUser == null || !currentUser.isVaitro()) {
-            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "error/403";
-        }
         model.addAttribute("user", currentUser);
         int currentPage = page.orElse(FIRST_PAGE_NUMBER);
         String sortField = field.orElse("tentaikhoan");
@@ -84,10 +80,6 @@ public class AdminController {
     @RequestMapping("/kiemduyet")
     public String kiemDuyet(Model model) {
         taikhoan currentUser = authUtils.getCurrentUser();
-        if (currentUser == null || !currentUser.isVaitro()) {
-            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "error/403";
-        }
         model.addAttribute("user", currentUser);
         addNotifications(model);
 
@@ -97,10 +89,6 @@ public class AdminController {
     @RequestMapping("/kiemduyet/{tentaikhoan}")
     public String kiemDuyetDetail(Model model, @PathVariable String tentaikhoan) {
         taikhoan currentUser = authUtils.getCurrentUser();
-        if (currentUser == null || !currentUser.isVaitro()) {
-            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "error/403";
-        }
         model.addAttribute("user", currentUser);
         addNotifications(model);
 
@@ -138,7 +126,7 @@ public class AdminController {
     @RequestMapping("/kiemduyet/{tentaikhoan}/reject")
     public String kiemDuyetDetailReject(Model model, @PathVariable String tentaikhoan) {
         taikhoan currentUser = authUtils.getCurrentUser();
-        if (currentUser == null || !currentUser.isVaitro()) {
+        if (currentUser == null || authUtils.isAdmin(currentUser)) {
             resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return "error/403";
         }

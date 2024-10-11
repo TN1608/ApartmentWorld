@@ -14,7 +14,7 @@
                          class="d-inline-block align-top">
                     <span>ApartmentWorld</span>
                 </a>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item d-flex align-items-center ms-5">
                         <a class="nav-link" href="#">Liên hệ</a>
                     </li>

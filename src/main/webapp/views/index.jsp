@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -131,7 +133,8 @@
         <h5 class="fw-bold mb-2 pt-2 text-center">Phòng trọ cho thuê giá rẻ cập nhật 9/2024</h5>
         <form action="/home" class="w-50" method="get">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nhập nội dung cần tìm" name="keywords" value="${keywords}">
+                <input type="text" class="form-control" placeholder="Nhập nội dung cần tìm" name="keywords"
+                       value="${keywords}">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
             </div>
         </form>
@@ -148,7 +151,8 @@
                                     <p class="card-text">
                                         <i class="bi bi-geo-alt"></i>
                                         <span>Quận Bình Thạnh</span>
-                                    <p class="text-danger fw-bold">Giá: ${item.giaphong}đ/tháng</p>
+                                    <p class="text-danger fw-bold">Giá: <fmt:formatNumber value="${item.giaphong}"
+                                                                                          pattern="#,##0"/> đ/tháng</p>
                                     </p>
                                 </div>
                             </div>

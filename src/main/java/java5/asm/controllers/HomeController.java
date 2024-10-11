@@ -36,34 +36,40 @@ public class HomeController {
     @Autowired
     AuthUtils authUtils;
 
+    @RequestMapping("/")
+    public String index() {
+        return "redirect:/home";
+    }
+
     @GetMapping("/home")
-    public String home(Model model,@RequestParam("p") Optional<Integer> p) {
+    public String home(Model model, @RequestParam("p") Optional<Integer> p) {
         taikhoan user = authUtils.getCurrentUser();
         int pageIndex = p.orElse(0);
         if (pageIndex <= 0) {
             pageIndex = 0;
         }
-        Pageable pageable = PageRequest.of(pageIndex,8);
+        Pageable pageable = PageRequest.of(pageIndex, 8);
         Page<phongtro> lists = phongtroDAO.findAll(pageable);
-        model.addAttribute("items",lists);
+        model.addAttribute("items", lists);
         if (user != null) {
             model.addAttribute("user", user);
         }
         return "index";
     }
+
     @RequestMapping("/home")
     public String homePage(Model model,
-                           @RequestParam("keywords")Optional<String> keywords,
+                           @RequestParam("keywords") Optional<String> keywords,
                            @RequestParam("p") Optional<Integer> p) {
         String kw = keywords.orElse(sessionService.get("keywords"));
-        sessionService.set("keywords",kw);
+        sessionService.set("keywords", kw);
         int pageIndex = p.orElse(0);
         if (pageIndex <= 0) {
             pageIndex = 0;
         }
-        Pageable pageable = PageRequest.of(pageIndex,8);
-        Page<phongtro> page = phongtroDAO.findByKeywords("%" + kw + "%",pageable);
-        model.addAttribute("items",page);
+        Pageable pageable = PageRequest.of(pageIndex, 8);
+        Page<phongtro> page = phongtroDAO.findByKeywords("%" + kw + "%", pageable);
+        model.addAttribute("items", page);
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             model.addAttribute("user", user);

@@ -67,6 +67,10 @@ public class AuthUtils {
         return user;
     }
 
+    public boolean isAdmin(taikhoan user) {
+        return user != null && user.isVaitro();
+    }
+
     public boolean isEmailVerified(taikhoan user) {
         if (user != null) {
             Boolean isVerified = user.getEmailVerified();
