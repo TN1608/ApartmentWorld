@@ -162,3 +162,17 @@ function handleFileSelect(event) {
         reader.readAsDataURL(file);
     });
 }
+// JavaScript function to check the URL and toggle button visibility
+document.addEventListener("DOMContentLoaded", function() {
+    var currentUrl = window.location.pathname;
+    var dangTinButton = document.getElementById("dangTinButton");
+    var capNhatButton = document.getElementById("capNhatButton");
+
+    if (currentUrl === "/dang-tin") {
+        dangTinButton.style.display = "block";
+        capNhatButton.style.display = "none";
+    } else if (currentUrl === "/dang-tin/sua-doi-thong-tin") {
+        dangTinButton.style.display = "none";
+        capNhatButton.style.display = "block";
+    }
+});

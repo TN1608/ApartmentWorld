@@ -8,10 +8,9 @@ import java5.asm.utils.StringListConverter;
 import lombok.Data;
 import org.hibernate.annotations.Nationalized;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.*;
 
 @Data
 @Entity
@@ -72,6 +71,17 @@ public class phongtro {
     @OneToMany(mappedBy = "maphong")
     private Set<hopdongthue> hopdongthues = new LinkedHashSet<>();
 
+    @Column(name = "ngaytao")
+    private Instant ngaytao = Instant.now();
+
+    @Size(max = 100)
+    @Nationalized
+    @Column(name = "dientich", length = 100)
+    private String dientich;
+
+    @Column(name = "tiencoc")
+    private Double tiencoc;
+
     //ENUM
     public enum trangthai {
         Renting("Đang cho thuê"),
@@ -108,5 +118,9 @@ public class phongtro {
         public String getDescription() {
             return description;
         }
+    }
+
+    public Date convert(Instant instant) {
+        return Date.from(instant);
     }
 }

@@ -89,15 +89,62 @@ public class createPostController {
             model.addAttribute("error", "Lỗi trạng thái");
             return "user/createPost";
         }
+
         phongtro.setMaphong(getMaphong());
         phongtro.setTentaikhoan(user);
         phongtroDAO.save(phongtro);
         return "redirect:/user";
     }
+    @RequestMapping("/dang-tin/sua-doi-thong-tin")
+    public String HandleEditPost(Model model,
+                           @ModelAttribute("phongtro") phongtro phongtro,
+                           @RequestParam("maphong") String maphong) {
+        taikhoan user = AuthUtils.getCurrentUser();
+        phongtro phtro = phongtroDAO.findById(maphong).orElse(null);
+        if (user == null) {
+            return "redirect:/home";
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("phongtro",phtro);
+        return "user/createPost";
+    }
+    @RequestMapping("/dang-tin/sua-doi-thong-tin/update")
+    public String editPost(Model model,
+                           @RequestParam("images") MultipartFile[] images,
+                           @RequestParam("maphong") String maphong,
+                           @ModelAttribute("phongtro") phongtro phongtros){
+        taikhoan user = AuthUtils.getCurrentUser();
+        if(user==null){
+            return "redirect:/home";
+        }
 
-    @ResponseBody
-    @RequestMapping("/dang-tin/kiem-tra")
-    public List<phongtro> checkPost() {
-        return phongtroDAO.findByTentaikhoan("khang");
+        if (images.length == 0) {
+            model.addAttribute("error", "Chưa chọn ảnh");
+            return "user/createPost";
+        }
+        try {
+            List<String> listAnh = new ArrayList<>();
+            String uploadDirectory = context.getRealPath("/images/phongtro/");
+            for (MultipartFile image : images) {
+                if (!image.isEmpty()) {
+                    listAnh.add(FileUtils.uploadFile(image, uploadDirectory));
+                }
+            }
+            phongtros.setAnh(listAnh);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        model.addAttribute("user",user);
+        phongtro phtro = phongtroDAO.findById(maphong).orElse(null);
+        phongtros.setTenphong(phtro.getTenphong());
+        phongtros.setDiachi(phtro.getDiachi());
+        phongtros.setTinhtrang(phtro.getTinhtrang());
+        phongtros.setTiencoc(phtro.getTiencoc());
+        phongtros.setTrangthai(phtro.getTrangthai());
+        phongtros.setMota(phtro.getMota());
+        phongtros.setNgaytao(phtro.getNgaytao());
+        phongtros.setDientich(phtro.getDientich());
+        phongtroDAO.save(phongtros);
+        return "redirect:/user";
     }
 }

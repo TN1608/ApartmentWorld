@@ -99,6 +99,7 @@
                     <div class="container-fluid p-2 d-flex justify-content-center align-items-center">
                         <c:if test="${empty phongtros}">
                             <h4 class="text-center fw-bold">Bài đăng trống</h4>
+                            <a class="btn btn-primary" href="/dang-tin" class="btn btn-primary">Đăng bài</a>
                         </c:if>
                         <c:if test="${not empty phongtros}">
                             <c:forEach items="${phongtros}" var="phongtro">
@@ -112,18 +113,20 @@
                                             <p class="card-text">Giá: <fmt:formatNumber
                                                     value="${phongtro.giaphong}"
                                                     pattern="#,##0"/>đ <br>
+                                                Diện tích: ${phongtro.dientich} m<sup>2</sup> <br>
+                                                Tiền đã cọc: <fmt:formatNumber value="${phongtro.tiencoc}" pattern="#,##0"/>đ <br>
                                                 Tình trạng: ${phongtro.tinhtrang.getDescription()} <br>
-                                                Địa chỉ: ${phongtro.diachi}
+                                                Địa chỉ: ${phongtro.diachi}<br>
+                                                Ngày đăng: <fmt:formatDate value="${phongtro.convert(phongtro.ngaytao)}" pattern="dd/MM/yyyy hh:mm:ss"/>
                                             </p>
                                         </div>
-
                                         <div class="cta-section">
                                             <c:if test="${phongtro.trangthai == 'Waiting'}">
-                                                <div>Trạng thái:
-                                                    <div class="bg-warning p-2 rounded">${phongtro.trangthai.getDescription()}</div>
+                                                <div class="status">Trạng thái:
+                                                        <p class="status-text">${phongtro.trangthai.getDescription()}</p>
                                                 </div>
                                             </c:if>
-                                            <a href="#" class="btn btn-primary">Xem thêm</a>
+                                            <a href="/dang-tin/sua-doi-thong-tin?maphong=${phongtro.maphong}" class="btn btn-primary">Xem thêm</a>
                                         </div>
 
                                     </div>

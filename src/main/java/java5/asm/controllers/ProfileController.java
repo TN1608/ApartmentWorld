@@ -112,6 +112,9 @@ public class ProfileController {
     @RequestMapping("/settings/payment-history")
     public String paymentHistory(Model model) {
         taikhoan user = authUtils.getCurrentUser();
+        if(user!=null){
+            model.addAttribute("user", user);
+        }
 //        if (user != null) {
 //            List<lichsuthanhtoan> paymentHistory = LSTTDao.findByTentaikhoan(user.getTentaikhoan());
 //            model.addAttribute("paymentHistory", paymentHistory != null ? paymentHistory : new ArrayList<>());

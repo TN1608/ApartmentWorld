@@ -29,7 +29,7 @@
 <body>
 <!-- Main content here -->
 <div class="dangtinform container p-5">
-    <form:form action="/dang-tin/tao-tin" modelAttribute="phongtro" method="post" enctype="multipart/form-data">
+    <form:form action="/dang-tin" modelAttribute="phongtro" method="post" enctype="multipart/form-data">
         <div class="row g-3 rounded-2">
             <div class="col-md-4">
                 <h3>Hình ảnh và video phòng trọ</h3>
@@ -55,11 +55,19 @@
                     </form:select>
                 </div>
                 <div class="col-md-8 m-2">
-                    <label class="form-label">Thông tin & giá</label>
+                    <label for="dientich" class="form-label">Diện tích</label>
+                    <form:input path="dientich" placeholder="Diện tích" class="form-control" id="dientich"/>
+                </div>
+                <div class="col-md-8 m-2">
+                    <label class="form-label">Thông tin chi tiết & giá</label>
                     <form:input path="giaphong" placeholder="Giá thuê" class="form-control mb-3"/>
                     <form:textarea path="mota"
                                    placeholder="Thông tin phòng (Diện tích,loại phòng,vị trí,tình trạng,tiện ích,....)"
                                    class="form-control" rows="3"/>
+                </div>
+                <div class="col-md-8 m-2">
+                    <label class="form-label">Tiền cọc</label>
+                    <form:input path="tiencoc" placeholder="Tiền cọc/1 tháng" class="form-control"/>
                 </div>
                 <div class="col-md-8 m-2">
                     <label for="diachi" class="form-label">Địa chỉ</label>
@@ -109,7 +117,12 @@
                 </div>
                 <!-- Modal Bootstrap -->
                 <div class="col-md-8 m-2">
-                    <button class="btn btn-orange fw-bold fs-5 w-100 text-white" type="submit">Đăng tin</button>
+                    <div class="col-md-8 m-2 w-100">
+                        <button id="dangTinButton" class="btn btn-orange fw-bold fs-5 w-100 text-white" formaction="/dang-tin/tao-tin">Đăng tin</button>
+                    </div>
+                    <div class="col-md-8 m-2 w-100">
+                        <button id="capNhatButton" class="btn btn-success fw-bold fs-5 w-100 text-white" formaction="/dang-tin/sua-doi-thong-tin/update?maphong=${phongtro.maphong}">Cập nhật</button>
+                    </div>
                 </div>
                 <c:if test="${not empty message}">
                     <p class="text-success" role="alert">

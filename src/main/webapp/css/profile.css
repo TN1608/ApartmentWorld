@@ -76,3 +76,8 @@
         font-size: 0.9em;
     }
 }
+/*bai dang*/
+.status-text {
+    color: #F95454;
+    font-weight: bold;
+}
