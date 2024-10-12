@@ -29,34 +29,26 @@
 <body>
 <!-- Main content here -->
 <div class="dangtinform container p-5">
-    <form:form action="/dang-tin" modelAttribute="phongtro" method="post" enctype="multipart/form-data">
+    <form:form action="/dang-tin" modelAttribute="phongtro" method="post" id="dang-tin" enctype="multipart/form-data">
         <div class="row g-3 rounded-2">
             <div class="col-md-4">
                 <h3>Hình ảnh và video phòng trọ</h3>
                 <p>Xem thêm về <a href="#">Quy định đăng tin của ApartMentWorld</a></p>
-                <c:if test="${empty phongtro.anh}">
-                    <div class="image-group">
-                        <label for="file-upload" class="form-label">Chọn hình ảnh</label>
-                        <input type="file" id="file-upload" name="images" accept="image/*" multiple class="form-control"
-                               onchange="handleFileSelect(event)"/>
-                        <div id="preview-container" class="img-container mt-3">
-
-                        </div>
-                    </div>
-                </c:if>
-                <c:if test="${not empty phongtro.anh}">
-                    <div class="image-group">
-                        <label for="file-upload" class="form-label">Chọn hình ảnh</label>
-                        <input type="file" id="file-upload" name="images" accept="image/*" multiple class="form-control"
-                               onchange="handleFileSelect(event)"/>
-                        <div id="preview-container" class="img-container mt-3">
+                <div class="image-group">
+                    <label class="form-label">Chọn hình ảnh</label>
+                    <label for="file-upload" class="btn btn-outline-warning w-100">Chọn tệp</label>
+                    <input type="file" id="file-upload" name="images" accept="image/*" multiple
+                           class="form-control d-none"
+                           onchange="handleFileSelect(event)"/>
+                    <div id="preview-container" class="img-container mt-3 ">
+                        <c:if test="${not empty phongtro.anh}">
                             <c:forEach var="image" items="${phongtro.anh}">
                                 <img src="/images/phongtro/${image}" class="img-thumbnail" alt="Preview image"
                                      style="width: 100px; height: 100px; object-fit: cover;"/>
                             </c:forEach>
-                        </div>
+                        </c:if>
                     </div>
-                </c:if>
+                </div>
             </div>
             <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
                 <div class="col-md-8 m-2">
@@ -138,10 +130,16 @@
                 <!-- Modal Bootstrap -->
                 <div class="col-md-8 m-2">
                     <div class="col-md-8 m-2 w-100">
-                        <button id="dangTinButton" class="btn btn-orange fw-bold fs-5 w-100 text-white" formaction="/dang-tin/tao-tin">Đăng tin</button>
+                        <button id="dangTinButton" class="btn btn-orange fw-bold fs-5 w-100 text-white"
+                                onclick="submitForm()" type="submit"
+                                formaction="/dang-tin/tao-tin">Đăng tin
+                        </button>
                     </div>
                     <div class="col-md-8 m-2 w-100">
-                        <button id="capNhatButton" class="btn btn-success fw-bold fs-5 w-100 text-white" formaction="/dang-tin/sua-doi-thong-tin/update?maphong=${phongtro.maphong}">Cập nhật</button>
+                        <button id="capNhatButton" class="btn btn-success fw-bold fs-5 w-100 text-white"
+                                onclick="submitForm()" type="submit"
+                                formaction="/dang-tin/sua-doi-thong-tin/update?maphong=${phongtro.maphong}">Cập nhật
+                        </button>
                     </div>
                 </div>
                 <c:if test="${not empty message}">

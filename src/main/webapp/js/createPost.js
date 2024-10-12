@@ -114,6 +114,9 @@ function saveAddress() {
     var modal = bootstrap.Modal.getInstance(document.getElementById('addressModal'));
     modal.hide();
 }
+
+let selectedFiles = [];
+
 function handleFileSelect(event) {
     const files = event.target.files;
     const previewContainer = document.getElementById('preview-container');
@@ -121,6 +124,7 @@ function handleFileSelect(event) {
     let firstImage = true;
 
     Array.from(files).forEach((file, index) => {
+        selectedFiles.push(file);
         const reader = new FileReader();
         reader.onload = function (e) {
             // Tạo phần tử chứa hình ảnh
@@ -133,21 +137,25 @@ function handleFileSelect(event) {
             img.classList.add('img-thumbnail');
 
             // Tạo nút chọn làm ảnh bìa
+            // Create cover button
             const coverButton = document.createElement('button');
             coverButton.classList.add('btn', 'btn-outline-primary');
-            coverButton.textContent = firstImage ? 'Ảnh bìa' : 'Chọn làm ảnh bìa';
-            coverButton.onclick = function () {
+            coverButton.textContent = selectedFiles.indexOf(file) === 0 ? 'Ảnh bìa' : 'Chọn làm ảnh bìa';
+            coverButton.onclick = function (e) {
+                e.preventDefault();
                 document.querySelectorAll('.img-container .btn').forEach(btn => btn.textContent = 'Chọn làm ảnh bìa');
                 coverButton.textContent = 'Ảnh bìa';
+                previewContainer.insertBefore(imgContainer, previewContainer.firstChild);
+                selectedFiles = [file, ...selectedFiles.filter(f => f !== file)];
             };
 
             // Tạo nút xóa ảnh
-            const deleteButton = document.createElement('button');
-            deleteButton.classList.add('delete-btn');
-            deleteButton.textContent = 'X';
-            deleteButton.onclick = function () {
-                imgContainer.remove(); // Xóa ảnh khỏi danh sách
-            };
+            const deleteButton = document.createElement('div');
+            deleteButton.innerHTML = '<button class="delete-btn">X</button>';
+            deleteButton.querySelector('button').onclick = function () {
+                imgContainer.remove(); // Remove image from preview
+                selectedFiles = selectedFiles.filter(f => f !== file); // Remove file from selectedFiles
+            }
 
             imgContainer.appendChild(img);
             imgContainer.appendChild(coverButton);
@@ -162,8 +170,10 @@ function handleFileSelect(event) {
         reader.readAsDataURL(file);
     });
 }
+
+
 // JavaScript function to check the URL and toggle button visibility
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var currentUrl = window.location.pathname;
     var dangTinButton = document.getElementById("dangTinButton");
     var capNhatButton = document.getElementById("capNhatButton");
@@ -175,4 +185,85 @@ document.addEventListener("DOMContentLoaded", function() {
         dangTinButton.style.display = "none";
         capNhatButton.style.display = "block";
     }
+
+
+// preview file handler
+//     let selectedFiles = [];
+//
+//     document.getElementById('file-upload').addEventListener('change', function (event) {
+//         const previewContainer = document.getElementById('preview-container');
+//         const files = event.target.files;
+//
+//         Array.from(files).forEach((file) => {
+//             if (file && file.type.startsWith('image/')) {
+//                 selectedFiles.push(file);
+//                 const reader = new FileReader();
+//
+//                 reader.onload = function (e) {
+//                     const previewImage = document.createElement('div');
+//                     previewImage.classList.add('img-thumbnail');
+//
+//                     previewImage.innerHTML = `
+//                         <button class="set-cover-image btn btn-outline-danger btn-sm">Chọn ảnh bìa</button>
+//                         <img src="${e.target.result}" alt="Image">
+//                         <button class="remove-image"><i class="fa-solid fa-xmark"></i></button>
+//                     `;
+//
+//                     previewContainer.appendChild(previewImage);
+//
+//                     // Handle remove image event
+//                     previewImage.querySelector('.remove-image').addEventListener('click', function (event) {
+//                         event.preventDefault();
+//                         const index = Array.from(previewContainer.children).indexOf(previewImage);
+//                         removeImage(index);
+//                     });
+//
+//                     previewImage.querySelector('.set-cover-image').addEventListener('click', function (event) {
+//                         event.preventDefault();
+//                         const index = Array.from(previewContainer.children).indexOf(previewImage);
+//                         setCoverImage(index);
+//                     });
+//                 };
+//
+//                 reader.readAsDataURL(file);
+//             }
+//         });
+//     });
+//
+//     function removeImage(index) {
+//         selectedFiles.splice(index, 1);
+//         const previewContainer = document.getElementById('preview-container');
+//         const images = Array.from(previewContainer.getElementsByClassName('img-thumbnail'));
+//
+//         if (images[index]) {
+//             images[index].remove();  // Remove selected image
+//         }
+//
+//         // Update indices of remaining images
+//         Array.from(previewContainer.children).forEach((child, idx) => {
+//             child.querySelector('.remove-image').setAttribute('data-index', idx);
+//         });
+//     }
+//
+//     function setCoverImage(index) {
+//         if (index > 0) {
+//             const [file] = selectedFiles.splice(index, 1);
+//             selectedFiles.unshift(file);
+//
+//             const previewContainer = document.getElementById('preview-container');
+//             const images = Array.from(previewContainer.getElementsByClassName('img-thumbnail'));
+//
+//             if (images[index]) {
+//                 const coverImage = images[index];
+//                 previewContainer.removeChild(coverImage);
+//                 previewContainer.insertBefore(coverImage, previewContainer.firstChild);
+//             }
+//
+//             Array.from(previewContainer.children).forEach((child, idx) => {
+//                 child.querySelector('.remove-image').setAttribute('data-index', idx);
+//             });
+//         }
+//
+//
+//     }
 });

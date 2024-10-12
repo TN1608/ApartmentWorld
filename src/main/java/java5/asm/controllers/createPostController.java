@@ -4,6 +4,7 @@ import jakarta.servlet.ServletContext;
 import java5.asm.dao.phongtroDAO;
 import java5.asm.model.phongtro;
 import java5.asm.model.taikhoan;
+import java5.asm.services.NotificationService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import java5.asm.utils.EnumOptions;
@@ -34,6 +35,8 @@ public class createPostController {
     RestTemplate restTemplate;
     @Autowired
     ServletContext context;
+    @Autowired
+    private NotificationService notificationService;
 
     @ModelAttribute("tinhtrang")
     public List<EnumOptions> getTinhTrang() {
@@ -52,6 +55,7 @@ public class createPostController {
             return "redirect:/home";
         }
         model.addAttribute("user", user);
+        notificationService.addNotifications(model);
         return "user/createPost";
     }
 
@@ -97,27 +101,30 @@ public class createPostController {
         phongtroDAO.save(phongtro);
         return "redirect:/user";
     }
+
     @RequestMapping("/dang-tin/sua-doi-thong-tin")
     public String HandleEditPost(Model model,
-                           @ModelAttribute("phongtro") phongtro phongtro,
-                           @RequestParam("maphong") String maphong) {
+                                 @ModelAttribute("phongtro") phongtro phongtro,
+                                 @RequestParam("maphong") String maphong) {
         taikhoan user = AuthUtils.getCurrentUser();
         phongtro phtro = phongtroDAO.findById(maphong).orElse(null);
         if (user == null) {
             return "redirect:/home";
         }
         model.addAttribute("user", user);
-        model.addAttribute("phongtro",phtro);
+        model.addAttribute("phongtro", phtro);
+        notificationService.addNotifications(model);
         return "user/createPost";
     }
+
     @RequestMapping("/dang-tin/sua-doi-thong-tin/update")
     public String editPost(Model model,
                            @RequestParam("images") MultipartFile[] images,
                            @RequestParam("maphong") String maphong,
                            @ModelAttribute("phongtro") phongtro phongtros,
-                           BindingResult result){
+                           BindingResult result) {
         taikhoan user = AuthUtils.getCurrentUser();
-        if(user==null){
+        if (user == null) {
             return "redirect:/home";
         }
 
@@ -136,8 +143,14 @@ public class createPostController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         phongtro phtro = phongtroDAO.findById(maphong).orElse(null);
+        assert phtro != null;
+        if (listAnh.isEmpty()) {
+            if (!phtro.getAnh().isEmpty()) {
+                listAnh = phtro.getAnh();
+            }
+        }
         phtro.setAnh(listAnh);
         phtro.setDientich(phongtros.getDientich());
         phtro.setTenphong(phongtros.getTenphong());
@@ -147,12 +160,12 @@ public class createPostController {
         phtro.setTinhtrang(phongtros.getTinhtrang());
         phtro.setDiachi(phongtros.getDiachi());
         phtro.setTrangthai(phongtro.trangthai.Waiting);//loi cai nay,phai lay tu trang thai ban dau
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "user/createPost";
         }
         phtro.setTentaikhoan(AuthUtils.getCurrentUser());
 //        model.addAttribute("phongtro",phtro);
-        model.addAttribute("diachi",phtro.getDiachi());
+        model.addAttribute("diachi", phtro.getDiachi());
         phongtroDAO.save(phtro);
         return "redirect:/user";
     }

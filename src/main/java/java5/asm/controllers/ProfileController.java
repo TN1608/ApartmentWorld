@@ -12,6 +12,7 @@ import java5.asm.model.phongtro;
 import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
 import java5.asm.services.EmailSenderService;
+import java5.asm.services.NotificationService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import java5.asm.utils.DateUtils;
@@ -66,6 +67,8 @@ public class ProfileController {
     private EmailSenderService MailSender;
     @Autowired
     AuthUtils authUtils;
+    @Autowired
+    NotificationService notificationService;
     String otpMail;
 
     @GetMapping
@@ -79,7 +82,7 @@ public class ProfileController {
         model.addAttribute("dayJoin", date);
         List<phongtro> phongtros = phongtroDAO.findByTentaikhoan(user.getTentaikhoan());
         model.addAttribute("phongtros", phongtros);
-
+        notificationService.addNotifications(model);
         return "user/user";
     }
 
@@ -91,6 +94,7 @@ public class ProfileController {
             return "redirect:/home";
         }
         model.addAttribute("user", user);
+        notificationService.addNotifications(model);
         return "user/profile";
     }
 
@@ -106,13 +110,14 @@ public class ProfileController {
         model.addAttribute("user", user);
         model.addAttribute("emailVerified", emailVerified);
         model.addAttribute("phoneVerified", phoneVerified);
+        notificationService.addNotifications(model);
         return "user/linking";
     }
 
     @RequestMapping("/settings/payment-history")
     public String paymentHistory(Model model) {
         taikhoan user = authUtils.getCurrentUser();
-        if(user!=null){
+        if (user != null) {
             model.addAttribute("user", user);
         }
 //        if (user != null) {
@@ -121,6 +126,7 @@ public class ProfileController {
 //        }else{
 //            model.addAttribute("paymentHistory", new ArrayList<>());
 //        }
+        notificationService.addNotifications(model);
         return "user/payment-history";
     }
 
@@ -131,6 +137,7 @@ public class ProfileController {
             return "redirect:/home";
         }
         model.addAttribute("user", user);
+        notificationService.addNotifications(model);
         return "user/account-settings";
     }
 
