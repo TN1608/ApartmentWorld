@@ -1,0 +1,44 @@
+package java5.asm.services;
+
+import java5.asm.dao.NotificationDAO;
+import java5.asm.dao.usersDAO;
+import java5.asm.model.Notification;
+import java5.asm.model.taikhoan;
+import java5.asm.utils.AuthUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import java.util.List;
+
+@Service
+public class NotificationService {
+    @Autowired
+    private NotificationDAO nDAO;
+    @Autowired
+    private usersDAO uDAO;
+    @Autowired
+    private AuthUtils authUtils;
+
+
+    public void notifyUser(taikhoan user, String message) {
+        Notification notification = new Notification();
+        notification.setMessage(message);
+        notification.setTentaikhoan(user);
+        nDAO.save(notification);
+    }
+
+    public void notifyAllUsers(String message) {
+        for (taikhoan user : uDAO.findAll()) {
+            notifyUser(user, message);
+        }
+    }
+
+    public void addNotifications(Model model) {
+        taikhoan currentUser = authUtils.getCurrentUser();
+        if (currentUser != null) {
+            List<Notification> notifications = nDAO.findByUser(currentUser.getTentaikhoan());
+            model.addAttribute("notifications", notifications);
+        }
+    }
+}
