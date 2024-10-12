@@ -34,14 +34,29 @@
             <div class="col-md-4">
                 <h3>Hình ảnh và video phòng trọ</h3>
                 <p>Xem thêm về <a href="#">Quy định đăng tin của ApartMentWorld</a></p>
-                <div class="image-group">
-                    <label for="file-upload" class="form-label">Chọn hình ảnh</label>
-                    <input type="file" id="file-upload" name="images" accept="image/*" multiple class="form-control"
-                           onchange="handleFileSelect(event)"/>
-                    <div id="preview-container" class="img-container mt-3">
+                <c:if test="${empty phongtro.anh}">
+                    <div class="image-group">
+                        <label for="file-upload" class="form-label">Chọn hình ảnh</label>
+                        <input type="file" id="file-upload" name="images" accept="image/*" multiple class="form-control"
+                               onchange="handleFileSelect(event)"/>
+                        <div id="preview-container" class="img-container mt-3">
 
+                        </div>
                     </div>
-                </div>
+                </c:if>
+                <c:if test="${not empty phongtro.anh}">
+                    <div class="image-group">
+                        <label for="file-upload" class="form-label">Chọn hình ảnh</label>
+                        <input type="file" id="file-upload" name="images" accept="image/*" multiple class="form-control"
+                               onchange="handleFileSelect(event)"/>
+                        <div id="preview-container" class="img-container mt-3">
+                            <c:forEach var="image" items="${phongtro.anh}">
+                                <img src="/images/phongtro/${image}" class="img-thumbnail" alt="Preview image"
+                                     style="width: 100px; height: 100px; object-fit: cover;"/>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </c:if>
             </div>
             <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
                 <div class="col-md-8 m-2">
@@ -73,7 +88,12 @@
                     <label for="diachi" class="form-label">Địa chỉ</label>
                     <select id="diachi" name="diachi" class="form-select" onclick="showPopup()"
                             onmousedown="preventDropdown(event)">
-                        <option value="">Chọn địa chỉ</option>
+                        <c:if test="${not empty phongtro.diachi}">
+                            <option value="${phongtro.diachi}">${phongtro.diachi}</option>
+                        </c:if>
+                        <c:if test="${empty phongtro.diachi}">
+                            <option value="">Chọn địa chỉ</option>
+                        </c:if>
                     </select>
                 </div>
                 <!-- Modal Bootstrap -->

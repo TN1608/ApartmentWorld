@@ -11,10 +11,12 @@ import java5.asm.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.naming.Binding;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -112,7 +114,8 @@ public class createPostController {
     public String editPost(Model model,
                            @RequestParam("images") MultipartFile[] images,
                            @RequestParam("maphong") String maphong,
-                           @ModelAttribute("phongtro") phongtro phongtros){
+                           @ModelAttribute("phongtro") phongtro phongtros,
+                           BindingResult result){
         taikhoan user = AuthUtils.getCurrentUser();
         if(user==null){
             return "redirect:/home";
@@ -122,29 +125,35 @@ public class createPostController {
             model.addAttribute("error", "Chưa chọn ảnh");
             return "user/createPost";
         }
+        List<String> listAnh = new ArrayList<>();
         try {
-            List<String> listAnh = new ArrayList<>();
             String uploadDirectory = context.getRealPath("/images/phongtro/");
             for (MultipartFile image : images) {
                 if (!image.isEmpty()) {
                     listAnh.add(FileUtils.uploadFile(image, uploadDirectory));
                 }
             }
-            phongtros.setAnh(listAnh);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         model.addAttribute("user",user);
         phongtro phtro = phongtroDAO.findById(maphong).orElse(null);
-        phongtros.setTenphong(phtro.getTenphong());
-        phongtros.setDiachi(phtro.getDiachi());
-        phongtros.setTinhtrang(phtro.getTinhtrang());
-        phongtros.setTiencoc(phtro.getTiencoc());
-        phongtros.setTrangthai(phtro.getTrangthai());
-        phongtros.setMota(phtro.getMota());
-        phongtros.setNgaytao(phtro.getNgaytao());
-        phongtros.setDientich(phtro.getDientich());
-        phongtroDAO.save(phongtros);
+        phtro.setAnh(listAnh);
+        phtro.setDientich(phongtros.getDientich());
+        phtro.setTenphong(phongtros.getTenphong());
+        phtro.setMota(phongtros.getMota());
+        phtro.setGiaphong(phongtros.getGiaphong());
+        phtro.setTiencoc(phongtros.getTiencoc());
+        phtro.setTinhtrang(phongtros.getTinhtrang());
+        phtro.setDiachi(phongtros.getDiachi());
+        phtro.setTrangthai(phongtro.trangthai.Waiting);//loi cai nay,phai lay tu trang thai ban dau
+        if(result.hasErrors()){
+            return "user/createPost";
+        }
+        phtro.setTentaikhoan(AuthUtils.getCurrentUser());
+//        model.addAttribute("phongtro",phtro);
+        model.addAttribute("diachi",phtro.getDiachi());
+        phongtroDAO.save(phtro);
         return "redirect:/user";
     }
 }
