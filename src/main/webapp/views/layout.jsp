@@ -14,6 +14,7 @@
     <title>ApartmentWorld</title>
 </head>
 <body>
+test ne
 <jsp:include page="_header.jsp"/>
 <!-- Main content here -->
 <jsp:include page="_footer.jsp"/>
