@@ -32,15 +32,21 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="view-tab" data-bs-toggle="tab" data-bs-target="#view-tab-pane"
-                        type="button" role="tab" aria-controls="view-tab-pane" aria-selected="true">Duyệt Xác thực
-                    (${fn:length(waitingUsers)})
+                <button class="nav-link active" id="cccd-tab" data-bs-toggle="tab" data-bs-target="#cccd-tab-pane"
+                        type="button" role="tab" aria-controls="cccd-tab-pane" aria-selected="true">Duyệt Xác thực
+                    (${waitingUsers.size()})
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="result-tab" data-bs-toggle="tab" data-bs-target="#result-tab-pane"
-                        type="button" role="tab" aria-controls="result-tab-pane" aria-selected="false">Duyệt bài
+                <button class="nav-link" id="post-tab" data-bs-toggle="tab" data-bs-target="#post-tab-pane"
+                        type="button" role="tab" aria-controls="post-tab-pane" aria-selected="false">Duyệt bài
                     đăng (${waitingPosts.size()})
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="seller-tab" data-bs-toggle="tab" data-bs-target="#seller-tab-pane"
+                        type="button" role="tab" aria-controls="seller-tab-pane" aria-selected="false">Duyệt người bán
+                    (${waitingSeller.size()})
                 </button>
             </li>
             <%--                <li class="nav-item" role="presentation">--%>
@@ -48,7 +54,7 @@
             <%--                </li>--%>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="view-tab-pane" role="tabpanel" aria-labelledby="view-tab"
+            <div class="tab-pane fade show active" id="cccd-tab-pane" role="tabpanel" aria-labelledby="cccd-tab"
                  tabindex="0">
                 <%--                Xác thực CCCD--%>
                 <div class="container-fluid p-2">
@@ -74,7 +80,7 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="kiemduyet/${user.taikhoan.tentaikhoan}" type="submit"
+                                            <a href="kiemduyet/cccd/${user.taikhoan.tentaikhoan}" type="submit"
                                                class="btn btn-secondary">Xem chi tiết
                                             </a>
                                         </div>
@@ -89,11 +95,53 @@
                     </c:if>
                 </div>
             </div>
-            <div class="tab-pane fade" id="result-tab-pane" role="tabpanel" aria-labelledby="result-tab"
+            <div class="tab-pane fade" id="post-tab-pane" role="tabpanel" aria-labelledby="post-tab"
                  tabindex="0">
                 <%--                Duyệt bài đăng--%>
                 <div class="container-fluid p-2">
-                    <h4 class="text-center fw-bold">Bài đăng trống</h4>
+                    <c:if test="${not empty waitingPosts}">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Tên bài đăng</th>
+                                <th scope="col">Người đăng</th>
+                                <th scope="col">Ngày thêm</th>
+                                <th scope="col">Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${waitingPosts}" var="post" varStatus="loop">
+                                <tr>
+                                    <th scope="row">${loop.index + 1}</th>
+                                    <td>${post.tenphong}</td>
+                                    <td>${post.tentaikhoan.tentaikhoan}</td>
+                                    <td>
+                                        <fmt:formatDate value="${post.convert(post.ngaytao)}"
+                                                        pattern="dd/MM/yyyy hh:mm:ss"/>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="kiemduyet/baidang/${post.maphong}" type="submit"
+                                               class="btn btn-secondary">Xem chi tiết
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
+                    <c:if test="${empty waitingPosts}">
+                        <h4 class="text-center fw-bold">Bài đăng trống</h4>
+                    </c:if>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="seller-tab-pane" role="tabpanel" aria-labelledby="seller-tab"
+                 tabindex="0">
+                <%--                Duyệt bài đăng--%>
+                <div class="container-fluid p-2">
+                    <h4 class="text-center fw-bold">Chưa có người đăng ký</h4>
                 </div>
             </div>
             <%--                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>--%>

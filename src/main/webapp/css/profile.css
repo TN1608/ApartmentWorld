@@ -76,8 +76,16 @@
         font-size: 0.9em;
     }
 }
+
 /*bai dang*/
 .status-text {
-    color: #F95454;
     font-weight: bold;
+}
+
+.status-text.wait {
+    color: #F95454;
+}
+
+.status-text.accept {
+    color: #4CAF50;
 }

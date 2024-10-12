@@ -22,7 +22,7 @@
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <%--    custom css--%>
-    <link rel="stylesheet" href="../../css/admin/style.css">
+    <link rel="stylesheet" href="/css/admin/style.css">
 
 </head>
 <body>
@@ -134,12 +134,12 @@
 
             <div class="col-md-6">
                 <label for="anhtruoc">Ảnh trước</label>
-                <img class="img-thumbnail overflow-y-auto w-100" src="../../images/cccd/${cccd.anhTruocCCCD}"
+                <img class="img-thumbnail overflow-y-auto w-100" src="/images/cccd/${cccd.anhTruocCCCD}"
                      alt="" style="max-height: 300px" id="anhtruoc">
             </div>
             <div class="col-md-6">
                 <label for="anhsau">Ảnh sau</label>
-                <img class="img-thumbnail overflow-y-auto w-100" src="../../images/cccd/${cccd.anhSauCCCD}"
+                <img class="img-thumbnail overflow-y-auto w-100" src="/images/cccd/${cccd.anhSauCCCD}"
                      alt="" style="max-height: 300px" id="anhsau">
             </div>
         </form>

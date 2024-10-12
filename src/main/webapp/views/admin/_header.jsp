@@ -78,6 +78,15 @@
                                 </a>
                             </li>
                         </c:forEach>
+
+                        <c:forEach var="user" items="${waitingSeller}">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                        ${user.taikhoan.tentaikhoan} đợi duyệt người bán
+                                </a>
+                            </li>
+                        </c:forEach>
+
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

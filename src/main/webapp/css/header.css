@@ -27,3 +27,6 @@ header .nav-item a:hover{
     display: block;
     margin-top: .125rem;
 }
+.notifi {
+    width: 250px;
+}

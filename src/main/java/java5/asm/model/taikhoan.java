@@ -91,10 +91,19 @@ public class taikhoan implements Serializable {
     @Column(name = "status", nullable = false)
     private UserStatus status = UserStatus.NONE;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "seller", nullable = false)
+    private UserSeller seller = UserSeller.NONE;
+
     public enum UserStatus {
         NONE,
         WAITING,
         APPROVED,
+    }
+
+    public enum UserSeller {
+        NONE,
+        WAITING,
         FREE,
         PREMIUM,
     }

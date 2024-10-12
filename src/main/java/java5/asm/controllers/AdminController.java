@@ -9,6 +9,7 @@ import java5.asm.model.CCCD;
 import java5.asm.model.phongtro;
 import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
+import java5.asm.services.NotificationService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,8 @@ public class AdminController {
     phongtroDAO phongtroDAO;
     @Autowired
     AuthUtils authUtils;
+    @Autowired
+    NotificationService notificationService;
 
     private int FIRST_PAGE_NUMBER = 0;
     private int NUMBER_OF_ITEM_PER_PAGE = 10;
@@ -86,7 +89,7 @@ public class AdminController {
         return "admin/censor";
     }
 
-    @RequestMapping("/kiemduyet/{tentaikhoan}")
+    @RequestMapping("/kiemduyet/cccd/{tentaikhoan}")
     public String kiemDuyetDetail(Model model, @PathVariable String tentaikhoan) {
         taikhoan currentUser = authUtils.getCurrentUser();
         model.addAttribute("user", currentUser);
@@ -102,13 +105,9 @@ public class AdminController {
         return "admin/censorDetail";
     }
 
-    @RequestMapping("/kiemduyet/{tentaikhoan}/accept")
+    @RequestMapping("/kiemduyet/cccd/{tentaikhoan}/accept")
     public String kiemDuyetDetailAccept(Model model, @PathVariable String tentaikhoan) {
         taikhoan currentUser = authUtils.getCurrentUser();
-        if (currentUser == null || !currentUser.isVaitro()) {
-            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "error/403";
-        }
         model.addAttribute("user", currentUser);
         addNotifications(model);
 
@@ -120,16 +119,14 @@ public class AdminController {
         usersDAO.save(user);
         CCCDDao.save(cccd);
 
+        notificationService.notifyUser(user, "CCCD của bạn đã được duyệt");
+
         return "redirect:/admin/kiemduyet";
     }
 
-    @RequestMapping("/kiemduyet/{tentaikhoan}/reject")
+    @RequestMapping("/kiemduyet/cccd/{tentaikhoan}/reject")
     public String kiemDuyetDetailReject(Model model, @PathVariable String tentaikhoan) {
         taikhoan currentUser = authUtils.getCurrentUser();
-        if (currentUser == null || authUtils.isAdmin(currentUser)) {
-            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "error/403";
-        }
         model.addAttribute("user", currentUser);
         addNotifications(model);
 
@@ -137,9 +134,62 @@ public class AdminController {
         taikhoan user = cccd.getTaikhoan();
 
         user.setStatus(taikhoan.UserStatus.NONE);
-
         usersDAO.save(user);
         CCCDDao.delete(cccd);
+        notificationService.notifyUser(user, "CCCD của bạn đã bị từ chối");
+        return "redirect:/admin/kiemduyet";
+    }
+
+    @RequestMapping("/kiemduyet/baidang/{maphong}")
+    public String kiemduyetPostDetail(Model model, @PathVariable String maphong) {
+        taikhoan currentUser = authUtils.getCurrentUser();
+        model.addAttribute("user", currentUser);
+        addNotifications(model);
+
+        phongtro post = phongtroDAO.findById(maphong).orElse(null);
+        model.addAttribute("post", post);
+
+        if (post == null) {
+            return "redirect:/admin/kiemduyet";
+        }
+
+        return "admin/censorPostDetail";
+    }
+
+    @RequestMapping("/kiemduyet/baidang/{maphong}/accept")
+    public String kiemduyetPostDetailAccept(Model model, @PathVariable String maphong) {
+        taikhoan currentUser = authUtils.getCurrentUser();
+        model.addAttribute("user", currentUser);
+        addNotifications(model);
+
+        phongtro post = phongtroDAO.findById(maphong).orElse(null);
+        if (post == null) {
+            return "redirect:/admin/kiemduyet";
+        }
+
+        post.setTrangthai(phongtro.trangthai.Approved);
+        phongtroDAO.save(post);
+
+        notificationService.notifyUser(post.getTentaikhoan(), "Bài đăng của bạn đã được duyệt");
+
+        return "redirect:/admin/kiemduyet";
+    }
+
+    @RequestMapping("/kiemduyet/baidang/{maphong}/reject")
+    public String kiemduyetPostDetailReject(Model model, @PathVariable String maphong) {
+        taikhoan currentUser = authUtils.getCurrentUser();
+        model.addAttribute("user", currentUser);
+        addNotifications(model);
+
+        phongtro post = phongtroDAO.findById(maphong).orElse(null);
+        if (post == null) {
+            return "redirect:/admin/kiemduyet";
+        }
+
+        post.setTrangthai(phongtro.trangthai.Hidden);
+        phongtroDAO.save(post);
+
+        notificationService.notifyUser(post.getTentaikhoan(), "Bài đăng của bạn đã bị từ chối");
 
         return "redirect:/admin/kiemduyet";
     }

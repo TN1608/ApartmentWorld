@@ -102,37 +102,47 @@
                             <a class="btn btn-primary" href="/dang-tin" class="btn btn-primary">Đăng bài</a>
                         </c:if>
                         <c:if test="${not empty phongtros}">
-                            <c:forEach items="${phongtros}" var="phongtro">
+                            <div class="d-flex flex-column">
+                                <c:forEach items="${phongtros}" var="phongtro">
+                                    <div class="card card-user mb-3">
+                                        <img src="../../images/phongtro/${phongtro.anh[0]}" class="card-img-top"
+                                             alt="...">
+                                        <div class="card-body">
+                                            <div class="text-section">
+                                                <h5 class="card-title">${phongtro.tenphong}</h5>
+                                                <p class="card-text">Giá: <fmt:formatNumber
+                                                        value="${phongtro.giaphong}"
+                                                        pattern="#,##0"/>đ <br>
+                                                    Diện tích: ${phongtro.dientich} m<sup>2</sup> <br>
+                                                    Tiền đã cọc: <fmt:formatNumber value="${phongtro.tiencoc}"
+                                                                                   pattern="#,##0"/>đ <br>
+                                                    Tình trạng: ${phongtro.tinhtrang.getDescription()} <br>
+                                                    Địa chỉ: ${phongtro.diachi}<br>
+                                                    Ngày đăng: <fmt:formatDate
+                                                            value="${phongtro.convert(phongtro.ngaytao)}"
+                                                            pattern="dd/MM/yyyy hh:mm:ss"/>
+                                                </p>
+                                            </div>
+                                            <div class="cta-section">
+                                                <c:if test="${phongtro.trangthai == 'Waiting'}">
+                                                    <div class="status">Trạng thái:
+                                                        <p class="status-text wait">${phongtro.trangthai.getDescription()}</p>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${phongtro.trangthai == 'Approved'}">
+                                                    <div class="status">Trạng thái:
+                                                        <p class="status-text accept">${phongtro.trangthai.getDescription()}</p>
+                                                    </div>
+                                                </c:if>
+                                                <a href="/dang-tin/sua-doi-thong-tin?maphong=${phongtro.maphong}"
+                                                   class="btn btn-primary">Xem thêm</a>
+                                            </div>
 
-                                <div class="card card-user">
-                                    <img src="../../images/phongtro/${phongtro.anh[0]}" class="card-img-top"
-                                         alt="...">
-                                    <div class="card-body">
-                                        <div class="text-section">
-                                            <h5 class="card-title">${phongtro.tenphong}</h5>
-                                            <p class="card-text">Giá: <fmt:formatNumber
-                                                    value="${phongtro.giaphong}"
-                                                    pattern="#,##0"/>đ <br>
-                                                Diện tích: ${phongtro.dientich} m<sup>2</sup> <br>
-                                                Tiền đã cọc: <fmt:formatNumber value="${phongtro.tiencoc}" pattern="#,##0"/>đ <br>
-                                                Tình trạng: ${phongtro.tinhtrang.getDescription()} <br>
-                                                Địa chỉ: ${phongtro.diachi}<br>
-                                                Ngày đăng: <fmt:formatDate value="${phongtro.convert(phongtro.ngaytao)}" pattern="dd/MM/yyyy hh:mm:ss"/>
-                                            </p>
                                         </div>
-                                        <div class="cta-section">
-                                            <c:if test="${phongtro.trangthai == 'Waiting'}">
-                                                <div class="status">Trạng thái:
-                                                        <p class="status-text">${phongtro.trangthai.getDescription()}</p>
-                                                </div>
-                                            </c:if>
-                                            <a href="/dang-tin/sua-doi-thong-tin?maphong=${phongtro.maphong}" class="btn btn-primary">Xem thêm</a>
-                                        </div>
-
                                     </div>
-                                </div>
 
-                            </c:forEach>
+                                </c:forEach>
+                            </div>
                         </c:if>
                     </div>
                 </div>

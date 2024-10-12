@@ -7,6 +7,7 @@ import java5.asm.dao.usersDAO;
 import java5.asm.model.phongtro;
 import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
+import java5.asm.services.NotificationService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class HomeController {
     phongtroDAO phongtroDAO;
     @Autowired
     AuthUtils authUtils;
+    @Autowired
+    NotificationService notificationService;
 
     @RequestMapping("/")
     public String index() {
@@ -49,10 +52,11 @@ public class HomeController {
             pageIndex = 0;
         }
         Pageable pageable = PageRequest.of(pageIndex, 8);
-        Page<phongtro> lists = phongtroDAO.findAll(pageable);
+        Page<phongtro> lists = phongtroDAO.findByTrangThai(phongtro.trangthai.Approved, pageable);
         model.addAttribute("items", lists);
         if (user != null) {
             model.addAttribute("user", user);
+            notificationService.addNotifications(model);
         }
         return "index";
     }
@@ -73,6 +77,11 @@ public class HomeController {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
             model.addAttribute("user", user);
+            notificationService.addNotifications(model);
+            if (user.getSeller() == null) {
+                user.setSeller(taikhoan.UserSeller.NONE);
+                usersDAO.save(user);
+            }
         }
         return "redirect:/home";
     }

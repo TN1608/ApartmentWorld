@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <html>
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary align-items-center d-flex justify-content-center">
@@ -29,9 +30,20 @@
                             </a>
                             <ul class="dropdown-menu p-2">
                                 <li>
-                                    <h4 class="fw-bold text-center">Thông báo</h4>
+                                    <h4 class="fw-bold text-center notifi">Thông báo</h4>
                                     <hr>
-                                    <p>Trống</p>
+                                    <c:if test="${empty notifications}">
+                                        <p class="text-center">Không có thông báo mới</p>
+                                    </c:if>
+                                    <c:if test="${not empty notifications}">
+                                        <c:forEach items="${notifications}" var="tb">
+                                            <div class="d-flex flex-column ">
+                                                <label>${tb.message}</label>
+                                                <p>Vào lúc: <fmt:formatDate value="${tb.convertDate(tb.createAt)}"
+                                                                            pattern="dd/MM/yy hh:mm:ss a"/></p>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
                                 </li>
                             </ul>
                         </div>
@@ -54,11 +66,15 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="/user">Thông tin</a></li>
+                                    <c:if test="${user.status == 'APPROVED'}">
+                                        <li><a class="dropdown-item" href="/register-seller">Đăng ký làm nhà bán hàng</a></li>
+                                    </c:if>
                                     <li><a class="dropdown-item" href="/dang-tin">Đăng tin</a></li>
                                     <li><a class="dropdown-item" href="#">Lịch sử thanh toán</a></li>
                                     <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
-                                    <hr>
+
                                     <c:if test="${user.vaitro}">
+                                        <hr>
                                         <li><a class="dropdown-item" href="/admin/home">Admin</a></li>
                                     </c:if>
                                 </ul>

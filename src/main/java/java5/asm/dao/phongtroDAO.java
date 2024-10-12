@@ -24,6 +24,9 @@ public interface phongtroDAO extends JpaRepository<phongtro, String> {
     @Query("SELECT p FROM phongtro p WHERE p.trangthai = ?1")
     List<phongtro> findByTrangThai(phongtro.trangthai trangthai);
 
+    @Query("SELECT p FROM phongtro p WHERE p.trangthai = ?1")
+    Page<phongtro> findByTrangThai(phongtro.trangthai trangthai, Pageable pageable);
+
     @Query("SELECT p FROM phongtro p WHERE p.tentaikhoan.tentaikhoan like ?1")
     List<phongtro> findByTentaikhoan(String tentaikhoan);
 }
