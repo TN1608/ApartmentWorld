@@ -49,8 +49,8 @@ public class ProfileController {
     usersDAO usersDAO;
     @Autowired
     CCCDDao CCCDDao;
-    //    @Autowired
-//    LSTTDao LSTTDao;
+    @Autowired
+    LSTTDao LSTTDao;
     @Autowired
     HDTDao HDTDao;
     @Autowired
@@ -70,6 +70,8 @@ public class ProfileController {
     @Autowired
     NotificationService notificationService;
     String otpMail;
+    @Autowired
+    private LSTTDao lSTTDao;
 
     @GetMapping
     public String user(Model model) {
@@ -118,14 +120,10 @@ public class ProfileController {
     public String paymentHistory(Model model) {
         taikhoan user = authUtils.getCurrentUser();
         if (user != null) {
+            List<lichsuthanhtoan> paymentHistory = LSTTDao.findAll();
             model.addAttribute("user", user);
+            model.addAttribute("paymentHistory", paymentHistory);
         }
-//        if (user != null) {
-//            List<lichsuthanhtoan> paymentHistory = LSTTDao.findByTentaikhoan(user.getTentaikhoan());
-//            model.addAttribute("paymentHistory", paymentHistory != null ? paymentHistory : new ArrayList<>());
-//        }else{
-//            model.addAttribute("paymentHistory", new ArrayList<>());
-//        }
         notificationService.addNotifications(model);
         return "user/payment-history";
     }

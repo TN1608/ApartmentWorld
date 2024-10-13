@@ -9,6 +9,4 @@ import java.util.List;
 
 
 public interface LSTTDao extends JpaRepository<lichsuthanhtoan, Integer> {
-//    @Query("SELECT l FROM lichsuthanhtoan l JOIN hopdongthue h ON l.maHD = h.maHD WHERE h.tentaikhoan = :tentaikhoan")
-//    List<lichsuthanhtoan> findByTentaikhoan(@Param("tentaikhoan") String tentaikhoan);
 }

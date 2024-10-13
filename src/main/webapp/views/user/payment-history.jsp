@@ -51,19 +51,20 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Mã giao dịch</th>
-                                        <th scope="col">Ngày thanh toán</th>
+                                        <th scope="col">Mã thanh toán</th>
+                                        <th scope="col">Mã hợp đồng</th>
                                         <th scope="col">Số tiền</th>
-                                        <th scope="col">Trạng thái</th>
+                                        <th scope="col">Ngày thanh toán</th>
+                                        <th scope="col">Hình thức thanh toán</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${paymentHistories}" var="paymentHistory">
-                                        <tr>
-                                            <td>${paymentHistory.id}</td>
-                                            <td>${paymentHistory.paymentDate}</td>
-                                            <td>${paymentHistory.amount}</td>
-                                            <td>${paymentHistory.status}</td>
+                                    <c:forEach var="payment" items="${paymentHistory}">
+                                        <td>${payment.id}</td>
+                                        <td>${payment.maHD.maHD}</td>
+                                        <td>${payment.sotien}</td>
+                                        <td>${payment.ngaythanhtoan}</td>
+                                        <td>${payment.hinhthucthanhtoan}</td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
