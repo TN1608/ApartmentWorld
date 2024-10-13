@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface NotificationDAO extends JpaRepository<Notification, Long> {
     @Query("SELECT n FROM Notification n " +
-            "WHERE n.tentaikhoan.tentaikhoan = ?1 " +
+            "WHERE n.tentaikhoan.tentaikhoan = ?1 AND n.isRead = false " +
             "ORDER BY n.createAt DESC")
     List<Notification> findByUser(String tentaikhoan);
+
 }

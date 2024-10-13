@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class HomeController {
     @Autowired
     NotificationService notificationService;
 
-    @RequestMapping("/")
+    @GetMapping("")
     public String index() {
         return "redirect:/home";
     }
@@ -85,4 +86,14 @@ public class HomeController {
         }
         return "redirect:/home";
     }
+
+    @PostMapping("/notification/readAll")
+    public ResponseEntity<Void> markAllNotificationsAsRead() {
+        taikhoan user = authUtils.getCurrentUser();
+        if (user != null) {
+            notificationService.markAsRead(user.getTentaikhoan());
+        }
+        return ResponseEntity.ok().build();
+    }
+
 }

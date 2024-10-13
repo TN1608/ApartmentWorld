@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
     <base href="${pageContext.request.contextPath}/">
+    <script src="/js/app.js"></script>
     <script src="/js/link.js"></script>
     <title>ApartmentWorld</title>
     <style>

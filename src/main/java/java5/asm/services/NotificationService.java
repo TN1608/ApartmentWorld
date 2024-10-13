@@ -41,4 +41,12 @@ public class NotificationService {
             model.addAttribute("notifications", notifications);
         }
     }
+
+    public void markAsRead(String username) {
+        List<Notification> notifications = nDAO.findByUser(username);
+        for (Notification notification : notifications) {
+            notification.setIsRead(true);
+            nDAO.save(notification);
+        }
+    }
 }

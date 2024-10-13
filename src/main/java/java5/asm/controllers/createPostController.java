@@ -52,7 +52,7 @@ public class createPostController {
                              @ModelAttribute("phongtro") phongtro phongtro) {
         taikhoan user = AuthUtils.getCurrentUser();
         if (user == null) {
-            return "redirect:/home";
+            return "redirect:/login";
         }
         model.addAttribute("user", user);
         notificationService.addNotifications(model);

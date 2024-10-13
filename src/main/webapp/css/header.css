@@ -1,4 +1,4 @@
-header{
+header {
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     line-height: 1.42857143;
@@ -7,26 +7,37 @@ header{
     background-color: #F5F5F5;
 }
 
-header .navbar-nav{
+header .navbar-nav {
     justify-content: space-between;
 }
-header .nav-item{
+
+header .nav-item {
     margin-left: 0.5em;
 }
-header .nav-item a:hover{
+
+header .nav-item a:hover {
     font-weight: bold;
     box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
     border-radius: .2em;
 }
-.searchbar{
+
+.searchbar {
     margin-left: 5.5em;
     margin-top: 1em;
 }
 
-.dropdown:hover > .dropdown-menu{
+.dropdown:hover > .dropdown-menu {
     display: block;
     margin-top: .125rem;
 }
+
 .notifi {
     width: 250px;
+}
+
+.make-read a {
+    font-size: 0.8em;
+    color: black;
+    text-decoration: none;
+    background: none;
 }
