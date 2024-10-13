@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.naming.Binding;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Controller
 public class createPostController {
@@ -60,9 +58,9 @@ public class createPostController {
     }
 
     public String getMaphong() {
-        String maphong = phongtroDAO.findTopByMaphong();
-        if (maphong != null) {
-            int num = Integer.parseInt(maphong.replace("P", ""));
+        Optional<String> optionalMaphong = Optional.ofNullable(phongtroDAO.findTopByMaphong());
+        if (optionalMaphong.isPresent()) {
+            int num = Integer.parseInt(optionalMaphong.get().replace("P", ""));
             return "P" + (num + 1);
         }
         return "P1";
@@ -92,7 +90,7 @@ public class createPostController {
             phongtro.setAnh(listAnh);
             phongtro.setTrangthai(java5.asm.model.phongtro.trangthai.Waiting);
         } catch (Exception e) {
-            model.addAttribute("error", "Lỗi trạng thái");
+            model.addAttribute("error", "Error in status");
             return "user/createPost";
         }
 
@@ -107,14 +105,20 @@ public class createPostController {
                                  @ModelAttribute("phongtro") phongtro phongtro,
                                  @RequestParam("maphong") String maphong) {
         taikhoan user = AuthUtils.getCurrentUser();
-        phongtro phtro = phongtroDAO.findById(maphong).orElse(null);
+        Optional<phongtro> optionalPhongtro = phongtroDAO.findById(maphong);
         if (user == null) {
             return "redirect:/home";
         }
-        model.addAttribute("user", user);
-        model.addAttribute("phongtro", phtro);
-        notificationService.addNotifications(model);
-        return "user/createPost";
+        if (optionalPhongtro.isPresent()) {
+            phongtro phtro = optionalPhongtro.get();
+            model.addAttribute("user", user);
+            model.addAttribute("phongtro", phtro);
+            notificationService.addNotifications(model);
+            return "user/createPost";
+        } else {
+            model.addAttribute("error", "Phòng trọ không tồn tại");
+            return "user/createPost";
+        }
     }
 
     @RequestMapping("/dang-tin/sua-doi-thong-tin/update")
@@ -129,7 +133,7 @@ public class createPostController {
         }
 
         if (images.length == 0) {
-            model.addAttribute("error", "Chưa chọn ảnh");
+            model.addAttribute("error", "No images selected");
             return "user/createPost";
         }
         List<String> listAnh = new ArrayList<>();
@@ -145,7 +149,10 @@ public class createPostController {
         }
         model.addAttribute("user", user);
         phongtro phtro = phongtroDAO.findById(maphong).orElse(null);
-        assert phtro != null;
+        if (phtro == null) {
+            model.addAttribute("error", "phòng trọ không tồn tại");
+            return "user/createPost";
+        }
         if (listAnh.isEmpty()) {
             if (!phtro.getAnh().isEmpty()) {
                 listAnh = phtro.getAnh();
@@ -159,12 +166,15 @@ public class createPostController {
         phtro.setTiencoc(phongtros.getTiencoc());
         phtro.setTinhtrang(phongtros.getTinhtrang());
         phtro.setDiachi(phongtros.getDiachi());
-        phtro.setTrangthai(phongtro.trangthai.Waiting);//loi cai nay,phai lay tu trang thai ban dau
+        if (phtro.getTrangthai() != null) {
+            phtro.setTrangthai(phtro.getTrangthai());
+        } else {
+            phtro.setTrangthai(phongtro.trangthai.Waiting);
+        }
         if (result.hasErrors()) {
             return "user/createPost";
         }
         phtro.setTentaikhoan(AuthUtils.getCurrentUser());
-//        model.addAttribute("phongtro",phtro);
         model.addAttribute("diachi", phtro.getDiachi());
         phongtroDAO.save(phtro);
         return "redirect:/user";
