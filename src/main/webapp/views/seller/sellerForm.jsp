@@ -60,40 +60,43 @@
 <!-- Main content here -->
 <div class="container-form p-5">
     <h1 class="text-center mb-4">Thông tin đăng ký</h1>
-    <form:form id="sellerForm" modelAttribute="taikhoan">
+    <form:form id="sellerForm" modelAttribute="seller" method="post">
         <!-- Tên tài khoản -->
         <div class="mb-3">
             <label for="username" class="form-label">Tên tài khoản</label>
-            <input type="text" class="form-control" id="username" value="${user.tentaikhoan}" disabled
-                   placeholder="Nhập tên tài khoản" name="tentaikhoan" required>
+            <form:input path="tentaikhoan" type="text" class="form-control" id="username" value="${user.tentaikhoan}"
+                        disabled="true" placeholder="Nhập tên tài khoản" name="tentaikhoan"/>
         </div>
 
         <!-- Họ và Tên -->
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="lastname" class="form-label">Họ</label>
-                <input type="text" class="form-control" id="lastname" value="${user.firstname}" placeholder="Nhập họ"
-                       required name="firstname">
+                <form:input path="firstname" type="text" class="form-control" id="lastname" value="${user.firstname}"
+                            placeholder="Nhập họ"
+                            name="firstname"/>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="firstname" class="form-label">Tên</label>
-                <input type="text" class="form-control" id="firstname" value="${user.lastname}" placeholder="Nhập tên"
-                       required name="lastname">
+                <form:input path="lastname" type="text" class="form-control" id="firstname" value="${user.lastname}"
+                            placeholder="Nhập tên"
+                            name="lastname"/>
             </div>
         </div>
 
         <!-- Email -->
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" value="${user.email}" placeholder="Nhập email"
-                   required name="email">
+            <form:input path="email" type="email" class="form-control" id="email" value="${user.email}"
+                        placeholder="Nhập email"
+                        name="email"/>
         </div>
 
         <!-- Số điện thoại -->
         <div class="mb-3">
             <label for="phone" class="form-label">Số điện thoại</label>
-            <input type="tel" class="form-control" id="phone" value="${user.sodienthoai}"
-                   placeholder="Nhập số điện thoại" required name="sodienthoai">
+            <form:input path="sodienthoai" type="tel" class="form-control" id="phone" value="${user.sodienthoai}"
+                        placeholder="Nhập số điện thoại" name="sodienthoai"/>
         </div>
 
         <!-- Gói đã chọn -->

@@ -55,9 +55,9 @@
                             aria-expanded="false"
                     >
                         <i class="fa-solid fa-bell"></i>
-                        <c:if test="${not empty waitingUsers}">
+                        <c:if test="${not empty waitingUsers || not empty waitingPosts || not empty waitingSellers}">
                             <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-                                    ${fn:length(waitingUsers)}
+                                    ${waitingUsers.size() + waitingPosts.size() + waitingSellers.size()}
                             </span>
                         </c:if>
                     </a>
@@ -79,10 +79,10 @@
                             </li>
                         </c:forEach>
 
-                        <c:forEach var="user" items="${waitingSeller}">
+                        <c:forEach var="user" items="${waitingSellers}">
                             <li>
                                 <a class="dropdown-item" href="#">
-                                        ${user.taikhoan.tentaikhoan} đợi duyệt người bán
+                                        ${user.tentaikhoan} đợi duyệt người bán
                                 </a>
                             </li>
                         </c:forEach>

@@ -86,7 +86,7 @@
                                     <div class="col-md-6">
                                         <label for="username" class="form-label">Tên tài khoản</label>
                                         <form:input type="text" class="form-control" id="username" path="tentaikhoan"
-                                                    value="${user.tentaikhoan}"/>
+                                                    value="${user.tentaikhoan}" disabled="true"/>
                                     </div>
                                     <%--        firstname--%>
                                     <div class="col-md-6">

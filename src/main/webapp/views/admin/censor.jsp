@@ -46,7 +46,7 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="seller-tab" data-bs-toggle="tab" data-bs-target="#seller-tab-pane"
                         type="button" role="tab" aria-controls="seller-tab-pane" aria-selected="false">Duyệt người bán
-                    (${waitingSeller.size()})
+                    (${waitingSellers.size()})
                 </button>
             </li>
             <%--                <li class="nav-item" role="presentation">--%>
@@ -141,7 +141,49 @@
                  tabindex="0">
                 <%--                Duyệt bài đăng--%>
                 <div class="container-fluid p-2">
-                    <h4 class="text-center fw-bold">Chưa có người đăng ký</h4>
+                    <c:if test="${not empty waitingSellers}">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Tên Tài Khoản</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Số điện thoại</th>
+                                <th scope="col">Gói</th>
+                                <th scope="col">Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${waitingSellers}" var="seller" varStatus="loop">
+                                <tr>
+                                    <th scope="row">${loop.index + 1}</th>
+                                    <td>${seller.tentaikhoan}</td>
+                                    <td>${seller.email}</td>
+                                    <td>${seller.sodienthoai}</td>
+                                    <c:if test="${seller.seller == 'WAITING_FREE'}">
+                                        <td>Free</td>
+                                    </c:if>
+                                    <c:if test="${seller.seller == 'WAITING_PREMIUM'}">
+                                        <td>Premium</td>
+                                    </c:if>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="kiemduyet/seller/${seller.tentaikhoan}/accept" type="submit"
+                                               class="btn btn-secondary">Chấp nhận
+                                            </a>
+                                            <a href="kiemduyet/seller/${seller.tentaikhoan}/reject" type="submit"
+                                               class="btn btn-danger">Từ chối
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
+                    <c:if test="${empty waitingSellers}">
+                        <h4 class="text-center fw-bold">Chưa có người đăng ký</h4>
+                    </c:if>
                 </div>
             </div>
             <%--                <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>--%>

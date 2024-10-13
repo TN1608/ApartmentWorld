@@ -206,11 +206,19 @@ public class AdminController {
         return CCCDDao.findCCCDByUser(taikhoan.UserStatus.WAITING);
     }
 
+    @ResponseBody
+    @RequestMapping("/kiemduyettest2")
+    public List<taikhoan> kiemDuyetTest2() {
+        return usersDAO.findBySeller(taikhoan.UserSeller.WAITING_FREE, taikhoan.UserSeller.WAITING_PREMIUM);
+    }
+
     private void addNotifications(Model model) {
         List<CCCD> waitingUser = CCCDDao.findCCCDByUser(taikhoan.UserStatus.WAITING);
         model.addAttribute("waitingUsers", waitingUser);
         List<phongtro> waitingPost = phongtroDAO.findByTrangThai(phongtro.trangthai.Waiting);
         model.addAttribute("waitingPosts", waitingPost);
+        List<taikhoan> waitingSeller = usersDAO.findBySeller(taikhoan.UserSeller.WAITING_FREE, taikhoan.UserSeller.WAITING_PREMIUM);
+        model.addAttribute("waitingSellers", waitingSeller);
     }
 
 }
