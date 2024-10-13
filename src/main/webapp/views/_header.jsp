@@ -4,16 +4,20 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <html>
 <header>
-    <div class="d-flex justify-content-end">
-        <div class="dropdown">
-            <a class="dropdown-toggle nav-link fs-6 p-1" href="#" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false"><s:message code="header.mn.language"/>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?lang=vi">Tiếng Việt</a></li>
-                <li><a class="dropdown-item" href="?lang=en">English</a></li>
-            </ul>
-        </div>
+<%--    <div class="d-flex justify-content-end">--%>
+<%--        <div class="dropdown">--%>
+<%--            <a class="dropdown-toggle nav-link fs-6 p-1" href="#" role="button" data-bs-toggle="dropdown"--%>
+<%--               aria-expanded="false"><s:message code="header.mn.language"/>--%>
+<%--            </a>--%>
+<%--            <ul class="dropdown-menu">--%>
+<%--                <li><a class="dropdown-item" href="?lang=vi">Tiếng Việt</a></li>--%>
+<%--                <li><a class="dropdown-item" href="?lang=en">English</a></li>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+    <div class="d-flex justify-content-end me-4">
+        <span class="text-muted">Ngôn ngữ:</span><a href="?lang=vi" class="text-decoration-none">vi-VN</a>
+        <span class="text-muted">|</span><a class="text-decoration-none" href="?lang=en" class="">en-US</a>
     </div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary align-items-center d-flex justify-content-center">
         <div class="container-fluid">

@@ -70,8 +70,6 @@ public class ProfileController {
     @Autowired
     NotificationService notificationService;
     String otpMail;
-    @Autowired
-    private LSTTDao lSTTDao;
 
     @GetMapping
     public String user(Model model) {

@@ -16,8 +16,8 @@ public interface phongtroDAO extends JpaRepository<phongtro, String> {
 //    @Query("SELECT p FROM phongtro p WHERE p.giaphong BETWEEN ?1 AND ?2")
 //    Page<phongtro>findByPrice(int min, int max);
 //    //PriceBetween
-//    @Query("SELECT p FROM phongtro p WHERE p.giaphong BETWEEN ?1 AND ?2")
-//    Page<phongtro>findByPriceBetween(int min, int max);
+    @Query("SELECT p FROM phongtro p WHERE p.giaphong BETWEEN ?1 AND ?2")
+    Page<phongtro>findByPriceBetween(int min, int max, Pageable pageable);
     @Query("Select p.maphong from phongtro p order by length(p.maphong) desc,p.maphong desc")
     String findTopByMaphong();
 
@@ -29,4 +29,7 @@ public interface phongtroDAO extends JpaRepository<phongtro, String> {
 
     @Query("SELECT p FROM phongtro p WHERE p.tentaikhoan.tentaikhoan like ?1")
     List<phongtro> findByTentaikhoan(String tentaikhoan);
+
+    @Query("Select p from phongtro p where p.tinhtrang = ?1")
+    Page<phongtro> findByTinhtrang(phongtro.tinhtrang tinhtrang, Pageable pageable);
 }
