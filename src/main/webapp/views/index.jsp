@@ -131,35 +131,87 @@
     </section>
     <section class="section3 container w-100">
         <h5 class="fw-bold mb-2 pt-2 text-center">Phòng trọ cho thuê giá rẻ cập nhật 9/2024</h5>
-        <form action="/home" class="w-50" method="get">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nhập nội dung cần tìm" name="keywords"
-                       value="${keywords}">
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
-            </div>
-        </form>
         <hr>
+        <div class="justify-content-end d-flex option">
+            <button class="btn btn-option" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="bi bi-sliders2 me-2"></i><span>Bộ lọc</span></button>
+
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Lọc giá và thông tin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p>
+<%--                    searchBar--%>
+                    <form action="/home" class="w-100" method="get">
+                    <label class="form-label">Tìm kiếm</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Nhập nội dung cần tìm" name="keywords"
+                                   value="${keywords}">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
+                        </div>
+                    </form>
+<%--                    SortGia--%>
+                    <form class="sortPice w-100 mb-3" action="/home/sort" method="get">
+                        <div class="form-group">
+                            <label class="form-label">Chọn giá</label>
+                            <div class="d-flex align-items-center">
+                                <input type="number" class="form-control mx-2" id="minPrice" name="minPrice" placeholder="Giá thấp nhất" value="${minPrice}">
+                                <input type="number" class="form-control mx-2" id="maxPrice" name="maxPrice" placeholder="Giá cao nhất" value="${maxPrice}">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mt-3" type="submit">Lọc theo giá</button>
+                    </form>
+<%--                    tinh trang noi that--%>
+                    <form class="filterTinhTrang w-100" action="/home/filter" method="get">
+                        <div class="form-group">
+                            <label class="form-label">Chọn Tình Trạng</label>
+                            <select class="form-control" name="tinhTrang">
+                                <c:forEach var="option" items="${tinhtrang}">
+                                    <option value="${option.value}">${option.label}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary mt-3" type="submit">Lọc theo Tình Trạng</button>
+                    </form>
+                    </p>
+                </div>
+            </div>
+        </div>
         <div class="row ps-3">
-            <c:forEach var="item" items="${items.content}">
-                <div class="col-3">
-                    <div class="card">
-                        <img src="../images/products/1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-10">
-                                    <h7 class="card-title fw-bold">${item.tenphong}</h7>
-                                    <p class="card-text">
-                                        <i class="bi bi-geo-alt"></i>
-                                        <span>Quận Bình Thạnh</span>
-                                    <p class="text-danger fw-bold">Giá: <fmt:formatNumber value="${item.giaphong}"
-                                                                                          pattern="#,##0"/> đ/tháng</p>
-                                    </p>
+            <c:if test="${not empty items.content}">
+                <c:forEach var="item" items="${items.content}">
+                    <div class="col-3">
+                        <div class="card">
+                            <img src="../../images/phongtro/${item.anh[0]}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <h7 class="card-title fw-bold">${item.tenphong}</h7>
+                                        <p class="card-text">
+                                            <i class="bi bi-geo-alt"></i>
+                                            <span>${item.diachi}</span>
+                                            <span>${item.tinhtrang.getDescription()}</span>
+                                        <p class="text-danger fw-bold">Giá: <fmt:formatNumber value="${item.giaphong}" pattern="#,##0"/> đ/tháng</p>
+                                        </p>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        Ngày đăng: <fmt:formatDate
+                                            value="${item.convert(item.ngaytao)}"
+                                            pattern="dd/MM/yyyy"/>
+                                        <a href="/detail?id=${item.maphong}" class="btn btn-detail w-100">Xem thêm</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty items.content}">
+                <div class="alert alert-warning mt-3" role="alert">
+                    <h4 class="fw-bold text-danger text-center">Không tìm thấy phòng trọ nào</h4>
                 </div>
-            </c:forEach>
+            </c:if>
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center align-items-center">
