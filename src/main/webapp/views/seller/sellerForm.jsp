@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,10 +35,10 @@
 
             if (url.includes('/free')) {
                 packageSelect.value = 'free';
-                sendLink.href = 'send?package=free';
+                sendLink.formAction = `send?package=free`;
             } else if (url.includes('/premium')) {
                 packageSelect.value = 'premium';
-                sendLink.href = 'send?package=premium';
+                sendLink.formAction = `send?package=premium`;
             }
 
             packageSelect.addEventListener('change', function () {
@@ -60,26 +60,24 @@
 <!-- Main content here -->
 <div class="container-form p-5">
     <h1 class="text-center mb-4">Thông tin đăng ký</h1>
-    <form:form id="sellerForm" modelAttribute="seller" method="post">
+    <form:form id="sellerForm" modelAttribute="taikhoan" method="post">
         <!-- Tên tài khoản -->
         <div class="mb-3">
             <label for="username" class="form-label">Tên tài khoản</label>
             <form:input path="tentaikhoan" type="text" class="form-control" id="username" value="${user.tentaikhoan}"
-                        disabled="true" placeholder="Nhập tên tài khoản" name="tentaikhoan"/>
+                        disabled="true" name="tentaikhoan"/>
         </div>
 
         <!-- Họ và Tên -->
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="lastname" class="form-label">Họ</label>
-                <form:input path="firstname" type="text" class="form-control" id="lastname" value="${user.firstname}"
-                            placeholder="Nhập họ"
+                <label for="firstname" class="form-label">Họ</label>
+                <form:input path="firstname" type="text" class="form-control" id="firstname" value="${user.firstname}"
                             name="firstname"/>
             </div>
             <div class="col-md-6 mb-3">
-                <label for="firstname" class="form-label">Tên</label>
-                <form:input path="lastname" type="text" class="form-control" id="firstname" value="${user.lastname}"
-                            placeholder="Nhập tên"
+                <label for="lastname" class="form-label">Tên</label>
+                <form:input path="lastname" type="text" class="form-control" id="lastname" value="${user.lastname}"
                             name="lastname"/>
             </div>
         </div>
@@ -110,7 +108,8 @@
 
         <!-- Nút Gửi -->
 
-        <a id="sendLink" href="" type="submit" class="btn btn-primary w-100">Gửi thông tin</a>
+        <button id="sendLink" type="submit" class="btn btn-primary w-100">Gửi thông tin
+        </button>
     </form:form>
 </div>
 <jsp:include page="../_footer.jsp"/>
