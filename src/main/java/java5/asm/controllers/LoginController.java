@@ -7,6 +7,7 @@ import java5.asm.dao.usersDAO;
 import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
 import java5.asm.services.EmailSenderService;
+import java5.asm.services.NotificationService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,8 @@ public class LoginController {
     AuthUtils authUtils;
     @Autowired
     private EmailSenderService mailService;
+    @Autowired
+    NotificationService notificationService;
     String otp;
 
     @GetMapping("/login")
@@ -55,6 +58,7 @@ public class LoginController {
     public String login(@RequestParam("tentaikhoan") String username,
                         @RequestParam("matkhau") String password,
                         @RequestParam(value = "remember", defaultValue = "false") boolean remember,
+                        RedirectAttributes ra,
                         Model model) {
         taikhoan user = usersDAO.findById(username).orElse(null);
         if (user != null) {
@@ -67,6 +71,7 @@ public class LoginController {
                 if (remember) {
                     cookieService.add("token", token, 24);
                 }
+                notificationService.addNotiBox(ra, "Đăng nhập thành công");
                 return "redirect:/home";
             } else {
                 model.addAttribute("message", "Sai tên đăng nhập hoặc mật khẩu");
@@ -93,7 +98,7 @@ public class LoginController {
     @PostMapping("/signup")
     public String signup(@RequestParam("cpass") String cpass,
                          @ModelAttribute("taikhoan") @Validated taikhoan user,
-                         Errors errors, Model model) {
+                         Errors errors, Model model, RedirectAttributes ra) {
         if (errors.hasErrors()) {
             return "signup";
         }
@@ -114,6 +119,7 @@ public class LoginController {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         user.setMatkhau(passwordEncoder.encode(pass));
         usersDAO.save(user);
+        notificationService.addNotiBox(ra, "Đăng ký thành công");
         return "redirect:/login";
     }
 
@@ -130,7 +136,8 @@ public class LoginController {
         List<taikhoan> users = usersDAO.findByEmail(email);
         taikhoan user = users.isEmpty() ? null : users.getFirst();
         if (user == null) {
-            redirectAttributes.addFlashAttribute("message", "Email không tồn tại");
+//            redirectAttributes.addFlashAttribute("message", "Email không tồn tại");
+            notificationService.addNotiBox(redirectAttributes, "Email không tồn tại");
             return "redirect:/forgot-password";
         }
         sessionService.set("email", email);

@@ -55,9 +55,9 @@
                             aria-expanded="false"
                     >
                         <i class="fa-solid fa-bell"></i>
-                        <c:if test="${not empty waitingUsers}">
+                        <c:if test="${not empty waitingUsers || not empty waitingPosts || not empty waitingSellers}">
                             <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-                                    ${fn:length(waitingUsers)}
+                                    ${waitingUsers.size() + waitingPosts.size() + waitingSellers.size()}
                             </span>
                         </c:if>
                     </a>
@@ -73,16 +73,16 @@
                         </c:forEach>
                         <c:forEach var="post" items="${waitingPosts}">
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/admin/kiemduyet">
                                     Bài đăng ${post.tenphong} đợi duyệt
                                 </a>
                             </li>
                         </c:forEach>
 
-                        <c:forEach var="user" items="${waitingSeller}">
+                        <c:forEach var="user" items="${waitingSellers}">
                             <li>
-                                <a class="dropdown-item" href="#">
-                                        ${user.taikhoan.tentaikhoan} đợi duyệt người bán
+                                <a class="dropdown-item" href="/admin/kiemduyet">
+                                        ${user.tentaikhoan} đợi duyệt người bán
                                 </a>
                             </li>
                         </c:forEach>
@@ -117,3 +117,9 @@
     </div>
 </nav>
 <%--Navbar--%>
+<%--Notification Box--%>
+<div class="notiBox" id="notificationBox">
+    <span id="notiBoxMessage">${notiBox}</span>
+    <button class="close-notiBox" id="closeNotiBox">&times;</button>
+    <div class="notiBox-progress-bar" id="notiBoxProgressBar"></div>
+</div>

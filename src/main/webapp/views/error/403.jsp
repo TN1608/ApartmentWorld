@@ -84,6 +84,7 @@
 
 
     </style>
+    <script src="/js/error/app.js"></script>
 </head>
 <body>
 <div class="text-wrapper">
@@ -102,8 +103,7 @@
     </div>
 
     <div class="buttons">
-        <a class="button" href="/home">Go to homepage</a>
+        <a class="button" id="errorLink" href="">Go back</a>
     </div>
 </div>
 </body>
-</html>

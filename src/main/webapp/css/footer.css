@@ -12,3 +12,64 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+   body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+    }
+
+    .footer {
+       background-color: #c5c6c6;
+    }
+
+    .footer h5 {
+        letter-spacing: 1px;
+    }
+
+    .text-warning {
+        color: #ffcc00 !important;
+    }
+
+    .text-primary {
+        color: #00aaff !important; /* Màu xanh dương cho chữ */
+    }
+
+    .footer p, .footer a {
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .footer a {
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+        color: #ffcc00;
+    }
+
+.btn-floating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.btn-floating i {
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+    .btn-floating:hover {
+        background-color: #ffcc00 !important;
+        color: white !important;
+    }
+
+    @media (max-width: 768px) {
+        .footer .col-md-6 {
+            text-align: center;
+        }
+    } 

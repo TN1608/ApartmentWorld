@@ -1,130 +1,88 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<footer class="bg-dark text-center text-lg-start text-white position-relative w-100 bottom-0">
-    <!-- Grid container -->
-    <div class="container p-4">
-        <!-- Section: Social media -->
-        <section class="mb-4">
-            <!-- Facebook -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button">
-                <i class="bi bi-facebook"></i>
-            </a>
-            <!-- Twitter -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button">
-                <i class="bi bi-twitter"></i>
-            </a>
-            <!-- Google -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39;" href="#!" role="button">
-                <i class="bi bi-google"></i>
-            </a>
-            <!-- Instagram -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac;" href="#!" role="button">
-                <i class="bi bi-instagram"></i>
-            </a>
-            <!-- Linkedin -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #007bb5;" href="#!" role="button">
-                <i class="bi bi-linkedin"></i>
-            </a>
-            <!-- Github -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="#!" role="button">
-                <i class="bi bi-github"></i>
-            </a>
-        </section>
-        <!-- Section: Social media -->
-
-        <!-- Section: Links -->
-        <section class="">
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Company</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-white">About Us</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Careers</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Press</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Blog</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Support</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-white">Help Center</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Contact Us</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Report a Problem</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Privacy Policy</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Services</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-white">Web Design</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Development</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Hosting</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">SEO</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Contact</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-white">New York, NY 10012, US</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">info@example.com</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">+ 01 234 567 88</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">+ 01 234 567 89</a>
-                        </li>
-                    </ul>
-                </div>
-                <!--Grid column-->
+<footer class="footer bg-gradient text-white py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Company Info Section -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="text-uppercase font-weight-bold mb-4 text-warning">Apartment World</h5>
+                <p class="text-muted">
+                    Discover your next home with us. High-quality apartments, simple search, and fast connections.
+                </p>
+                <ul class="list-inline mt-4">
+                    <li class="list-inline-item pb-1">
+                        <a href="#" class="btn btn-floating btn-light" style="background-color: #3b5998;">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item pb-1">
+                        <a href="#" class="btn btn-floating btn-light" style="background-color: #55acee;">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item pb-1">
+                        <a href="#" class="btn btn-floating btn-light" style="background-color: #dd4b39;">
+                            <i class="bi bi-google"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item pb-1">
+                        <a href="#" class="btn btn-floating btn-light" style="background-color: #ac2bac;">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item pb-1">
+                        <a href="#" class="btn btn-floating btn-light" style="background-color: #007bb5;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <!--Grid row-->
-        </section>
-        <!-- Section: Links -->
-    </div>
-    <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        � 2024 Copyright:
-        <a class="text-white" href="/">ApartmentWorld.com</a>
+            <!-- Quick Links Section -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="text-uppercase font-weight-bold mb-4 text-warning">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-muted">About Us</a></li>
+                    <li><a href="#" class="text-muted">Services</a></li>
+                    <li><a href="#" class="text-muted">Contact</a></li>
+                    <li><a href="#" class="text-muted">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Services Section -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="text-uppercase font-weight-bold mb-4 text-warning">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-muted">Web Design</a></li>
+                    <li><a href="#" class="text-muted">SEO Optimization</a></li>
+                    <li><a href="#" class="text-muted">Hosting</a></li>
+                    <li><a href="#" class="text-muted">Development</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="text-uppercase font-weight-bold mb-4 text-warning">Contact</h5>
+                <ul class="list-unstyled text-muted">
+                    <li><i class="bi bi-geo-alt-fill"></i> New York, NY 10012, US</li>
+                    <li><i class="bi bi-envelope-fill"></i> info@example.com</li>
+                    <li><i class="bi bi-phone-fill"></i> +01 234 567 88</li>
+                    <li><i class="bi bi-phone-fill"></i> +01 234 567 89</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="mb-4" style="border-color: rgba(255, 255, 255, 0.2);">
+
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p class="text-center text-md-left text-muted">© 2024 Apartment World. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-right">
+                <p class="text-muted">Designed by <a href="#" class="text-primary">Apartment World Team</a></p>
+            </div>
+        </div>
     </div>
-    <!-- Copyright -->
 </footer>
+
+
+

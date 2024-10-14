@@ -1,10 +1,7 @@
-package java5.asm.controllers;
+package java5.asm.controllers.Admin;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java5.asm.dao.CCCDDao;
-import java5.asm.dao.phongtroDAO;
-import java5.asm.dao.usersDAO;
 import java5.asm.model.CCCD;
 import java5.asm.model.phongtro;
 import java5.asm.model.taikhoan;
@@ -13,24 +10,19 @@ import java5.asm.services.NotificationService;
 import java5.asm.services.SessionService;
 import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class CensorController {
+
     @Autowired
     HttpServletRequest req;
     @Autowired
@@ -40,45 +32,16 @@ public class AdminController {
     @Autowired
     CookieService cookieService;
     @Autowired
-    usersDAO usersDAO;
+    java5.asm.dao.usersDAO usersDAO;
     @Autowired
-    CCCDDao CCCDDao;
+    java5.asm.dao.CCCDDao CCCDDao;
     @Autowired
-    phongtroDAO phongtroDAO;
+    java5.asm.dao.phongtroDAO phongtroDAO;
     @Autowired
     AuthUtils authUtils;
     @Autowired
     NotificationService notificationService;
 
-    private int FIRST_PAGE_NUMBER = 0;
-    private int NUMBER_OF_ITEM_PER_PAGE = 10;
-
-    @RequestMapping("/home")
-    public String home(Model model,
-                       @RequestParam("page") Optional<Integer> page,
-                       @RequestParam("field") Optional<String> field) {
-        taikhoan currentUser = authUtils.getCurrentUser();
-        model.addAttribute("user", currentUser);
-        int currentPage = page.orElse(FIRST_PAGE_NUMBER);
-        String sortField = field.orElse("tentaikhoan");
-        if (sortField.isEmpty()) {
-            sortField = "tentaikhoan";
-        }
-        Sort sort = Sort.by(Sort.Direction.ASC, sortField);
-        Pageable pageable;
-        if (currentPage < FIRST_PAGE_NUMBER) {
-            pageable = PageRequest.of(usersDAO.findAll(PageRequest.of(0, NUMBER_OF_ITEM_PER_PAGE)).getTotalPages() - 1, NUMBER_OF_ITEM_PER_PAGE, sort);
-        } else if (currentPage >= usersDAO.findAll(PageRequest.of(0, NUMBER_OF_ITEM_PER_PAGE)).getTotalPages()) {
-            pageable = PageRequest.of(FIRST_PAGE_NUMBER, NUMBER_OF_ITEM_PER_PAGE, sort);
-        } else {
-            pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE, sort);
-        }
-        Page<taikhoan> pages = usersDAO.findAll(pageable);
-        model.addAttribute("pages", pages);
-        addNotifications(model);
-
-        return "admin/index";
-    }
 
     @RequestMapping("/kiemduyet")
     public String kiemDuyet(Model model) {
@@ -106,7 +69,7 @@ public class AdminController {
     }
 
     @RequestMapping("/kiemduyet/cccd/{tentaikhoan}/accept")
-    public String kiemDuyetDetailAccept(Model model, @PathVariable String tentaikhoan) {
+    public String kiemDuyetDetailAccept(Model model, @PathVariable String tentaikhoan, RedirectAttributes ra) {
         taikhoan currentUser = authUtils.getCurrentUser();
         model.addAttribute("user", currentUser);
         addNotifications(model);
@@ -120,12 +83,12 @@ public class AdminController {
         CCCDDao.save(cccd);
 
         notificationService.notifyUser(user, "CCCD của bạn đã được duyệt");
-
+        notificationService.addNotiBox(ra, "CCCD đã được duyệt");
         return "redirect:/admin/kiemduyet";
     }
 
     @RequestMapping("/kiemduyet/cccd/{tentaikhoan}/reject")
-    public String kiemDuyetDetailReject(Model model, @PathVariable String tentaikhoan) {
+    public String kiemDuyetDetailReject(Model model, @PathVariable String tentaikhoan, RedirectAttributes ra) {
         taikhoan currentUser = authUtils.getCurrentUser();
         model.addAttribute("user", currentUser);
         addNotifications(model);
@@ -137,6 +100,7 @@ public class AdminController {
         usersDAO.save(user);
         CCCDDao.delete(cccd);
         notificationService.notifyUser(user, "CCCD của bạn đã bị từ chối");
+        notificationService.addNotiBox(ra, "CCCD đã bị từ chối");
         return "redirect:/admin/kiemduyet";
     }
 
@@ -157,7 +121,7 @@ public class AdminController {
     }
 
     @RequestMapping("/kiemduyet/baidang/{maphong}/accept")
-    public String kiemduyetPostDetailAccept(Model model, @PathVariable String maphong) {
+    public String kiemduyetPostDetailAccept(Model model, @PathVariable String maphong, RedirectAttributes ra) {
         taikhoan currentUser = authUtils.getCurrentUser();
         model.addAttribute("user", currentUser);
         addNotifications(model);
@@ -171,18 +135,19 @@ public class AdminController {
         phongtroDAO.save(post);
 
         notificationService.notifyUser(post.getTentaikhoan(), "Bài đăng của bạn đã được duyệt");
-
+        notificationService.addNotiBox(ra, "Bài đăng đã được duyệt");
         return "redirect:/admin/kiemduyet";
     }
 
     @RequestMapping("/kiemduyet/baidang/{maphong}/reject")
-    public String kiemduyetPostDetailReject(Model model, @PathVariable String maphong) {
+    public String kiemduyetPostDetailReject(Model model, @PathVariable String maphong, RedirectAttributes ra) {
         taikhoan currentUser = authUtils.getCurrentUser();
         model.addAttribute("user", currentUser);
         addNotifications(model);
 
         phongtro post = phongtroDAO.findById(maphong).orElse(null);
         if (post == null) {
+            notificationService.addNotiBox(ra, "Tài khoản không tồn tại");
             return "redirect:/admin/kiemduyet";
         }
 
@@ -190,20 +155,51 @@ public class AdminController {
         phongtroDAO.save(post);
 
         notificationService.notifyUser(post.getTentaikhoan(), "Bài đăng của bạn đã bị từ chối");
-
+        notificationService.addNotiBox(ra, "Bài đăng đã bị từ chối");
         return "redirect:/admin/kiemduyet";
     }
 
-    @ResponseBody
-    @RequestMapping("/kiemduyettest1")
-    public CCCD kiemDuyetTest1() {
-        return CCCDDao.findByTentaikhoan("khang");
+    @RequestMapping("/kiemduyet/seller/{tentaikhoan}/accept")
+    public String kiemduyetSellerAccept(Model model, @PathVariable String tentaikhoan, RedirectAttributes ra) {
+        taikhoan currentUser = authUtils.getCurrentUser();
+        model.addAttribute("user", currentUser);
+        addNotifications(model);
+
+        taikhoan user = usersDAO.findById(tentaikhoan).orElse(null);
+        if (user == null) {
+            notificationService.addNotiBox(ra, "Tài khoản không tồn tại");
+            return "redirect:/admin/kiemduyet";
+        }
+
+        if (user.getSeller() == taikhoan.UserSeller.WAITING_FREE) {
+            user.setSeller(taikhoan.UserSeller.FREE);
+        } else if (user.getSeller() == taikhoan.UserSeller.WAITING_PREMIUM) {
+            user.setSeller(taikhoan.UserSeller.PREMIUM);
+        }
+
+        usersDAO.save(user);
+        notificationService.notifyUser(user, "Tài khoản của bạn đã được duyệt");
+        notificationService.addNotiBox(ra, "Tài khoản đã được duyệt");
+        return "redirect:/admin/kiemduyet";
     }
 
-    @ResponseBody
-    @RequestMapping("/kiemduyettest")
-    public List<CCCD> kiemDuyetTest() {
-        return CCCDDao.findCCCDByUser(taikhoan.UserStatus.WAITING);
+    @RequestMapping("/kiemduyet/seller/{tentaikhoan}/reject")
+    public String kiemduyetSellerReject(Model model, @PathVariable String tentaikhoan, RedirectAttributes ra) {
+        taikhoan currentUser = authUtils.getCurrentUser();
+        model.addAttribute("user", currentUser);
+        addNotifications(model);
+
+        taikhoan user = usersDAO.findById(tentaikhoan).orElse(null);
+        if (user == null) {
+            notificationService.addNotiBox(ra, "Tài khoản không tồn tại");
+            return "redirect:/admin/kiemduyet";
+        }
+
+        user.setSeller(taikhoan.UserSeller.NONE);
+        usersDAO.save(user);
+        notificationService.notifyUser(user, "Tài khoản của bạn đã bị từ chối");
+        notificationService.addNotiBox(ra, "Tài khoản đã bị từ chối");
+        return "redirect:/admin/kiemduyet";
     }
 
     private void addNotifications(Model model) {
@@ -211,6 +207,7 @@ public class AdminController {
         model.addAttribute("waitingUsers", waitingUser);
         List<phongtro> waitingPost = phongtroDAO.findByTrangThai(phongtro.trangthai.Waiting);
         model.addAttribute("waitingPosts", waitingPost);
+        List<taikhoan> waitingSeller = usersDAO.findBySeller(taikhoan.UserSeller.WAITING_FREE, taikhoan.UserSeller.WAITING_PREMIUM);
+        model.addAttribute("waitingSellers", waitingSeller);
     }
-
 }

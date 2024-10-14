@@ -12,13 +12,13 @@
             <ul class="navbar-nav">
                 <li>
                     <div class="text-muted small fw-bold text-uppercase px-3">
-                        CORE
+                        Mục Chính
                     </div>
                 </li>
                 <li>
                     <a href="#" class="nav-link px-3 active">
                         <span class="me-2"><i class="fa-solid fa-torii-gate"></i></span>
-                        <span>Dashboard</span>
+                        <span>Trang Quản Lý</span>
                     </a>
                 </li>
                 <li class="my-4">
@@ -26,7 +26,7 @@
                 </li>
                 <li>
                     <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-                        Interface
+                        Mục Quản Lý
                     </div>
                 </li>
                 <li>
@@ -46,17 +46,17 @@
                     <div class="collapse" id="layouts">
                         <ul class="navbar-nav ps-3">
                             <li>
-                                <a href="#" class="nav-link px-3">
-                      <span class="me-2"
-                      ><i class="fa-regular fa-circle-dot"></i></span>
-                                    <span>Phòng trọ</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-3">
+                                <a href="user" class="nav-link px-3">
                       <span class="me-2"
                       ><i class="fa-regular fa-circle-dot"></i></span>
                                     <span>Người dùng</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="post" class="nav-link px-3">
+                      <span class="me-2"
+                      ><i class="fa-regular fa-circle-dot"></i></span>
+                                    <span>Bài đăng</span>
                                 </a>
                             </li>
                             <li>
@@ -87,7 +87,7 @@
                 </li>
                 <li>
                     <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
-                        Addons
+                        Mục khác
                     </div>
                 </li>
                 <li>

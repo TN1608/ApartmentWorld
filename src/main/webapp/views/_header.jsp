@@ -4,17 +4,17 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <html>
 <header>
-<%--    <div class="d-flex justify-content-end">--%>
-<%--        <div class="dropdown">--%>
-<%--            <a class="dropdown-toggle nav-link fs-6 p-1" href="#" role="button" data-bs-toggle="dropdown"--%>
-<%--               aria-expanded="false"><s:message code="header.mn.language"/>--%>
-<%--            </a>--%>
-<%--            <ul class="dropdown-menu">--%>
-<%--                <li><a class="dropdown-item" href="?lang=vi">Tiếng Việt</a></li>--%>
-<%--                <li><a class="dropdown-item" href="?lang=en">English</a></li>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
-<%--    </div>--%>
+    <%--    <div class="d-flex justify-content-end">--%>
+    <%--        <div class="dropdown">--%>
+    <%--            <a class="dropdown-toggle nav-link fs-6 p-1" href="#" role="button" data-bs-toggle="dropdown"--%>
+    <%--               aria-expanded="false"><s:message code="header.mn.language"/>--%>
+    <%--            </a>--%>
+    <%--            <ul class="dropdown-menu">--%>
+    <%--                <li><a class="dropdown-item" href="?lang=vi">Tiếng Việt</a></li>--%>
+    <%--                <li><a class="dropdown-item" href="?lang=en">English</a></li>--%>
+    <%--            </ul>--%>
+    <%--        </div>--%>
+    <%--    </div>--%>
     <div class="d-flex justify-content-end me-4">
         <span class="text-muted">Ngôn ngữ:</span><a href="?lang=vi" class="text-decoration-none">vi-VN</a>
         <span class="text-muted">|</span><a class="text-decoration-none" href="?lang=en" class="">en-US</a>
@@ -36,7 +36,7 @@
                 </a>
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item d-flex align-items-center ms-5">
-                        <a class="nav-link" href="#"><s:message code="header.mn.contact"/></a>
+                        <a class="nav-link" href="/test"><s:message code="header.mn.contact"/></a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
                         <a class="nav-link" href="#"><i class="bi bi-bag-fill text-success me-2"></i><s:message
@@ -48,6 +48,12 @@
                                aria-expanded="false">
                                 <i class="bi bi-bell-fill text-warning me-2"></i><s:message
                                     code="header.mn.notification"/>
+                                <c:if test="${not empty notifications}">
+                                    <span class="position-absolute translate-middle p-2 bg-danger border border-light rounded-circle"
+                                          style="left: 15%">
+                                   <span class="visually-hidden">New alerts</span>
+                                </span>
+                                </c:if>
                             </a>
                             <ul class="dropdown-menu p-2">
                                 <li>
@@ -61,8 +67,9 @@
                                         <c:forEach items="${notifications}" var="tb">
                                             <div class="d-flex flex-column ">
                                                 <label>${tb.message}</label>
-                                                <p>Vào lúc: <fmt:formatDate value="${tb.convertDate(tb.createAt)}"
-                                                                            pattern="dd/MM/yy hh:mm:ss a"/></p>
+                                                <label>Vào lúc: <fmt:formatDate value="${tb.convertDate(tb.createAt)}"
+                                                                                pattern="dd/MM/yy hh:mm:ss a"/></label>
+                                                <hr class="mt-1 mb-2"/>
                                             </div>
                                         </c:forEach>
                                         <label class="make-read d-flex justify-content-end">
@@ -136,3 +143,9 @@
         </div>
     </nav>
 </header>
+<%--noti box--%>
+<div class="notiBox" id="notificationBox">
+    <span id="notiBoxMessage">${notiBox}</span>
+    <button class="close-notiBox" id="closeNotiBox">&times;</button>
+    <div class="notiBox-progress-bar" id="notiBoxProgressBar"></div>
+</div>

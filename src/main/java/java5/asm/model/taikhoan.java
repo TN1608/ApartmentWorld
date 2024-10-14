@@ -103,7 +103,8 @@ public class taikhoan implements Serializable {
 
     public enum UserSeller {
         NONE,
-        WAITING,
+        WAITING_FREE,
+        WAITING_PREMIUM,
         FREE,
         PREMIUM,
     }

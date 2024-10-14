@@ -56,3 +56,22 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("Element with ID 'readAllNotifications' not found.");
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const notificationBox = document.getElementById('notificationBox');
+    const notificationMessage = document.getElementById('notiBoxMessage');
+    const progressBar = document.getElementById('notiBoxProgressBar');
+    const closeBtn = document.getElementById('closeNotiBox');
+
+    if (notificationMessage.textContent.trim() !== '') {
+        notificationBox.style.display = 'block';
+        progressBar.style.animation = 'progress 5s linear forwards';
+        setTimeout(function () {
+            notificationBox.style.display = 'none';
+        }, 6000);
+    }
+
+    closeBtn.addEventListener('click', function () {
+        notificationBox.style.display = 'none';
+    });
+});

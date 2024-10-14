@@ -14,4 +14,8 @@ public interface usersDAO extends JpaRepository<taikhoan, String> {
 
     @Query("SELECT u FROM taikhoan u WHERE u.status = ?1")
     List<taikhoan> findByStatus(taikhoan.UserStatus status);
+
+
+    @Query("SELECT u FROM taikhoan u WHERE u.seller = ?1 or u.seller = ?2")
+    List<taikhoan> findBySeller(taikhoan.UserSeller seller, taikhoan.UserSeller seller2);
 }

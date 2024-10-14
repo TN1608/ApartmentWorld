@@ -23,7 +23,7 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <%--    custom css--%>
     <link rel="stylesheet" href="/css/admin/style.css">
-
+    <script src="/js/admin/app.js"></script>
 </head>
 <body>
 <jsp:include page="_header.jsp"/>
