@@ -86,6 +86,7 @@
             }
         }
     </style>
+    <script src="/js/error/app.js"></script>
 </head>
 <body>
 <main>
@@ -295,7 +296,7 @@
     </svg>
 
     <p id="errorText">O-o-oh! Something broke.</p>
-    <a id="errorLink" href="/">Go Back</a>
+    <a id="errorLink" href="">Go Back</a>
 </main>
 </main>
 
