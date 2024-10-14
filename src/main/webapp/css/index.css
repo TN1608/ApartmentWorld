@@ -111,3 +111,219 @@ body{
 .about{
     padding: 1em;
 }
+.btn-detail{
+    font-weight: bold;
+    background-color: #F3C623;
+    color: #10375C;
+    border: 1px solid #F3C623;
+    transition: 0.2s ease;
+}
+.btn-detail:hover{
+    font-weight: bold;
+    background-color: #EB8317;
+    color: #F4F6FF;
+    border: 1px solid #EB8317;
+    transition: 0.2s ease;
+}
+/* Style for the filter button */
+.btn-option {
+    background-color: #f8f9fa; /* Light background */
+    border: 2px solid #343a40; /* Dark border for contrast */
+    color: #343a40; /* Dark text */
+    padding: 8px 15px; /* Adjust padding for a balanced look */
+    border-radius: 30px; /* Rounded corners */
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-option:hover {
+    background-color: #343a40;
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.bi-sliders2 {
+    font-size: 1.2rem;
+}
+
+.option .offcanvas-start {
+    background-color: #ffffff;
+    border-right: 2px solid #343a40;
+}
+
+.option .offcanvas-header {
+    background-color: #343a40;
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
+}
+
+.option .offcanvas-body {
+    padding: 20px;
+    font-size: 1rem;
+    color: #495057;
+}
+
+.btn-close {
+    color: #ffffff;
+}
+
+.btn-close:hover {
+    color: #dc3545;
+}
+.option .form-check-label {
+    font-size: 1rem;
+}
+.option .form-label{
+    font-size: 1rem;
+    font-weight: bold;
+}
+/* General form styles */
+.sortPice .form-group {
+    margin-bottom: 20px;
+}
+
+.sortPice .form-label {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+    color: #333;
+}
+
+/* Style for input fields */
+.sortPice .form-control {
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #ced4da; /* Light gray border */
+    padding: 10px; /* Add some padding */
+    font-size: 14px; /* Text size */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.sortPice .form-control:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Green glow on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Button styling */
+.sortPice .btn-primary {
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 14px; /* Text size */
+    font-weight: bold;
+    color: #fff; /* White text */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 100%; /* Full width button */
+}
+
+.sortPice .btn-primary:hover {
+    background-color: #45A049; /* Darker green on hover */
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3); /* Add shadow on hover */
+}
+
+.sortPice .btn-primary:active {
+    background-color: #388E3C; /* Even darker green on click */
+    box-shadow: none; /* Remove shadow on click */
+}
+
+/* Container styling */
+.sortPice .d-flex {
+    display: flex;
+    gap: 10px; /* Add space between inputs */
+    justify-content: space-between;
+}
+
+.sortPice .mx-2 {
+    flex: 1; /* Make the inputs take equal space */
+}
+
+/* Adjustments for mobile */
+@media (max-width: 768px) {
+    .sortPice .d-flex {
+        flex-direction: column; /* Stack inputs vertically on small screens */
+        gap: 15px;
+    }
+
+    .sortPice .btn-primary {
+        width: 100%; /* Full width button on mobile */
+    }
+}
+
+/* General form styles */
+.filterTinhTrang .form-group {
+    margin-bottom: 20px;
+}
+
+.filterTinhTrang .form-label {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+    color: #333;
+}
+
+/* Dropdown (select) styling */
+.filterTinhTrang .form-control {
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #ced4da; /* Light gray border */
+    padding: 10px; /* Add some padding */
+    font-size: 14px; /* Text size */
+    background-color: #fff;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+}
+
+.filterTinhTrang .form-control:focus {
+    border-color: #4CAF50; /* Green border on focus */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Green glow on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Dropdown arrow styling */
+.filterTinhTrang .form-control::after {
+    content: '\25BC'; /* Down arrow */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Button styling */
+.filterTinhTrang .btn-primary {
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 14px; /* Text size */
+    font-weight: bold;
+    color: #fff; /* White text */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 100%; /* Full width button */
+}
+
+.filterTinhTrang .btn-primary:hover {
+    background-color: #45A049; /* Darker green on hover */
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3); /* Add shadow on hover */
+}
+
+.filterTinhTrang .btn-primary:active {
+    background-color: #388E3C; /* Even darker green on click */
+    box-shadow: none; /* Remove shadow on click */
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .filterTinhTrang .form-group {
+        margin-bottom: 15px;
+    }
+
+    .filterTinhTrang .btn-primary {
+        width: 100%; /* Full width button on mobile */
+    }
+}
