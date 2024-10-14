@@ -73,7 +73,7 @@
                         </c:forEach>
                         <c:forEach var="post" items="${waitingPosts}">
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/admin/kiemduyet">
                                     Bài đăng ${post.tenphong} đợi duyệt
                                 </a>
                             </li>
@@ -81,7 +81,7 @@
 
                         <c:forEach var="user" items="${waitingSellers}">
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/admin/kiemduyet">
                                         ${user.tentaikhoan} đợi duyệt người bán
                                 </a>
                             </li>
@@ -117,3 +117,9 @@
     </div>
 </nav>
 <%--Navbar--%>
+<%--Notification Box--%>
+<div class="notiBox" id="notificationBox">
+    <span id="notiBoxMessage">${notiBox}</span>
+    <button class="close-notiBox" id="closeNotiBox">&times;</button>
+    <div class="notiBox-progress-bar" id="notiBoxProgressBar"></div>
+</div>

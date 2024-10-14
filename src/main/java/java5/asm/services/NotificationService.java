@@ -8,6 +8,7 @@ import java5.asm.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -48,5 +49,13 @@ public class NotificationService {
             notification.setIsRead(true);
             nDAO.save(notification);
         }
+    }
+
+    public void addNotiBox(RedirectAttributes ra, String message) {
+        ra.addFlashAttribute("notiBox", message);
+    }
+
+    public void addNotiBox(Model model, String message) {
+        model.addAttribute("notiBox", message);
     }
 }

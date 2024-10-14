@@ -41,3 +41,77 @@ header .dropdown:hover > .dropdown-menu {
     text-decoration: none;
     background: none;
 }
+
+/*NOTI BOX*/
+.notiBox {
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    background-color: #f5f5f5;
+    color: #000000;
+    padding: 15px;
+    border-radius: 5px;
+    border: gray 2px solid;
+    display: none;
+    z-index: 1000;
+    min-width: 200px;
+    animation: slide-in 0.7s ease-out forwards, slide-out 1.2s 5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    overflow: hidden;
+}
+
+.close-notiBox {
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 1.5em;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+.notiBox span {
+    padding-right: 10px;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(150%);
+        opacity: 0;
+    }
+}
+
+.notiBox-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    background-color: gray;
+    width: 100%;
+    animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
