@@ -9,27 +9,27 @@
                     Discover your next home with us. High-quality apartments, simple search, and fast connections.
                 </p>
                 <ul class="list-inline mt-4">
-                    <li class="list-inline-item">
+                    <li class="list-inline-item pb-1">
                         <a href="#" class="btn btn-floating btn-light" style="background-color: #3b5998;">
                             <i class="bi bi-facebook"></i>
                         </a>
                     </li>
-                    <li class="list-inline-item">
+                    <li class="list-inline-item pb-1">
                         <a href="#" class="btn btn-floating btn-light" style="background-color: #55acee;">
                             <i class="bi bi-twitter"></i>
                         </a>
                     </li>
-                    <li class="list-inline-item">
+                    <li class="list-inline-item pb-1">
                         <a href="#" class="btn btn-floating btn-light" style="background-color: #dd4b39;">
                             <i class="bi bi-google"></i>
                         </a>
                     </li>
-                    <li class="list-inline-item">
+                    <li class="list-inline-item pb-1">
                         <a href="#" class="btn btn-floating btn-light" style="background-color: #ac2bac;">
                             <i class="bi bi-instagram"></i>
                         </a>
                     </li>
-                    <li class="list-inline-item">
+                    <li class="list-inline-item pb-1">
                         <a href="#" class="btn btn-floating btn-light" style="background-color: #007bb5;">
                             <i class="bi bi-linkedin"></i>
                         </a>
