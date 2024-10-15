@@ -66,19 +66,13 @@ public class WishlistController {
             if (!wishlists.contains(tro.getMaphong())) {
                 wishlists.add(tro.getMaphong());
             }
-
+            notificationService.addNotiBox(ra, "Lưu bài tin thành công!");
 //            sessionService.set("wishlists", wishlists);  // Update the session
-            taikhoan user = AuthUtils.getCurrentUser();
-            Wishlist existingWishlist = wishlistDAO.findByTentaikhoanAndMaphong(user.getTentaikhoan(), tro.getMaphong());
-            if (existingWishlist == null) {
-                Wishlist wishlist = new Wishlist();
-                wishlist.setMaphong(tro);
-                wishlist.setTentaikhoan(user);
-                wishlistDAO.save(wishlist);
-                notificationService.addNotiBox(ra, "Lưu bài tin và yêu thích thành công!");
-            } else {
-                notificationService.addNotiBox(ra, "Phòng trọ đã có trong danh sách yêu thích!");
-            }
+            Wishlist wishlist = new Wishlist();
+            wishlist.setMaphong(tro);
+            wishlist.setTentaikhoan(AuthUtils.getCurrentUser());
+            wishlistDAO.save(wishlist);
+            model.addAttribute("wishlists", tro);
         }
         return "redirect:/wishlists";
     }
