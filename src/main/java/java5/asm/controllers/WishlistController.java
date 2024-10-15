@@ -66,13 +66,19 @@ public class WishlistController {
             if (!wishlists.contains(tro.getMaphong())) {
                 wishlists.add(tro.getMaphong());
             }
-            notificationService.addNotiBox(ra, "Lưu bài tin thành công!");
+
 //            sessionService.set("wishlists", wishlists);  // Update the session
-            Wishlist wishlist = new Wishlist();
-            wishlist.setMaphong(tro);
-            wishlist.setTentaikhoan(AuthUtils.getCurrentUser());
-            wishlistDAO.save(wishlist);
-            model.addAttribute("wishlists", tro);
+            taikhoan user = AuthUtils.getCurrentUser();
+            Wishlist existingWishlist = wishlistDAO.findByTentaikhoanAndMaphong(user.getTentaikhoan(), tro.getMaphong());
+            if (existingWishlist == null) {
+                Wishlist wishlist = new Wishlist();
+                wishlist.setMaphong(tro);
+                wishlist.setTentaikhoan(user);
+                wishlistDAO.save(wishlist);
+                notificationService.addNotiBox(ra, "Lưu bài tin thành công!");
+            } else {
+                notificationService.addNotiBox(ra, "Phòng trọ đã có trong danh sách yêu thích!");
+            }
         }
         return "redirect:/wishlists";
     }
@@ -82,17 +88,12 @@ public class WishlistController {
     public String RemovefromList(Model model,
                                  @RequestParam("id") String maphong,
                                  RedirectAttributes ra) {
-        List<String> wishlists = sessionService.get("wishlists");
-        if (wishlists != null) {
-            wishlists.remove(maphong);
-            notificationService.addNotiBox(ra, "Xóa bài tin khỏi yêu thích thành công!");
-//            sessionService.set("wishlists", wishlists);  // Update the session
-            taikhoan user = AuthUtils.getCurrentUser();
-            phongtro tro = troDAO.findById(maphong).get();
+        taikhoan user = AuthUtils.getCurrentUser();
+        phongtro tro = troDAO.findById(maphong).orElse(null);
             if (user != null && tro != null) {
+                notificationService.addNotiBox(ra, "Xóa bài tin thành công!");
                 wishlistDAO.deleteByTentaikhoanAndMaphong(user, tro);
             }
-        }
         return "redirect:/wishlists";
     }
 }

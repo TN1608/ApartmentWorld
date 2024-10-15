@@ -54,8 +54,8 @@
                             </div>
                             <a href="/productdetail" class="btn btn-primary">Xem chi tiết</a>
                             <a href="/wishlists/remove?id=${item.maphong.maphong}"
-                               class="btn wishlist-link wishlist-btn"><i
-                                    class="bi bi-suit-heart-fill text-danger"></i></a>
+                               class="btn wishlist-btn"><i class="bi bi-suit-heart-fill" id="remove-icon-${item.maphong.maphong}"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
