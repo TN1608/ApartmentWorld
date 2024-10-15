@@ -62,3 +62,11 @@ body{
     color: #fff;
     cursor: pointer;
 }
+.wishlist-btn .bi-suit-heart-fill {
+    color: red;
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.wishlist-btn:hover .bi-suit-heart {
+    color: red; /* Change color on hover */
+}

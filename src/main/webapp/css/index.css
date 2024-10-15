@@ -58,6 +58,13 @@ body {
     max-height: 100%;
     max-width: 100%;
 }
+.wishlist-link .bi-heart {
+    transition: color 0.3s ease;
+}
+
+.wishlist-link:hover .bi-heart {
+    color: red;
+}
 
 .section2 .carousel-control-prev, .section2 .carousel-control-next {
     background-color: #e1e1e1;

@@ -75,6 +75,19 @@ document.addEventListener('DOMContentLoaded', function () {
     closeBtn.addEventListener('click', function () {
         notificationBox.style.display = 'none';
     });
+    document.querySelectorAll('.wishlist-link').forEach(link => {
+        link.addEventListener('mouseover', function() {
+            const icon = this.querySelector('i');
+            icon.classList.remove('bi-heart');
+            icon.classList.add('bi-heart-fill');
+        });
+
+        link.addEventListener('mouseout', function() {
+            const icon = this.querySelector('i');
+            icon.classList.remove('bi-heart-fill');
+            icon.classList.add('bi-heart');
+        });
+    });
 });
 
 // document.addEventListener('DOMContentLoaded', function () {

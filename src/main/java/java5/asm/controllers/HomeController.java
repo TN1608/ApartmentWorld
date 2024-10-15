@@ -55,6 +55,7 @@ public class HomeController {
         }
         return tinhtrangOptions;
     }
+
     @GetMapping("")
     public String index() {
         return "redirect:/home";
@@ -77,7 +78,7 @@ public class HomeController {
             pageIndex = 0;
         }
         Pageable pageable = PageRequest.of(pageIndex, 8);
-        Page<phongtro> page = phongtroDAO.findByKeywords("%" + kw + "%", pageable);
+        Page<phongtro> page = phongtroDAO.findByKeywords(kw, pageable);
         model.addAttribute("items", page);
         if (user != null) {
             model.addAttribute("user", user);
@@ -113,6 +114,7 @@ public class HomeController {
         }
         return "redirect:/home";
     }
+
     @GetMapping("/home/filter")
     public String filterByTinhTrang(Model model,
                                     @RequestParam("tinhTrang") String tinhTrang,

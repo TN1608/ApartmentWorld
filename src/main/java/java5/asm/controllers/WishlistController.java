@@ -75,7 +75,7 @@ public class WishlistController {
                 wishlist.setMaphong(tro);
                 wishlist.setTentaikhoan(user);
                 wishlistDAO.save(wishlist);
-                notificationService.addNotiBox(ra, "Lưu bài tin và yêu thích thành công!");
+                notificationService.addNotiBox(ra, "Lưu bài tin thành công!");
             } else {
                 notificationService.addNotiBox(ra, "Phòng trọ đã có trong danh sách yêu thích!");
             }
@@ -88,17 +88,12 @@ public class WishlistController {
     public String RemovefromList(Model model,
                                  @RequestParam("id") String maphong,
                                  RedirectAttributes ra) {
-        List<String> wishlists = sessionService.get("wishlists");
-        if (wishlists != null) {
-            wishlists.remove(maphong);
-            notificationService.addNotiBox(ra, "Xóa bài tin khỏi yêu thích thành công!");
-//            sessionService.set("wishlists", wishlists);  // Update the session
-            taikhoan user = AuthUtils.getCurrentUser();
-            phongtro tro = troDAO.findById(maphong).get();
+        taikhoan user = AuthUtils.getCurrentUser();
+        phongtro tro = troDAO.findById(maphong).orElse(null);
             if (user != null && tro != null) {
+                notificationService.addNotiBox(ra, "Xóa bài tin thành công!");
                 wishlistDAO.deleteByTentaikhoanAndMaphong(user, tro);
             }
-        }
         return "redirect:/wishlists";
     }
 }

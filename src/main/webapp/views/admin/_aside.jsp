@@ -67,7 +67,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-3">
+                                <a href="revenue" class="nav-link px-3">
                       <span class="me-2"
                       ><i class="fa-regular fa-circle-dot"></i></span>
                                     <span>Doanh thu</span>
