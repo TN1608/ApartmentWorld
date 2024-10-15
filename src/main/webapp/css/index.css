@@ -94,10 +94,31 @@ body {
 
 .section3 .card img {
     border-radius: 0;
-    max-height: 15em;
+    max-height: 12.75em;
     max-width: 100%;
 }
+.section3 .wishlist-link {
+    top: 10px;
+    right: 10px;
+    padding: 3px;
+    background-color: rgba(255, 255, 255, 0.7);
+    color:red;
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+}
 
+.section3 .wishlist-link i {
+    font-size: 20px;
+}
+
+.section3 .wishlist-link:hover {
+    background-color: #ffffff;
+    cursor: pointer;
+}
 .section3 .card {
     margin-right: 1em;
     margin-bottom: 1em;
@@ -105,10 +126,8 @@ body {
     border-radius: 0;
     border: 1px solid #e1e1e1;
     cursor: pointer;
-    border-radius: 0;
     transition: 0.2s ease;
 }
-
 .section3 .card:hover {
     box-shadow: 2px 6px 8px 8px rgba(22, 22, 26, 0.18);
     transition: 0.2s ease-in-out;

@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
 document.addEventListener('DOMContentLoaded', function () {
     const notificationBox = document.getElementById('notificationBox');
     const notificationMessage = document.getElementById('notiBoxMessage');

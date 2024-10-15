@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -27,19 +29,34 @@
         <div class="row ps-3 wishlist-content">
             <h4 class="fw-bold">Tin đăng đã lưu</h4>
             <hr>
-            <div class="card">
-                <img src="../images/phongtro/10.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <div class="text-section">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <c:if test="${not empty wishlists}">
+                <c:forEach var="item" items="${wishlists}">
+                    <div class="card">
+                        <img src="../../images/phongtro/${item.anh[0]}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <div class="text-section">
+                                <h5 class="card-title">${item.tenphong}</h5>
+                                <p class="card-text">
+                                    <span><i class="bi bi-geo-alt me-2"></i>Địa chỉ: ${item.diachi}</span><br>
+                                    <span><i class="bi bi-justify me-2"></i>Tình trạng: ${item.tinhtrang.getDescription()}</span><br>
+                                    <span><i class="bi bi-bounding-box me-2"></i>Diện tích: ${item.dientich}m<sup>2</sup></span>
+                                    <p class="text-warning fw-bold">Tiền cọc: <fmt:formatNumber value="${item.tiencoc}" pattern="#,##0"/>đ</p>
+                                </p>
+                            </div>
+                            <div class="cta-section">
+                                <div class=""><p class="text-danger fw-bold"><fmt:formatNumber value="${item.giaphong}" pattern="#,##0"/> đ/tháng</p></div>
+                                <a href="/productdetail" class="btn btn-primary">Xem chi tiết</a>
+                                <a href="/wishlists/remove?id=${item.maphong}" class="btn wishlist-btn"><i class="bi bi-suit-heart-fill text-danger"></i></a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="cta-section">
-                        <div class="">$129.00</div>
-                    <a href="#" class="btn wishlist-btn"><i class="bi bi-suit-heart-fill text-danger"></i></a>
-                    </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty wishlists}">
+                <div class="alert alert-warning" role="alert">
+                    Bạn chưa lưu tin đăng nào
                 </div>
-            </div>
+            </c:if>
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center d-flex">

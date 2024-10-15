@@ -3,6 +3,7 @@ package java5.asm.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Nationalized;
 
 import java.io.Serializable;
@@ -46,6 +47,7 @@ public class CCCD implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "tentaikhoan")
+    @EqualsAndHashCode.Exclude
     private taikhoan taikhoan;
 
     @Column(name = "ngaythem")

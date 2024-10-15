@@ -83,7 +83,7 @@
                         </div>
                     </li>
                     <c:if test="${not empty user}">
-                        <li class="nav-item d-flex align-items-center">
+                        <li class="nav-item d-flex align-items-center cDropDown">
                             <div class="dropdown">
                                 <a class="dropdown-toggle nav-link d-block justify-content-center" href="/user"
                                    role="button" data-bs-toggle="dropdown"
@@ -99,23 +99,38 @@
                                     </c:choose>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/user"><s:message
-                                            code="header.mn.profile"/></a></li>
+                                    <li class="dropdown-header">Tiện ích</li>
+                                    <li><a class="dropdown-item" href="/wishlists"><s:message code="header.mn.wishlist" /></a></li>
+                                    <li><a class="dropdown-item" href="/dang-tin"><s:message code="header.mn.addPost"/></a></li>
+                                    <li class="dropdown-header">Dịch vụ trả phí</li>
+                                    <li><a class="dropdown-item" href="user/settings/payment-history"><s:message code="header.mn.paymentHistory"/></a></li>
                                     <c:if test="${user.status == 'APPROVED'}">
-                                        <li><a class="dropdown-item" href="/register-seller"><s:message
-                                                code="header.mn.registerSeller"/></a></li>
+                                        <li><a class="dropdown-item" href="/register-seller"><s:message code="header.mn.registerSeller"/></a></li>
                                     </c:if>
-                                    <li><a class="dropdown-item" href="/dang-tin"><s:message
-                                            code="header.mn.addPost"/></a></li>
-                                    <li><a class="dropdown-item" href="#"><s:message
-                                            code="header.mn.paymentHistory"/></a></li>
-                                    <li><a class="dropdown-item" href="/logout"><s:message code="header.mn.logout"/></a>
-                                    </li>
+                                    <li class="dropdown-header">Khác</li>
+                                    <li><a class="dropdown-item" href="/user"><s:message code="header.mn.profile"/></a></li>
+                                    <li><a class="dropdown-item" href="/reviewaboutme"><s:message code="header.mn.review"/></a></li>
+                                    <li><a class="dropdown-item" href="/logout"><s:message code="header.mn.logout"/></a></li>
                                     <c:if test="${user.vaitro}">
-                                        <hr>
-                                        <li><a class="dropdown-item" href="/admin/home"><s:message
-                                                code="header.mn.admin"/></a></li>
+                                        <li><a class="dropdown-item" href="/admin/home"><s:message code="header.mn.admin"/></a></li>
                                     </c:if>
+<%--                                    <li><a class="dropdown-item" href="/user"><s:message--%>
+<%--                                            code="header.mn.profile"/></a></li>--%>
+<%--                                    <c:if test="${user.status == 'APPROVED'}">--%>
+<%--                                        <li><a class="dropdown-item" href="/register-seller"><s:message--%>
+<%--                                                code="header.mn.registerSeller"/></a></li>--%>
+<%--                                    </c:if>--%>
+<%--                                    <li><a class="dropdown-item" href="/dang-tin"><s:message--%>
+<%--                                            code="header.mn.addPost"/></a></li>--%>
+<%--                                    <li><a class="dropdown-item" href="#"><s:message--%>
+<%--                                            code="header.mn.paymentHistory"/></a></li>--%>
+<%--                                    <li><a class="dropdown-item" href="/logout"><s:message code="header.mn.logout"/></a>--%>
+<%--                                    </li>--%>
+<%--                                    <c:if test="${user.vaitro}">--%>
+<%--                                        <hr>--%>
+<%--                                        <li><a class="dropdown-item" href="/admin/home"><s:message--%>
+<%--                                                code="header.mn.admin"/></a></li>--%>
+<%--                                    </c:if>--%>
                                 </ul>
                             </div>
                         </li>
@@ -124,7 +139,7 @@
                         <li class="nav-item d-flex align-items-center">
                             <div class="dropdown">
                                 <a class="dropdown-toggle nav-link d-block justify-content-center" href="/user"
-                                   role="button" data-bs-toggle="dropdows"
+                                   role="button" data-bs-toggle="dropdown"
                                    aria-expanded="false">
                                     <i class="fa-solid fa-user"></i>
                                     <span><s:message code="header.mn.account"/></span>

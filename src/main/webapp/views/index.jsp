@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="../js/app.js"></script>
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/index.css">
@@ -183,14 +184,19 @@
                 <c:forEach var="item" items="${items.content}">
                     <div class="col-3">
                         <div class="card">
-                            <img src="../../images/phongtro/${item.anh[0]}" class="card-img-top" alt="...">
+                            <div class="position-relative">
+                                <a href="/wishlists/add?id=${item.maphong}" class="wishlist-link position-absolute">
+                                    <i class="bi bi-heart" id="wishlist-icon-${item.maphong}"></i>
+                                </a>
+                                <img src="../../images/phongtro/${item.anh[0]}" class="card-img-top" alt="...">
+                            </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-10">
                                         <h7 class="card-title fw-bold">${item.tenphong}</h7>
-                                        <p class="card-text">
+                                        <p class="card-text m-0">
                                             <i class="bi bi-geo-alt"></i>
-                                            <span>${item.diachi}</span>
+                                            <span>${item.diachi}</span><br>
                                             <span>${item.tinhtrang.getDescription()}</span>
                                         <p class="text-danger fw-bold">Giá: <fmt:formatNumber value="${item.giaphong}" pattern="#,##0"/> đ/tháng</p>
                                         </p>

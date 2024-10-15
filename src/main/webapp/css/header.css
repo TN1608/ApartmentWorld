@@ -15,21 +15,21 @@ header .nav-item {
     margin-left: 0.5em;
 }
 
-header .nav-item a:hover {
-    font-weight: bold;
-    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
-    border-radius: .2em;
-}
+/*header .nav-item a:hover {*/
+/*    font-weight: bold;*/
+/*    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);*/
+/*    border-radius: .2em;*/
+/*}*/
 
 .searchbar {
     margin-left: 5.5em;
     margin-top: 1em;
 }
 
-header .dropdown:hover > .dropdown-menu {
-    display: block;
-    margin-top: .125rem;
-}
+/*header .dropdown:hover > .dropdown-menu {*/
+/*    display: block;*/
+/*    margin-top: .125rem;*/
+/*}*/
 
 .notifi {
     width: 250px;
@@ -114,4 +114,54 @@ header .dropdown:hover > .dropdown-menu {
     to {
         width: 0;
     }
+}
+/* Định dạng chung cho dropdown */
+.cDropDown .dropdown-menu {
+    background-color: #f8f9fa; /* Màu nền sáng */
+    border-radius: 5px; /* Bo góc mềm mại */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho dropdown */
+    padding: 0; /* Bỏ padding mặc định */
+}
+
+.cDropDown .dropdown-header {
+    font-size: 14px;
+    font-weight: bold;
+    color: #343a40; /* Màu đậm */
+    padding: 10px 20px; /* Khoảng cách đều trên dưới và trái phải */
+    background-color: #e9ecef; /* Màu nền nhạt hơn */
+    border-bottom: 1px solid #dee2e6; /* Đường kẻ dưới header */
+}
+
+.cDropDown .dropdown-item {
+    font-size: 16px;
+    padding: 10px 20px; /* Tạo không gian rộng cho mục */
+    color: #495057; /* Màu chữ tối */
+    transition: background-color 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+.cDropDown .dropdown-item:hover {
+    background-color: #007bff; /* Màu xanh khi hover */
+    color: white; /* Chữ trắng khi hover */
+}
+
+/* Hiệu ứng cho phần tử đang được chọn (active) */
+.cDropDown .dropdown-item:active {
+    background-color: #0056b3; /* Màu xanh đậm khi click */
+    color: white;
+}
+
+/* Bo góc cho mục đầu tiên và cuối cùng trong danh sách */
+.cDropDown .dropdown-menu li:first-child a {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.cDropDown .dropdown-menu li:last-child a {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Khoảng cách giữa các nhóm tiêu đề */
+.cDropDown .dropdown-header + .dropdown-item {
+    margin-top: 5px; /* Khoảng cách giữa tiêu đề và mục đầu tiên */
 }

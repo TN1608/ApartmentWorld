@@ -12,7 +12,9 @@ import org.hibernate.annotations.Nationalized;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -94,6 +96,15 @@ public class taikhoan implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "seller", nullable = false)
     private UserSeller seller = UserSeller.NONE;
+
+    @OneToMany(mappedBy = "tentaikhoan")
+    private Set<danhgia> danhgias = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "tentaikhoan")
+    private Set<hopdongthue> hopdongthues = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "tentaikhoan")
+    private Set<Notification> notifications = new LinkedHashSet<>();
 
     public enum UserStatus {
         NONE,

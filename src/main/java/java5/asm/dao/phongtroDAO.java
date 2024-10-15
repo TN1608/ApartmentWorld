@@ -20,6 +20,8 @@ public interface phongtroDAO extends JpaRepository<phongtro, String> {
     Page<phongtro>findByPriceBetween(int min, int max, Pageable pageable);
     @Query("Select p.maphong from phongtro p order by length(p.maphong) desc,p.maphong desc")
     String findTopByMaphong();
+    @Query("SELECT p.maphong FROM phongtro p WHERE p.maphong LIKE 'P%' ORDER BY p.maphong DESC")
+    List<String> findAllMaphong();
 
     @Query("SELECT p FROM phongtro p WHERE p.trangthai = ?1")
     List<phongtro> findByTrangThai(phongtro.trangthai trangthai);

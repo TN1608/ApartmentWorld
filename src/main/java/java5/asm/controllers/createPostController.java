@@ -6,6 +6,7 @@ import java5.asm.model.phongtro;
 import java5.asm.model.taikhoan;
 import java5.asm.services.NotificationService;
 import java5.asm.services.SessionService;
+import java5.asm.services.phongtroService;
 import java5.asm.utils.AuthUtils;
 import java5.asm.utils.EnumOptions;
 import java5.asm.utils.FileUtils;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 public class createPostController {
@@ -34,6 +36,8 @@ public class createPostController {
     @Autowired
     ServletContext context;
     @Autowired
+    phongtroService pService;
+    @Autowired
     private NotificationService notificationService;
 
     @ModelAttribute("tinhtrang")
@@ -45,7 +49,7 @@ public class createPostController {
         return tinhtrangOptions;
     }
 
-    @RequestMapping("/dang-tin")
+    @GetMapping("/dang-tin")
     public String handlePost(Model model,
                              @ModelAttribute("phongtro") phongtro phongtro) {
         taikhoan user = AuthUtils.getCurrentUser();
@@ -57,14 +61,14 @@ public class createPostController {
         return "user/createPost";
     }
 
-    public String getMaphong() {
-        Optional<String> optionalMaphong = Optional.ofNullable(phongtroDAO.findTopByMaphong());
-        if (optionalMaphong.isPresent()) {
-            int num = Integer.parseInt(optionalMaphong.get().replace("P", ""));
-            return "P" + (num + 1);
-        }
-        return "P1";
-    }
+//    public String getMaphong() {
+//        Optional<String> optionalMaphong = Optional.ofNullable(phongtroDAO.findTopByMaphong());
+//        if (optionalMaphong.isPresent()) {
+//            int num = Integer.parseInt(optionalMaphong.get().replace("P", ""));
+//            return "P" + (num + 1);
+//        }
+//        return "P1";
+//    }
 
     @RequestMapping("/dang-tin/tao-tin")
     public String createPost(Model model,
@@ -87,6 +91,7 @@ public class createPostController {
                     listAnh.add(FileUtils.uploadFile(image, uploadDirectory));
                 }
             }
+
             phongtro.setAnh(listAnh);
             phongtro.setTrangthai(java5.asm.model.phongtro.trangthai.Waiting);
         } catch (Exception e) {
@@ -94,7 +99,7 @@ public class createPostController {
             return "user/createPost";
         }
 
-        phongtro.setMaphong(getMaphong());
+        phongtro.setMaphong(pService.getMaPhong());
         phongtro.setTentaikhoan(user);
         phongtroDAO.save(phongtro);
         return "redirect:/user";
