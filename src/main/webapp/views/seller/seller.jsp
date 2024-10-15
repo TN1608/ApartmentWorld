@@ -60,15 +60,28 @@
                     Gói Premium
                 </div>
                 <div class="card-body">
-                    <h2 class="card-title">299,000 VND / tháng</h2>
-                    <p class="card-text">Dành cho người bán chuyên nghiệp</p>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">5% phí hoa hồng</li>
-                        <li class="list-group-item">Tối ưu tìm kiếm sản phẩm</li>
-                        <li class="list-group-item">Hỗ trợ 24/7</li>
-                    </ul>
-                    <a href="register-seller/premium" class="btn btn-success mt-4">Chọn gói</a>
-                    <a href="#" class="btn btn-warning">Hỗ trợ</a>
+<%--                    <h2 class="card-title">299,000 VND / tháng</h2>--%>
+<%--                    <p class="card-text">Dành cho người bán chuyên nghiệp</p>--%>
+<%--                    <ul class="list-group list-group-flush">--%>
+<%--                        <li class="list-group-item">5% phí hoa hồng</li>--%>
+<%--                        <li class="list-group-item">Tối ưu tìm kiếm sản phẩm</li>--%>
+<%--                        <li class="list-group-item">Hỗ trợ 24/7</li>--%>
+<%--                    </ul>--%>
+<%--                    <a href="register-seller/premium" class="btn btn-success mt-4">Chọn gói</a>--%>
+<%--                    <a href="#" class="btn btn-warning">Hỗ trợ</a>--%>
+                    <form action="/submitOrder" method="post">
+                        <label class="form-label" for="amount">Số tiền</label>
+                        <input type="number" class="form-control" id="amount" name="amount" required value="299000">
+                        <label for="orderInfo">Thông tin đơn hàng:</label>
+                        <input type="text" class="form-control" id="orderInfo" name="orderInfo" required value="Thanh toan goi premium">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">5% phí hoa hồng</li>
+                            <li class="list-group-item">Tối ưu tìm kiếm sản phẩm</li>
+                            <li class="list-group-item">Hỗ trợ 24/7</li>
+                        </ul>
+                        <button type="submit" class="btn btn-success mt-4">Chọn gói</button>
+                        <a href="#" class="btn btn-warning">Hỗ trợ</a>
+                    </form>
                 </div>
             </div>
         </div>

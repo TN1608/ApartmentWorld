@@ -45,7 +45,18 @@
                 <div class="col-sm-12">
                     <h4>Hình thức thanh toán</h4>
                 </div>
-
+                <div class="form-check">
+                    <input id="credit" class="form-check-input" type="radio" name="paymentMethod" value="credit" checked>
+                    <label class="form-check" for="credit">Thẻ tín dụng</label>
+                </div>
+                <div class="form-check">
+                    <input id="vnpay" class="form-check-input" type="radio" name="paymentMethod" value="vnpay">
+                    <label class="form-check" for="vnpay">VNPAY</label>
+                </div>
+                <div class="form-check">
+                    <input id="momo" class="form-check-input" type="radio" name="paymentMethod" value="momo">
+                    <label class="form-check" for="momo">Momo</label>
+                </div>
             </div>
         </form>
     </div>

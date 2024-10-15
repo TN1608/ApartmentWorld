@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +53,6 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">Mã thanh toán</th>
-                                        <th scope="col">Mã hợp đồng</th>
                                         <th scope="col">Số tiền</th>
                                         <th scope="col">Ngày thanh toán</th>
                                         <th scope="col">Hình thức thanh toán</th>
@@ -61,8 +61,7 @@
                                     <tbody>
                                     <c:forEach var="payment" items="${paymentHistory}">
                                         <td>${payment.id}</td>
-                                        <td>${payment.maHD.maHD}</td>
-                                        <td>${payment.sotien}</td>
+                                        <td><fmt:formatNumber value="${payment.sotien}" pattern="#,##0"/>VND</td>
                                         <td>${payment.ngaythanhtoan}</td>
                                         <td>${payment.hinhthucthanhtoan}</td>
                                         </tr>
