@@ -15,5 +15,9 @@ public interface WishlistDAO extends JpaRepository<Wishlist, Long> {
             "WHERE w.tentaikhoan.tentaikhoan = ?1")
     List<Wishlist> findByUser(String tentaikhoan);
 
+    @Query("SELECT w FROM Wishlist w " +
+            "WHERE w.tentaikhoan.tentaikhoan = ?1 and w.maphong.maphong = ?2")
+    Wishlist findByTentaikhoanAndMaphong(String tentaikhoan, String maphong);
+
     void deleteByTentaikhoanAndMaphong(taikhoan tentaikhoan, phongtro maphong);
 }
