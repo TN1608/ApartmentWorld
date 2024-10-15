@@ -107,16 +107,36 @@ public class taikhoan implements Serializable {
     private Set<Notification> notifications = new LinkedHashSet<>();
 
     public enum UserStatus {
-        NONE,
-        WAITING,
-        APPROVED,
+        NONE("Không"),
+        WAITING("Chờ duyệt"),
+        APPROVED("Đã duyệt");
+
+        private final String description;
+
+        UserStatus(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
     }
 
     public enum UserSeller {
-        NONE,
-        WAITING_FREE,
-        WAITING_PREMIUM,
-        FREE,
-        PREMIUM,
+        NONE("Không"),
+        WAITING_FREE("Chờ duyệt tài khoản miễn phí"),
+        WAITING_PREMIUM("Chờ duyệt tài khoản cao cấp"),
+        FREE("Tài khoản miễn phí"),
+        PREMIUM("Tài khoản cao cấp");
+
+        private final String description;
+
+        UserSeller(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
     }
 }

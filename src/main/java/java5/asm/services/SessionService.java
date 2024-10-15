@@ -13,6 +13,10 @@ public class SessionService {
         return (T) session.getAttribute(name);
     }
 
+    public <T> T get(String name, String defaultValue) {
+        return (T) session.getAttribute(name) == null ? (T) defaultValue : (T) session.getAttribute(name);
+    }
+
     public void set(String name, Object value) {
         session.setAttribute(name, value);
     }

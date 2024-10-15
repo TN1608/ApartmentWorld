@@ -64,3 +64,29 @@ document.addEventListener('DOMContentLoaded', function () {
         notificationBox.style.display = 'none';
     });
 });
+
+function toggleField(fieldId, buttonId) {
+    var field = document.getElementById(fieldId);
+    var button = document.getElementById(buttonId);
+    if (field.style.display === "none") {
+        field.style.display = "block";
+        button.style.display = "none";
+    } else {
+        field.style.display = "none";
+        button.style.display = "block";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var currentUrl = window.location.pathname;
+    var addUser = document.getElementById("addUser");
+    var editUser = document.getElementById("editUser");
+
+    if (currentUrl.includes("/user/add")) {
+        addUser.style.display = "block";
+        editUser.style.display = "none";
+    } else if (currentUrl.includes("/user/edit")) {
+        addUser.style.display = "none";
+        editUser.style.display = "block";
+    }
+});
