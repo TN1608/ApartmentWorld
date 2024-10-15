@@ -21,3 +21,5 @@ public interface WishlistDAO extends JpaRepository<Wishlist, Long> {
 
     void deleteByTentaikhoanAndMaphong(taikhoan tentaikhoan, phongtro maphong);
 }
+
+

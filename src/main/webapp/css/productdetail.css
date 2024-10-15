@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   margin: 0 auto;
 }
@@ -13,34 +14,36 @@ header {
 
 .product-container {
   display: flex;
-  justify-content: start;
-  align-items: start;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
   gap: 40px;
+  margin: 0 auto; /* Đảm bảo rằng nó ở giữa nếu có chiều rộng tối đa */
 }
 
-/* .img-card{
-    width: 40%;
-} */
 
-.img-card img {
-  width: 100%;
-  flex-shrink: 0;
-  border-radius: 4px;
-  height: 520px;
+.img-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Canh giữa theo chiều ngang */
+}
+
+.img-card img#featured-image {
+  width: 120%; /* Điều chỉnh lại kích thước của ảnh lớn nếu cần */
+  height: 480px; /* Chiều cao ảnh lớn */
   object-fit: cover;
+  border-radius: 10px; /* Thay đổi giá trị này để điều chỉnh độ bo góc */
 }
 
 .small-Card {
   display: flex;
-  justify-content: start;
-  align-items: center;
+  justify-content: center; /* Canh giữa các ảnh nhỏ */
   margin-top: 15px;
-  gap: 12px;
+  gap: 5px; /* Điều chỉnh khoảng cách giữa các ảnh nhỏ */
 }
 
 .small-Card img {
-  width: 104px;
-  height: 104px;
+  width: 80px; /* Giảm kích thước của hình nhỏ */
+  height: 80px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -49,13 +52,10 @@ header {
   border: 1px solid #17696a;
 }
 
-.sm-card {
-  border: 2px solid darkred;
-}
-
-.product-info{
+.product-info {
   width: 60%;
 }
+
 .product-info h3 {
   font-size: 32px;
   font-family: Lato;
@@ -134,148 +134,199 @@ hr {
 }
 
 .pagination {
-    color: #787a80;
-    margin: 15px 0;
-    cursor: pointer;
+  color: #787a80;
+  margin: 15px 0;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 576px) {
-  .product-container{
+  .product-container {
     flex-direction: column;
   }
-  .small-Card img{
+  .small-Card img {
     width: 80px;
   }
-  .product-info{
+  .product-info {
     width: 100%;
   }
- 
-  .product-info p{
+  .product-info p {
     width: 100%;
   }
-
-  .delivery{
+  .delivery {
     width: 100%;
   }
-
-  hr{
+  hr {
     width: 100%;
   }
 }
+
 /* productdetail section */
-.product-detail-container {
-    max-width: 800px; 
-    margin: 0 auto; 
-    padding: 20px;
-
-    text-align: center;
-}
-
-.product-detail-container h4 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333; 
-}
-
-.product-detail-container ul {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-.product-detail-container ul li {
-    font-size: 18px;
-    color: #555;
-    margin-bottom: 5px;
-}
-
-.product-detail-container button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.product-detail-container button:hover {
-    background-color: #0056b3;
-}
-
-/*  productdetail table */
-.product-detail-container .table {
-    width: 100%;
-    margin-top: 20px;
-    text-align: left;
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-.product-detail-container .table thead {
-    background-color: #007bff;
-    color: white;
-}
-
-.product-detail-container .table th, .table td {
-    padding: 10px 15px;
-    font-size: 16px;
-    border-bottom: 1px solid #ddd;
-}
-
-.product-detail-container .table tbody tr:last-child td {
-    border-bottom: none; 
-}
-/*  partner info */
-.partner-info {
-    margin-top: 30px;
+.property-listing {
+    max-width: 600px;
+    margin: 20px auto;
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.partner-info h5 {
-    font-size: 20px;
-    font-weight: 600;
+.property-listing h2 {
+    font-size: 24px;
     color: #333;
-    display: flex;
-    align-items: center;
+}
+
+.property-listing h3 {
+    font-size: 20px;
+    color: #ff4242;
+}
+
+.property-details p,
+.property-description p {
+    color: #555;
+}
+
+.property-features {
+    margin: 15px 0;
+}
+
+.property-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.property-features ul li {
+    background: #e9ecef;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* partner info */
+.partner-info {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.partner-info h5 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  align-items: center;
 }
 
 .partner-info p {
-    color: #777;
-    font-size: 14px;
-    margin-top: 5px;
+  color: #777;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 .partner-info a {
-    color: #007bff;
-    text-decoration: none;
+  color: #007bff;
+  text-decoration: none;
 }
 
 .partner-benefits {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
 }
 
 .partner-benefits li {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.partner-benefits li i {
+  margin-right: 10px;
+  color: #007bff;
+}
+
+.sm-card {
+  border: 2px solid darkred;
+}
+/* info */
+.contact-section {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-header {
     display: flex;
     align-items: center;
 }
 
-.partner-benefits li i {
-    margin-right: 10px;
-    color: #007bff;
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
 }
-.sm-card {
-    border: 2px solid darkred; 
+
+.contact-info h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.rating, .status {
+    margin: 5px 0;
+    color: #555;
+}
+
+.call-button, .chat-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.call-button {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+}
+
+.chat-button {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.inquiries {
+    margin-top: 10px;
+    color: #555;
+}
+
+.inquiries p {
+    margin: 5px 0;
+}
+.container {
+    position: relative; 
+}
+
+.in4 {
+    position: absolute; 
+    top: 0px; 
+    right: 20px; 
+    max-width: 300px; 
+    z-index: 1000; 
+    background-color: #f8f9fa; 
+    padding: 15px; 
+    border-radius: 8px; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
