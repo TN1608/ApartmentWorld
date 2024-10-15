@@ -148,7 +148,7 @@
                 <button formaction="add/send" id="addUser" type="submit" class="btn btn-dark btn-block">Thêm</button>
                 <div id="editUser">
                     <button formaction="/admin/user/delete/${taikhoan.tentaikhoan}" type="submit"
-                            class="btn btn-danger btn-block">Xóa
+                            class="btn btn-danger btn-block" onclick="return confirm('Xác nhận xóa ?')">Xóa
                     </button>
                     <button formaction="send/${taikhoan.tentaikhoan}" type="submit"
                             class="btn btn-dark btn-block">Sửa

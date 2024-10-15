@@ -9,7 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface phongtroDAO extends JpaRepository<phongtro, String> {
-    @Query("SELECT p FROM phongtro p WHERE p.tenphong like ?1")
+    @Query("SELECT p FROM phongtro p WHERE " +
+            "CAST(p.giaphong AS string) LIKE %?1% " +
+            "OR p.tenphong LIKE %?1% " +
+            "OR p.maphong LIKE %?1% " +
+            "OR p.diachi LIKE %?1% " +
+            "OR p.tentaikhoan.tentaikhoan LIKE %?1%")
     Page<phongtro> findByKeywords(String keywords, Pageable pageable);
 
     //    //Price
@@ -17,11 +22,14 @@ public interface phongtroDAO extends JpaRepository<phongtro, String> {
 //    Page<phongtro>findByPrice(int min, int max);
 //    //PriceBetween
     @Query("SELECT p FROM phongtro p WHERE p.giaphong BETWEEN ?1 AND ?2")
-    Page<phongtro>findByPriceBetween(int min, int max, Pageable pageable);
+    Page<phongtro> findByPriceBetween(int min, int max, Pageable pageable);
+
     @Query("Select p.maphong from phongtro p order by length(p.maphong) desc,p.maphong desc")
     String findTopByMaphong();
+
     @Query("SELECT p.maphong FROM phongtro p WHERE p.maphong LIKE 'P%' ORDER BY p.maphong DESC")
     List<String> findAllMaphong();
+
 
     @Query("SELECT p FROM phongtro p WHERE p.trangthai = ?1")
     List<phongtro> findByTrangThai(phongtro.trangthai trangthai);

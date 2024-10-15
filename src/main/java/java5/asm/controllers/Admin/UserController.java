@@ -79,10 +79,12 @@ public class UserController {
         }
 
         Sort sort = Sort.by(Sort.Direction.ASC, fieldParam);
+        int totalPages = usersDAO.findAll(PageRequest.of(0, NUMBER_OF_ITEM_PER_PAGE)).getTotalPages();
         Pageable pageable;
+
         if (currentPage < FIRST_PAGE_NUMBER) {
-            pageable = PageRequest.of(usersDAO.findAll(PageRequest.of(0, NUMBER_OF_ITEM_PER_PAGE)).getTotalPages() - 1, NUMBER_OF_ITEM_PER_PAGE, sort);
-        } else if (currentPage >= usersDAO.findAll(PageRequest.of(0, NUMBER_OF_ITEM_PER_PAGE)).getTotalPages()) {
+            pageable = PageRequest.of(totalPages - 1, NUMBER_OF_ITEM_PER_PAGE, sort);
+        } else if (currentPage >= totalPages) {
             pageable = PageRequest.of(FIRST_PAGE_NUMBER, NUMBER_OF_ITEM_PER_PAGE, sort);
         } else {
             pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE, sort);
@@ -146,7 +148,6 @@ public class UserController {
                                  @RequestParam("avatar") MultipartFile avatar) {
         var currentUser = authUtils.getCurrentUser();
         model.addAttribute("user", currentUser);
-        System.out.println(user.toString());
         if (user.getEmail().isEmpty() || user.getMatkhau().isEmpty()) {
             notificationService.addNotiBox(ra, "Vui lòng điền đầy đủ thông tin!");
             return "redirect:/admin/user/add";
