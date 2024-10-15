@@ -213,7 +213,8 @@
                                         Ngày đăng: <fmt:formatDate
                                             value="${item.convert(item.ngaytao)}"
                                             pattern="dd/MM/yyyy"/>
-                                        <a href="/productdetail=${item.maphong}" class="btn btn-detail w-100">Xem thêm</a>
+                                        <a href="/productdetail/${item.maphong}" class="btn btn-detail w-100">Xem thêm</a>
+
                                     </div>
                                 </div>
                             </div>

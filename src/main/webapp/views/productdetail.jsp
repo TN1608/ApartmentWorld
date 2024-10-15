@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!--    Bootstrap-->
+<!-- Bootstrap -->
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
 	integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -29,13 +29,17 @@
 		<section class="product-container">
 			<!-- left side -->
 			<div class="img-card">
-				<img src="/images/phongtro/${image}" alt="" id="featured-image">
+				<img src="/images/phongtro/${product.anh[0]}"
+					alt="${product.tenphong}" id="featured-image">
 				<div class="small-Card">
-					<img src="/images/phongtro/${image}" alt="" class="small-Img">
-
+					<c:forEach items="${product.anh}" var="img">
+						<img src="/images/phongtro/${img}" alt="${product.tenphong}"
+							class="small-Img">
+					</c:forEach>
 				</div>
 			</div>
 		</section>
+
 		<section class="property-listing">
 			<h2>${product.tenphong}</h2>
 			<!-- Tên phòng từ đối tượng sản phẩm -->
@@ -44,8 +48,8 @@
 			<div class="property-details">
 				<p>
 					<strong>Địa chỉ:</strong> ${product.diachi}
-					<!-- Địa chỉ từ đối tượng sản phẩm -->
 				</p>
+				<!-- Địa chỉ từ đối tượng sản phẩm -->
 			</div>
 			<div class="property-features">
 				<p>
@@ -54,7 +58,7 @@
 				<ul>
 					<li>Cho Thuê</li>
 					<li>Số tiền cọc: ${product.tiencoc} đ/tháng</li>
-					<li>Diện tích: ${product.dientich}</li>
+					<li>Diện tích: ${product.dientich} m²</li>
 					<li>Tình trạng nội thất: ${product.tinhtrang}</li>
 				</ul>
 			</div>
@@ -64,19 +68,19 @@
 				<!-- Mô tả từ đối tượng sản phẩm -->
 			</div>
 		</section>
+
 		<div class="in4">
 			<section class="contact-section">
 				<div class="contact-header">
-					<img src="${account.anhtaikhoan}"
-						alt="${account.firstname} ${account.lastname}"
-						class="profile-image">
+					<img src="${user.anhtaikhoan}"
+						alt="${user.firstname} ${user.lastname}" class="profile-image">
 					<div class="contact-info">
-						<h4>${account.firstname}${account.lastname}</h4>
+						<h4>${user.firstname}${user.lastname}</h4>
 						<p class="rating">4.7 (3) • 7 tin đăng</p>
 					</div>
 				</div>
-				<button class="call-button">Bấm để hiện SĐT
-					${account.sodienthoai}</button>
+				<button class="call-button">Bấm để hiện SĐT:
+					${user.sodienthoai}</button>
 				<button class="chat-button">Chat</button>
 			</section>
 
@@ -100,7 +104,6 @@
 				</ul>
 			</section>
 		</div>
-
 	</div>
 
 	<!-- script tags -->

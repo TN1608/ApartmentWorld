@@ -16,21 +16,21 @@ import java5.asm.model.taikhoan;
 @Controller
 public class productdetailController {
 
-	@Autowired
-	private phongtroDAO phongtroDAO; 
-	@Autowired
-	private usersDAO taikhoanDAO; 
+    @Autowired
+    private phongtroDAO phongtroDAO;
 
-	@RequestMapping("/productdetail/{maphong}")
-	public String showProductDetail(@PathVariable("maphong") String maphong, Model model) {
-		Optional<phongtro> productOpt = phongtroDAO.findById(maphong); 
-		if (productOpt.isPresent()) {
-			phongtro product = productOpt.get();
-			model.addAttribute("product", product); 
+    @Autowired
+    private usersDAO taikhoanDAO; 
 
-		} else {
-			model.addAttribute("error", "Sản phẩm không tồn tại.");
-		}
-		return "productdetail"; 
-	}
+    @RequestMapping("/productdetail/{maphong}")
+    public String showProductDetail(@PathVariable("maphong") String maphong, Model model) {
+        Optional<phongtro> productOpt = phongtroDAO.findById(maphong); 
+        if (productOpt.isPresent()) {
+            phongtro product = productOpt.get();
+            model.addAttribute("product", product);
+        } else {
+            model.addAttribute("error", "Sản phẩm không tồn tại.");
+        }
+        return "productdetail"; 
+    }
 }
