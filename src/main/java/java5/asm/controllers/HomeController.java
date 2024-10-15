@@ -9,6 +9,7 @@ import java5.asm.model.taikhoan;
 import java5.asm.services.CookieService;
 import java5.asm.services.NotificationService;
 import java5.asm.services.SessionService;
+import java5.asm.services.WishlistServices;
 import java5.asm.utils.AuthUtils;
 import java5.asm.utils.EnumOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class HomeController {
     AuthUtils authUtils;
     @Autowired
     NotificationService notificationService;
+    @Autowired
+    private WishlistServices wishlistServices;
+
 
     @ModelAttribute("tinhtrang")
     public List<EnumOptions> getTinhTrang() {
@@ -78,6 +82,7 @@ public class HomeController {
         if (user != null) {
             model.addAttribute("user", user);
             notificationService.addNotifications(model);
+            wishlistServices.addWishlistModel(model);
         }
         return "index";
     }

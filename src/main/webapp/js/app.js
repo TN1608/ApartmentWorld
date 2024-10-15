@@ -76,3 +76,27 @@ document.addEventListener('DOMContentLoaded', function () {
         notificationBox.style.display = 'none';
     });
 });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     document.querySelectorAll('.wishlist-link').forEach(function (link) {
+//         link.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             const url = this.getAttribute('href');
+//             console.log(url);
+//             fetch(url, {
+//                 method: 'GET',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 }
+//             }).then(response => {
+//                 if (response.ok) {
+//                     location.reload(); // Reload the current page
+//                 } else {
+//                     console.error('Failed to update wishlist');
+//                 }
+//             }).catch(error => {
+//                 console.error('Error:', error);
+//             });
+//         });
+//     });
+// });

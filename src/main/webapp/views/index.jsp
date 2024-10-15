@@ -22,7 +22,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+          rel="stylesheet">
     <script src="../js/app.js"></script>
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/index.css">
@@ -134,36 +135,41 @@
         <h5 class="fw-bold mb-2 pt-2 text-center">Phòng trọ cho thuê giá rẻ cập nhật 9/2024</h5>
         <hr>
         <div class="justify-content-end d-flex option">
-            <button class="btn btn-option" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="bi bi-sliders2 me-2"></i><span>Bộ lọc</span></button>
+            <button class="btn btn-option" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i
+                    class="bi bi-sliders2 me-2"></i><span>Bộ lọc</span></button>
 
-            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                 aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Lọc giá và thông tin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <p>
-<%--                    searchBar--%>
+                        <%--                    searchBar--%>
                     <form action="/home" class="w-100" method="get">
-                    <label class="form-label">Tìm kiếm</label>
+                        <label class="form-label">Tìm kiếm</label>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Nhập nội dung cần tìm" name="keywords"
                                    value="${keywords}">
                             <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Tìm kiếm</button>
                         </div>
                     </form>
-<%--                    SortGia--%>
+                    <%--                    SortGia--%>
                     <form class="sortPice w-100 mb-3" action="/home/sort" method="get">
                         <div class="form-group">
                             <label class="form-label">Chọn giá</label>
                             <div class="d-flex align-items-center">
-                                <input type="number" class="form-control mx-2" id="minPrice" name="minPrice" placeholder="Giá thấp nhất" value="${minPrice}">
-                                <input type="number" class="form-control mx-2" id="maxPrice" name="maxPrice" placeholder="Giá cao nhất" value="${maxPrice}">
+                                <input type="number" class="form-control mx-2" id="minPrice" name="minPrice"
+                                       placeholder="Giá thấp nhất" value="${minPrice}">
+                                <input type="number" class="form-control mx-2" id="maxPrice" name="maxPrice"
+                                       placeholder="Giá cao nhất" value="${maxPrice}">
                             </div>
                         </div>
                         <button class="btn btn-primary mt-3" type="submit">Lọc theo giá</button>
                     </form>
-<%--                    tinh trang noi that--%>
+                    <%--                    tinh trang noi that--%>
                     <form class="filterTinhTrang w-100" action="/home/filter" method="get">
                         <div class="form-group">
                             <label class="form-label">Chọn Tình Trạng</label>
@@ -198,7 +204,9 @@
                                             <i class="bi bi-geo-alt"></i>
                                             <span>${item.diachi}</span><br>
                                             <span>${item.tinhtrang.getDescription()}</span>
-                                        <p class="text-danger fw-bold">Giá: <fmt:formatNumber value="${item.giaphong}" pattern="#,##0"/> đ/tháng</p>
+                                        <p class="text-danger fw-bold">Giá: <fmt:formatNumber value="${item.giaphong}"
+                                                                                              pattern="#,##0"/>
+                                            đ/tháng</p>
                                         </p>
                                     </div>
                                     <div class="d-flex justify-content-end">

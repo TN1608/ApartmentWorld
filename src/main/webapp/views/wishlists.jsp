@@ -20,54 +20,63 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <script src="../js/wishlist.js"></script>
+    <script src="../js/app.js"></script>
     <title>ApartmentWorld</title>
 </head>
 <jsp:include page="_header.jsp"/>
 <body>
 
-    <div class="container p-5">
-        <div class="row ps-3 wishlist-content">
-            <h4 class="fw-bold">Tin đăng đã lưu</h4>
-            <hr>
-            <c:if test="${not empty wishlists}">
-                <c:forEach var="item" items="${wishlists}">
-                    <div class="card">
-                        <img src="../../images/phongtro/${item.anh[0]}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="text-section">
-                                <h5 class="card-title">${item.tenphong}</h5>
-                                <p class="card-text">
-                                    <span><i class="bi bi-geo-alt me-2"></i>Địa chỉ: ${item.diachi}</span><br>
-                                    <span><i class="bi bi-justify me-2"></i>Tình trạng: ${item.tinhtrang.getDescription()}</span><br>
-                                    <span><i class="bi bi-bounding-box me-2"></i>Diện tích: ${item.dientich}m<sup>2</sup></span>
-                                    <p class="text-warning fw-bold">Tiền cọc: <fmt:formatNumber value="${item.tiencoc}" pattern="#,##0"/>đ</p>
-                                </p>
+<div class="container p-5">
+    <div class="row ps-3 wishlist-content">
+        <h4 class="fw-bold">Tin đăng đã lưu</h4>
+        <hr>
+        <c:if test="${not empty wishlists}">
+            <c:forEach var="item" items="${wishlists}">
+                <div class="card">
+                    <img src="../../images/phongtro/${item.maphong.anh[0]}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="text-section">
+                            <h5 class="card-title">${item.maphong.tenphong}</h5>
+                            <p class="card-text">
+                                <span><i class="bi bi-geo-alt me-2"></i>Địa chỉ: ${item.maphong.diachi}</span><br>
+                                <span><i
+                                        class="bi bi-justify me-2"></i>Tình trạng: ${item.maphong.tinhtrang.getDescription()}</span><br>
+                                <span><i
+                                        class="bi bi-bounding-box me-2"></i>Diện tích: ${item.maphong.dientich}m<sup>2</sup></span>
+                            <p class="text-warning fw-bold">Tiền cọc: <fmt:formatNumber value="${item.maphong.tiencoc}"
+                                                                                        pattern="#,##0"/>đ</p>
+                            </p>
+                        </div>
+                        <div class="cta-section">
+                            <div class=""><p class="text-danger fw-bold"><fmt:formatNumber
+                                    value="${item.maphong.giaphong}"
+                                    pattern="#,##0"/> đ/tháng</p>
                             </div>
-                            <div class="cta-section">
-                                <div class=""><p class="text-danger fw-bold"><fmt:formatNumber value="${item.giaphong}" pattern="#,##0"/> đ/tháng</p></div>
-                                <a href="/productdetail" class="btn btn-primary">Xem chi tiết</a>
-                                <a href="/wishlists/remove?id=${item.maphong}" class="btn wishlist-btn"><i class="bi bi-suit-heart-fill text-danger"></i></a>
-                            </div>
+                            <a href="/productdetail" class="btn btn-primary">Xem chi tiết</a>
+                            <a href="/wishlists/remove?id=${item.maphong.maphong}"
+                               class="btn wishlist-link wishlist-btn"><i
+                                    class="bi bi-suit-heart-fill text-danger"></i></a>
                         </div>
                     </div>
-                </c:forEach>
-            </c:if>
-            <c:if test="${empty wishlists}">
-                <div class="alert alert-warning" role="alert">
-                    Bạn chưa lưu tin đăng nào
                 </div>
-            </c:if>
-        </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center d-flex">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
+            </c:forEach>
+        </c:if>
+        <c:if test="${empty wishlists}">
+            <div class="alert alert-warning" role="alert">
+                Bạn chưa lưu tin đăng nào
+            </div>
+        </c:if>
     </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center d-flex">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>
 </body>
 <jsp:include page="_footer.jsp"/>
 </html>
