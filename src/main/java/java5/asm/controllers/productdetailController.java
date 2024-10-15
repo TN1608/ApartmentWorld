@@ -22,7 +22,7 @@ public class productdetailController {
     @Autowired
     private usersDAO taikhoanDAO; 
 
-    @RequestMapping("/productdetail/{maphong}")
+    @RequestMapping("/post/{maphong}")
     public String showProductDetail(@PathVariable("maphong") String maphong, Model model) {
         Optional<phongtro> productOpt = phongtroDAO.findById(maphong); 
         if (productOpt.isPresent()) {
