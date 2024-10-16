@@ -77,7 +77,7 @@ public class WishlistController {
                 wishlistDAO.save(wishlist);
                 notificationService.addNotiBox(ra, "Lưu bài tin thành công!");
             } else {
-                notificationService.addNotiBox(ra, "Phòng trọ đã có trong danh sách yêu thích!");
+                notificationService.addNotiBox(ra, "Bài tin đã có trong danh sách yêu thích!");
             }
         }
         return "redirect:/wishlists";

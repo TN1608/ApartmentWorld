@@ -33,7 +33,4 @@ public class hopdongthue {
     @Column(name = "ngayketthuc")
     private LocalDate ngayketthuc;
 
-    @OneToMany(mappedBy = "maHD")
-    private Set<lichsuthanhtoan> lichsuthanhtoans = new LinkedHashSet<>();
-
 }
