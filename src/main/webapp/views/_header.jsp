@@ -109,7 +109,7 @@
                                     </c:if>
                                     <li class="dropdown-header">Khác</li>
                                     <li><a class="dropdown-item" href="/user"><s:message code="header.mn.profile"/></a></li>
-                                    <li><a class="dropdown-item" href="/reviewaboutme"><s:message code="header.mn.review"/></a></li>
+                                    <li><a class="dropdown-item" href="/aboutus.jsp"><s:message code="header.mn.review"/></a></li>
                                     <li><a class="dropdown-item" href="/logout"><s:message code="header.mn.logout"/></a></li>
                                     <c:if test="${user.vaitro}">
                                         <li><a class="dropdown-item" href="/admin/home"><s:message code="header.mn.admin"/></a></li>

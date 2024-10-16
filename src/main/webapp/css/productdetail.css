@@ -14,35 +14,35 @@ header {
 
 .product-container {
   display: flex;
-  justify-content: center; /* Căn giữa theo chiều ngang */
-  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center; 
+  align-items: center; 
   gap: 40px;
-  margin: 0 auto; /* Đảm bảo rằng nó ở giữa nếu có chiều rộng tối đa */
+  margin: 0 auto; 
 }
 
 
 .img-card {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Canh giữa theo chiều ngang */
+  align-items: center; 
 }
 
 .img-card img#featured-image {
-  width: 120%; /* Điều chỉnh lại kích thước của ảnh lớn nếu cần */
-  height: 480px; /* Chiều cao ảnh lớn */
+  width: 120%; 
+  height: 480px; 
   object-fit: cover;
-  border-radius: 10px; /* Thay đổi giá trị này để điều chỉnh độ bo góc */
+  border-radius: 10px; 
 }
 
 .small-Card {
   display: flex;
-  justify-content: center; /* Canh giữa các ảnh nhỏ */
+  justify-content: center; 
   margin-top: 15px;
-  gap: 5px; /* Điều chỉnh khoảng cách giữa các ảnh nhỏ */
+  gap: 5px;
 }
 
 .small-Card img {
-  width: 80px; /* Giảm kích thước của hình nhỏ */
+  width: 80px; 
   height: 80px;
   border-radius: 4px;
   cursor: pointer;
@@ -321,7 +321,7 @@ hr {
 .in4 {
     position: absolute; 
     top: 0px; 
-    right: 20px; 
+    right: -100px; 
     max-width: 300px; 
     z-index: 1000; 
     background-color: #f8f9fa; 
